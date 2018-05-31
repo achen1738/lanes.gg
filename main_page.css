@@ -1,0 +1,192 @@
+dl, dt, dd, ol, ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+div, h1, p {
+    font-family: "Helvetica Neue",Helvetica,"Apple SD Gothic Neo",AppleGothic,Dotum,Arial,Tahoma;
+}
+
+div {
+	display: block;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    padding: 0;
+}
+
+img {
+    border: 0;
+    padding: 0;
+}
+
+form {
+    display: block;
+}
+
+.main {
+    background-color: rgb(158, 226, 226);  /*this is the webpages background color*/
+    min-width: 1080px;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.main .header {
+	width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 0px;
+}
+
+.l-header {
+    /*background: #fff;*/
+    padding-left: 0px;
+}
+
+.header {
+    position: relative;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 0px;
+}
+
+.site {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    color: #fff;
+    position: relative;
+    margin-right: 20px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.site--name img {
+    vertical-align: middle;
+    height: 30px;
+}
+
+.site--border {
+    padding-bottom: 2px;
+    padding-right: 16px;
+}
+
+.site-img {
+/*    padding-top: 30px;
+    padding-bottom: 30px;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 31%;
+
+}
+
+.site--border:after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: "";
+    border-right: 1px solid #fff;
+    border-right-color: rgba(255, 255, 255, 0.4);
+}
+
+.main .l-container {
+    padding: 0;
+    margin: 0 auto;
+    width: 900px;
+}
+
+.l-container {
+    position: relative;
+    min-height: 700px;
+    padding-bottom: 120px;
+}
+
+.search-form {
+    position: relative;
+    width: 624px;
+    height: 47px;
+    margin: 0 auto;
+    border-radius: 2px;
+    background-color: #fff;
+    max-width: 960px;
+}
+
+.search-form--text {
+    display: block;
+    width: 100%;
+    padding: 15px 150px 15px 15px;
+    background: none;
+    border: none;
+    line-height: 17px;
+    font-size: 14px;
+    color: #000000;
+    outline: none;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    box-sizing: border-box;         
+}
+
+
+.main .site-purpose {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.site-purpose {
+    background: #fff;
+    border: 1px solid #e9eff4;
+}
+
+.site-purpose--title {
+    padding: 17px 20px 16px;
+    line-height: 17px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 1px solid #e9eff4;
+}
+
+.site-purpose--content {
+    background: #fbfbfb;
+    position: relative;
+    text-align: center;
+    /*font-size: 0;*/
+}
+
+.site-purpose--item {
+    display: inline-block;
+    width: 280px;
+    margin-left: 20px;
+    padding-bottom: 24px;
+}
+
+.site-purpose--item:first-child {
+    margin-left: 0;
+}
+
+h1 {
+    font-size: 14px;
+}
+
+.main .site-purpose:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: "";
+    clear: both;
+    height: 0;
+}
