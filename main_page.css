@@ -34,8 +34,113 @@ form {
     display: block;
 }
 
+
+/*  -----------------    -----------------  |                 -----------------  ---------------|    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |--------------/    */
+/*  |                    |               |  |                 |               |  |\                  */
+/*  |                    |               |  |                 |               |  | \                 */
+/*  |                    |               |  |                 |               |  |  \                */
+/*  |                    |               |  |                 |               |  |   \               */
+/*  ------------------   -----------------  |---------------  =---------------=  --   --             */
+
+/* LIGHT MODE */
+
+.light-mc {
+    background: linear-gradient(45deg, rgb(109, 186, 186), rgb(184, 242, 242));
+}
+
+.light-nb{
+    background: #eaeaea;
+}
+
+.light-spc {
+    background: #fbfbfb;
+    /*font-size: 0;*/
+}
+
+.light-sf {
+    background-color: #fff;
+}
+
+.light-sp {
+    background: #fff;
+    border: 1px solid #e9eff4;
+}
+
+.light-sft {
+    border: none;
+    color: #000000;
+}
+
+.light-spt {
+    border-bottom: 1px solid #e9eff4;
+    color: #333;
+}
+
+/* DARK MODE */
+
+.dark-mc {
+    background: linear-gradient(45deg, rgb(7, 17, 35), rgb(8, 37, 84));
+}
+
+.dark-nb {
+    background: #eaeaea;
+}
+
+.dark-spc {
+    background: rgb(7, 5, 51);
+}
+
+.dark-sf {
+    background-color: rgb(7, 5, 51);
+    border: 1px;
+    border-color: #fff;
+}
+
+.dark-sp {
+    background: rgb(7, 5, 51);
+    border: 1px solid rgb(52, 49, 112);
+}
+
+.dark-sft {
+    border: 1px solid rgb(52, 49, 112);
+    color: rgb(88, 83, 193);
+}
+
+.dark-spt {
+    border-bottom: 1px solid rgb(52, 49, 112);
+    color: #666666;
+}
+
+.dark-htext {
+    color: #666666;
+}
+
+.dark-ptext {
+    color: #666666;
+}
+
+
+/*  -----------------    -----------------  |                 -----------------  ---------------|    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |--------------/    */
+/*  |                    |               |  |                 |               |  |\                  */
+/*  |                    |               |  |                 |               |  | \                 */
+/*  |                    |               |  |                 |               |  |  \                */
+/*  |                    |               |  |                 |               |  |   \               */
+/*  ------------------   -----------------  |---------------  =---------------=  --   --             */
+
 .main {
-    background-color: rgb(158, 226, 226);  /*this is the webpages background color*/
+    /*background-color: rgb(158, 226, 226);  this is the webpages background color*/
     min-width: 1080px;
     min-height: 100%;
     position: relative;
@@ -44,14 +149,19 @@ form {
 
 .main .header {
 	width: 100%;
-    padding-top: 25px;
-    padding-bottom: 25px;
+/*    padding-top: 25px;
+    padding-bottom: 25px;*/
     padding-left: 0px;
 }
 
 .l-header {
     /*background: #fff;*/
     padding-left: 0px;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+    border-color: #88aaa4;
 }
 
 .header {
@@ -59,19 +169,49 @@ form {
     max-width: 1300px;
     margin: 0 auto;
     padding-top: 12px;
-    padding-bottom: 12px;
+/*    padding-bottom: 12px;*/
     padding-left: 0px;
 }
 
 .site {
     display: inline-block;
     vertical-align: middle;
-    font-size: 12px;
     color: #fff;
+/*    color: #16aaa4; */    
     position: relative;
-    margin-right: 20px;
+    /*margin-left: 14px;*/
+    padding-left: 7px;
+    padding-right: 7px;
     height: 32px;
     line-height: 32px;
+    font-weight: bold;
+}
+
+.site:first-child {
+    margin-left: 0;
+    padding-left: 12px;
+}
+
+.site:hover {
+    background-color: #16aaa4;
+}
+
+.site-purpose--content {
+    position: relative;
+    text-align: center;
+}
+
+.search-form {
+    position: relative;
+    width: 624px;
+    height: 47px;
+    margin: 0 auto;
+    border-radius: 2px;
+    max-width: 960px;
+}
+
+.site-purpose {
+    margin-top: 20px;
 }
 
 .site--name img {
@@ -81,7 +221,7 @@ form {
 
 .site--border {
     padding-bottom: 2px;
-    padding-right: 16px;
+    padding-right: 12px;
 }
 
 .site-img {
@@ -90,8 +230,7 @@ form {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 31%;
-
+    width: 35%;
 }
 
 .site--border:after {
@@ -116,25 +255,13 @@ form {
     padding-bottom: 120px;
 }
 
-.search-form {
-    position: relative;
-    width: 624px;
-    height: 47px;
-    margin: 0 auto;
-    border-radius: 2px;
-    background-color: #fff;
-    max-width: 960px;
-}
-
 .search-form--text {
     display: block;
     width: 100%;
     padding: 15px 150px 15px 15px;
-    background: none;
-    border: none;
     line-height: 17px;
     font-size: 14px;
-    color: #000000;
+    background: none;
     outline: none;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
     box-sizing: border-box;         
@@ -146,26 +273,15 @@ form {
     width: 100%;
 }
 
-.site-purpose {
-    background: #fff;
-    border: 1px solid #e9eff4;
-}
 
 .site-purpose--title {
     padding: 17px 20px 16px;
     line-height: 17px;
     font-size: 14px;
     font-weight: bold;
-    color: #333;
-    border-bottom: 1px solid #e9eff4;
 }
 
-.site-purpose--content {
-    background: #fbfbfb;
-    position: relative;
-    text-align: center;
-    /*font-size: 0;*/
-}
+
 
 .site-purpose--item {
     display: inline-block;
@@ -190,3 +306,10 @@ h1 {
     clear: both;
     height: 0;
 }
+
+/*.divider {
+    height: 1px;
+    width: 100%;
+    background-color: #88aaa4;
+}*/
+
