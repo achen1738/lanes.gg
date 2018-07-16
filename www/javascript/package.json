@@ -1,0 +1,31 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "javascript for website",
+  "main": "bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achen1738/website.git"
+  },
+  "keywords": [
+    "Riot",
+    "LeagueOfLegends",
+    "LoL",
+    "Website",
+    "DataAnalysis"
+  ],
+  "author": "Arthur Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/achen1738/website/issues"
+  },
+  "homepage": "https://github.com/achen1738/website#readme",
+  "dependencies": {
+    "browserify": "^16.2.2",
+    "kayn": "^0.8.15",
+    "knex": "^0.15.1"
+  }
+}
