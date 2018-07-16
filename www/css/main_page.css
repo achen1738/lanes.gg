@@ -1,0 +1,716 @@
+dl, dt, dd, ol, ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+div, h1, p {
+    font-family: "Helvetica Neue",Helvetica,"Apple SD Gothic Neo",AppleGothic,Dotum,Arial,Tahoma;
+}
+
+div {
+	display: block;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    padding: 0;
+}
+
+form {
+    display: block;
+}
+
+
+/*  -----------------    -----------------  |                 -----------------  ---------------|    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |--------------/    */
+/*  |                    |               |  |                 |               |  |\                  */
+/*  |                    |               |  |                 |               |  | \                 */
+/*  |                    |               |  |                 |               |  |  \                */
+/*  |                    |               |  |                 |               |  |   \               */
+/*  ------------------   -----------------  |---------------  =---------------=  --   --             */
+
+/* LIGHT MODE */
+
+.light-mc {
+    background: linear-gradient(45deg, rgb(109, 186, 186), rgb(184, 242, 242));
+}
+
+.light-nb{
+    background: #eaeaea;
+}
+
+.light-spc {
+    background: #fbfbfb;
+    /*font-size: 0;*/
+}
+
+.light-sf {
+    background-color: #fff;
+}
+
+.light-sp {
+    background: #fff;
+    border: 1px solid #e9eff4;
+}
+
+.light-sft {
+    border: none;
+    color: #000000;
+}
+
+.light-spt {
+    border-bottom: 1px solid #e9eff4;
+    color: #333;
+}
+
+/* DARK MODE */
+
+.dark-mc {
+    background: linear-gradient(45deg, rgb(7, 17, 35), rgb(8, 37, 84));
+}
+
+.dark-nb {
+    background: #eaeaea;
+}
+
+.dark-spc {
+    background: rgb(7, 5, 51);
+}
+
+.dark-sf {
+    background-color: rgb(7, 5, 51);
+    border: 1px solid rgb(52, 49, 112);
+}
+
+.dark-sp {
+    background: rgb(7, 5, 51);
+    border: 1px solid rgb(52, 49, 112);
+}
+
+.dark-sft {
+    border: 1px solid rgb(52, 49, 112);
+    color: rgb(88, 83, 193);
+}
+
+.dark-spt {
+    border-bottom: 1px solid rgb(52, 49, 112);
+    color: #666666;
+}
+
+.dark-htext {
+    color: #666666;
+}
+
+.dark-ptext {
+    color: #666666;
+}
+
+
+/*  -----------------    -----------------  |                 -----------------  ---------------|    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |              |    */
+/*  |                    |               |  |                 |               |  |--------------/    */
+/*  |                    |               |  |                 |               |  |\                  */
+/*  |                    |               |  |                 |               |  | \                 */
+/*  |                    |               |  |                 |               |  |  \                */
+/*  |                    |               |  |                 |               |  |   \               */
+/*  ------------------   -----------------  |---------------  =---------------=  --   --             */
+
+.main {
+    /*background-color: rgb(158, 226, 226);  this is the webpages background color*/
+    min-width: 1080px;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.main .header {
+	width: 100%;
+/*    padding-top: 25px;
+    padding-bottom: 25px;*/
+    padding-left: 0px;
+}
+
+.l-header {
+    /*background: #fff;*/
+    padding-left: 0px;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+    border-color: #88aaa4;
+}
+
+.header {
+    position: relative;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 12px;
+/*    padding-bottom: 12px;*/
+    padding-left: 0px;
+}
+
+.site {
+    display: inline-block;
+    vertical-align: middle;
+    color: #fff;
+/*    color: #16aaa4; */    
+    position: relative;
+    /*margin-left: 14px;*/
+    padding-left: 7px;
+    padding-right: 7px;
+    height: 32px;
+    line-height: 32px;
+    font-weight: bold;
+}
+
+.site:first-child {
+    margin-left: 0;
+    padding-left: 12px;
+}
+
+.site:hover {
+    background-color: #16aaa4;
+}
+
+.site-purpose--content {
+    position: relative;
+    text-align: center;
+}
+
+.search-form {
+    position: relative;
+    width: 624px;
+    height: 47px;
+    margin: 0 auto;
+    border-radius: 2px;
+    max-width: 960px;
+}
+
+.site-purpose {
+    margin-top: 20px;
+}
+
+.site--name img {
+    vertical-align: middle;
+    height: 30px;
+}
+
+.site--border {
+    padding-bottom: 2px;
+    padding-right: 12px;
+}
+
+.site-img {
+/*    padding-top: 30px;
+    padding-bottom: 30px;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
+
+.site--border:after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: "";
+    border-right: 1px solid #fff;
+    border-right-color: rgba(255, 255, 255, 0.4);
+}
+
+.main .l-container {
+    padding: 0;
+    margin: 0 auto;
+    width: 840px;
+}
+
+.l-container {
+    position: relative;
+    min-height: 700px;
+    padding-bottom: 120px;
+}
+
+.search-form--text {
+    display: block;
+    width: 100%;
+    padding: 15px 150px 15px 15px;
+    line-height: 17px;
+    font-size: 14px;
+    background: none;
+    outline: none;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    box-sizing: border-box;         
+}
+
+
+.main .site-purpose {
+    margin-top: 20px;
+    width: 100%;
+}
+
+
+.site-purpose--title {
+    padding: 17px 20px 16px;
+    line-height: 17px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+
+.site-purpose--item {
+    display: inline-block;
+    width: 260px;
+    margin-left: 20px;
+    padding-bottom: 24px;
+}
+
+.site-purpose--item:first-child {
+    margin-left: 0;
+}
+
+h1 {
+    font-size: 14px;
+}
+
+.main .site-purpose:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: "";
+    clear: both;
+    height: 0;
+}   
+
+.summonerPage {
+    font-family: "Helvetica Neue",Helvetica,"Apple SD Gothic Neo",AppleGothic,Dotum,Arial,Tahoma;
+}
+
+.summonerPage>.summonerContent {
+    width: 1000px;
+    margin: 0 auto;
+    min-height: 500px;
+}
+
+.summonerFS>.infoSize {
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+}
+
+.summonerFS>.matchesSize {
+    display: inline-block;
+    width: 685px;
+    margin-left: 10px;
+    vertical-align: top;
+    margin-top: 10px;
+}
+
+.summonerContent+.summonerFS {
+    font-size: 0;
+}
+
+.summonerName {
+    width: 100%;
+}
+					
+/* .summonerTier {
+    background: blue;
+}
+
+.summonerChampStats {
+    background: blueviolet;
+}
+    
+.summonerWR {
+    background: greenyellow;
+} */
+
+
+.sBox {
+    /* border: 1px solid #cdd2d2; */
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+    /* font-size: 12px; */
+}
+
+.summonerInfo>.sBox {
+    margin-top: 10px;
+} 
+
+.summonerNameMedium {
+    display: table;
+    width: 100%;
+    color: #879292;
+    position: relative;
+}
+
+.WRItem {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+    display: table;
+    table-layout: fixed;
+}
+
+.WRItem>.champName {
+    display: table-cell;
+    width: 61px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.WRItem>.winRatio {
+    display: table-cell;
+    width: 40px;
+    vertical-align: middle;
+}
+
+.champItem {
+    display: table;
+    width: 100%;
+}
+
+.champItem>.champInfo {
+    display: table-cell
+}
+
+.champItem>.WRGames {
+    display: table-cell
+}
+
+.champItem>.KDA {
+    display: table-cell
+}
+
+.soloRank {
+    width: 100%;
+    display: table;
+}
+
+.flexRank {
+    width: 100%; 
+    display: table;
+}
+
+.flexType {
+    display: table-cell;
+}
+
+.gameResults {
+    display: table-cell;
+}
+
+.tierInfo {
+    display: table-cell;
+}
+
+.season {
+    display: inline-block;
+}
+
+.summonerIcon {
+    display: inline-block;
+}
+
+.summonerIGN {
+    display: inline-block;
+}
+
+.soloRank>.tierMedal {
+    display: table-cell;
+    vertical-align: middle;
+    width: 120px;
+    height: 116px;
+    text-align: center;
+}
+
+.soloRank>.tierMedal>img {
+    width: 110px;
+    height: 110px;
+    /* margin-left: -10px; */
+}
+
+.soloRank>.tierInfo {
+    line-height: 1.5;
+    font-size: 13px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.container {
+    display: table;
+    width: 685px;
+} 
+  
+.matchItem>.container>div {
+    display: table-cell;
+    height: 110px;
+    vertical-align: middle;
+}
+
+.matchItem>.container>.Players {
+    width: 200px;
+    font-size: 0;
+}
+
+
+.matchItem>.container>.Players>.Team {
+    float: left;
+    width: 50%;
+    /* display: inline-block; */
+}
+
+.matchItem>.container>.Players>.Team>.Summoner {
+    margin-top: 3.5px;
+    display: block;
+    width: 100px;
+    height: 18px;
+    margin-left: 3px;
+    text-align: left;
+    /* overflow: hidden; */
+    white-space: nowrap;
+}
+
+.Win {
+    border: 1px solid black;
+    background: white;
+}
+
+.Loss {
+    border: 1px solid black;
+    background: white;
+}
+
+.IGN {
+    width: 75px;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* .ChampImg {
+    height: 72px;
+    width: 72px;
+    vertical-align: middle;
+    overflow: hidden;
+    display: inline-block;
+} */
+
+/* .Spells > .ChampImg > img {
+    width: 100%;
+    height: 100%;
+    clip-path: circle(33px at center);
+} */
+
+.SpellsnRunes {
+    /* display: inline-block; */
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+/* .SummonerSpells {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+} */
+
+.Runes {
+    /* display: inline-block; */
+    overflow: hidden;
+    vertical-align: middle;
+}
+  
+.Spells {
+position: relative;
+width: 120px;
+vertical-align: middle;
+}
+
+.ChampName {
+    text-align: center;
+    font-size: 14px;
+    padding-top: 4px;
+}
+
+.biggestBox {
+  position: relative;
+  height: 95px;
+  margin-top: -2px
+}
+
+.biggestBox > div {
+  position: absolute;
+}
+
+.ChampImg {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 1;
+ }
+
+.ChampImg > img {
+  width: 60x;
+  height: 60px;
+  clip-path: circle(27px at center);
+}
+
+.Spell {
+    width: 24px;
+    height: 24px;
+    clip-path: circle(12px at center);
+}
+
+.Spell > img {
+    width: 100%;
+    height: 100%;
+}
+
+.left {
+    left: 27%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: 50%;
+}
+
+.right {
+    left: 73%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: 50%;
+}
+
+.Secondary {
+    width: 13px;
+    height: 13px;
+    /* clip-path: circle(5px at center); */
+    left: 60%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: 77%;
+    z-index: 1;
+    border-radius: 50%;
+    padding-bottom: 2px;
+    background: black;
+  
+}
+
+.Secondary > img {
+    width: 100%;
+    height: 100%;
+}
+
+.MainTree {
+  width: 40px;
+  height: 40px;
+  clip-path: circle(14px at center);
+  background: black;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  top: 55%;
+}
+
+.MainTree > img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.ItemsList {
+    width: 94px;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.Item {
+    display: inline-block;
+    width: 29px;
+    height: 29px;
+    border-radius: 3px;
+    margin-top: -2px;
+    margin-right: 2px;
+    overflow: hidden;
+} 
+
+.Trinket > .Item {
+    /* margin-bottom: 50%; */
+    margin-left: -1px;
+}
+
+.Trinket {
+    display: inline-block;
+}
+
+.Item > img {
+    width: 100%;
+    height: 100%;
+}
+
+.container > .Stats > div {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.container > .Info > div {
+    text-align: center;
+    font-size: 14px;line-height: 1.35;
+}
+
+.Stats {
+    padding-left: 6px;
+    padding-right: 9px;
+}
+
+.Items {
+    padding-right: 9px;
+    padding-top: 4px;
+}
+
+.Summoner > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.Summoner > .IGN {
+    margin-left: 2px;
+}
+
+.SummImage > img {
+    width: 18px;
+    height: 18px;
+}
+
+.Players {
+    padding-bottom: 2.5px;
+}
+
+
+.matchItem {
+    margin-bottom: 3px;
+}
