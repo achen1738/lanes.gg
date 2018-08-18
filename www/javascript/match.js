@@ -1,85 +1,103 @@
-function addGame(match, summName) {
-    var ajaxRunes = $.ajax({url: "https://ddragon.leagueoflegends.com/cdn/8.13.1/data/en_US/runesReforged.json"});
-    var ajaxSpells = $.ajax({url: "http://ddragon.leagueoflegends.com/cdn/8.13.1/data/en_US/summoner.json"});
-    ajaxRunes.done(function(runesJSON) {
-        ajaxSpells.done(function(spellsJSON) {
-            // Create Win-Loss Div and give it the container class
-            var winLossContainerDiv = document.createElement('div');
-            $(winLossContainerDiv).addClass('container');
-            // Create the Players div and initialize its class
-            var players = document.createElement('div');
-            $(players).addClass("Players")
-            // Do this type of iteration such that you can create one Team div at a time.
-            for (var i = 0; i < 2; i++) {
-                // Create Team div
-                var team = document.createElement('div');
-                $(team).addClass("Team");
-                for (var j = 0; j < 5; j++) {
-                    // summoner will go from 0 to 9
-                    var summoner = match[j + (i * 5)];
-                    // For each summoner create a div and append an image of their champ to the div/their name
-                    var divSum = document.createElement('div');            
-                    var divIGN = document.createElement('div');  
-                    var divImg = document.createElement('div');  
-                    var chmpImg = document.createElement('img');
-                    $(divSum).addClass("Summoner");
-                    $(divIGN).addClass("IGN").html(summoner.summonerName);
-                    $(divIGN).appendTo(divSum);
-                    chmpImg.src = `http://ddragon.leagueoflegends.com/cdn/8.13.1/img/champion/${summoner.image.full}`;
-                    $(chmpImg).appendTo(divImg);
-                    $(divImg).addClass('SummImage');
-                    $(divImg).prependTo(divSum);
-                    // Finished summoner div is added to the team div
-                    $(divSum).appendTo(team);
-                    // Find the requested summoner
-                    if (summName.toLowerCase() == summoner.summonerName.toLowerCase()) {
-                        var stats = summoner.info.stats;
-                        var win = stats.win;
-                        var kda = KDA(stats, match.minutes);
-                        var itemsArray = addItems(stats);
-                        var items = itemsArray[0];
-                        var trinket = itemsArray[1];
-                        var spell = summSpells(runesJSON, spellsJSON, summoner);
-                        var vD;
-                        if (win) {
-                            vD = "Victory";
-                            $(winLossContainerDiv).addClass('Win');
-                        } else {
-                            vD = "Defeat";
-                            $(winLossContainerDiv).addClass('Loss');
-                        }
-                    }
-                }
-                // add the team div to the players div
-                $(team).appendTo(players);
-            }
-
-            var info = addInfo(match.queueId, match.time, vD, match.duration);
-            // $(addWin(info, spell, kda, items.innerHTML, trinket.innerHTML, players.innerHTML)).appendTo('.summonerMatches > .Content');
-            $(spell).appendTo(winLossContainerDiv);
-            $(info).appendTo(winLossContainerDiv);
-            $(kda).appendTo(winLossContainerDiv);
-            $(items).appendTo(winLossContainerDiv);
-            $(trinket).appendTo(winLossContainerDiv);
-            $(players).appendTo(winLossContainerDiv);
-            var matchDiv = $(`*[data-match-id="${match.matchID}"]`);
-            $(winLossContainerDiv).appendTo(matchDiv);
-            // console.log(winLossContainerDiv);
-        });
-    });
-}
-
-
-function addMatches(obj, e) {
-    for (var j = 0; j < obj.matches.length; j++) {
-        var match = obj.matches[j];
-        var matchDiv = document.createElement('div');
-        $(matchDiv).addClass("matchItem");
-        $(matchDiv).attr('data-match-id', match.matchID);
-        $(matchDiv).appendTo('.summonerMatches > .Content');
-        addGame(match, e);
-    }
-}
-
-
-
+var partObj = {
+    1:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Taliyah.png",
+    2:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Garen.png",
+    3:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Varus.png",
+    4:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Zyra.png",
+    5:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Talon.png",
+    6:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Graves.png",
+    7:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/MonkeyKing.png",
+    8:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Fiddlesticks.png",
+    9:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Ryze.png",
+    10:"https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/Jinx.png"
+  }
+  
+  var data = [{
+      assistingParticipantIds:[3],
+      killerId:4,
+      position:{x: 13119, y: 2997},
+      timestamp:279138,
+      type:"CHAMPION_KILL",
+      victimId:8
+  },
+  {
+      assistingParticipantIds:[3],
+      killerId:4,
+      position:{x: 12944, y: 2828},
+      timestamp:285117,
+      type:"CHAMPION_KILL",
+      victimId:6
+  },
+  {
+      assistingParticipantIds:[6, 8],
+      killerId:10,
+      position:{x: 12663, y: 2639},
+      timestamp:285579,
+      type:"CHAMPION_KILL",
+      victimId:4
+  },
+  {
+      assistingParticipantIds:[],
+      killerId:1,
+      position:{x: 10683, y: 3384},
+      timestamp:333369,
+      type:"CHAMPION_KILL",
+      victimId:10
+  },
+  {
+      assistingParticipantIds:[],
+      killerId:5,
+      position:{x: 10885, y: 5534},
+      timestamp:479928,
+      type:"CHAMPION_KILL",
+      victimId:7
+  },
+  {
+      assistingParticipantIds:[8],
+      killerId:10,
+      position:{x: 13186, y: 2074},
+      timestamp:634100,
+      type:"CHAMPION_KILL",
+      victimId:4
+  },
+  {
+      assistingParticipantIds:[],
+      killerId:10,
+      position:{x: 12642, y: 1910},
+      timestamp:638931,
+      type:"CHAMPION_KILL",
+      victimId:3
+  },
+  {
+      assistingParticipantIds:[],
+      killerId:1,
+      position:{x: 10657, y: 2140},
+      timestamp:660257,
+      type:"CHAMPION_KILL",
+      victimId:10
+  },
+  {
+      assistingParticipantIds:[],
+      killerId:1,
+      position:{x: 9982, y: 5748},
+      timestamp:732810,
+      type:"CHAMPION_KILL",
+      victimId:6
+  },
+  {
+      assistingParticipantIds:[],
+      killerId:1,
+      position:{x: 10859, y: 5246},
+      timestamp:904049,
+      type:"CHAMPION_KILL",
+      victimId:10
+  },
+  {
+      assistingParticipantIds:[],
+      killerId:1,
+      position:{x: 12160, y: 8315},
+      timestamp:1005724,
+      type:"CHAMPION_KILL",
+      victimId:6
+  }];
+  
+  console.log('daddy');
