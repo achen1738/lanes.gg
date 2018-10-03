@@ -5,6 +5,7 @@ include('FileSystemCache.php');
 
 // Pepperminht's accID = 216014260 summonerID = 53382097
 // 100T Levi's accID = 247997681
+
 $db_user = 'root';
 $db_password = 'zero124041four';
 $db_name = '';
@@ -12,15 +13,6 @@ $db_host = 'localhost';
 
 const API_URL_MATCH_3 = 'https://na1.api.riotgames.com/lol/match/v3/';
 const API_KEY = 'RGAPI-293a90cd-8b0e-4d78-ba5b-c008f2568bcd';
-// Create connection
-// $conn = new mysqli($db_host, $db_user, $db_password);
-
-// Check connection
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// } 
-
-// echo "Connected successfully";
 
 $queueTypes = array(0 => 'Custom games',72 => '1v1 Snowdown Showdown', 73 => '2v2 Snowdown Showdown', 
 75 => '6v6 Hexakill', 76 => 'Ultra Rapid Fire', 78 => 'One For All: Mirror Mode', 
