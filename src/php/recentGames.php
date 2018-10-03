@@ -48,7 +48,7 @@ try {
     $accId = $api->getSummonerAccountId("pepperminht");
     $summId = $api->getSummonerId("pepperminht");
     $league = $api->getLeaguePosition($summId);
-    $endIndex = 6bv 0;
+    $endIndex = 6;
     $params = "endIndex=$endIndex";
     $matchList = $api->getMatchList($accId, $params);
     if (is_array($matchList) || is_object($matchList)) {

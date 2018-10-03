@@ -1,7 +1,7 @@
 function getDetail(nameArray, matchID, username) {
     return new Promise(function(resolve, reject) {
         data = {names: nameArray, match: matchID, username: username}
-        $.post('/www/php/details.php', data, function(response) {
+        $.post('/src/php/details.php', data, function(response) {
             resolve(response);
         }).fail(function() {
             reject('There is an error with Riot API');
@@ -13,7 +13,7 @@ function moreGames(lastMatchID, username) {
     // console.log(lastMatchID);
     return new Promise(function(resolve, reject) {
         data = {username: username, lastMatchID: lastMatchID}
-        $.post('/www/php/moreGames.php', data, function(response) {
+        $.post('/src/php/moreGames.php', data, function(response) {
             resolve(response);
         }).fail(function() {
             reject('There is an error with Riot API');
@@ -100,7 +100,7 @@ async function addLanes(timelineObj, win, version, place, images, actualContaine
             var deadImage = document.createElement('img');
             var redX = document.createElement('img');
             aliveImage.src = images[kill.killerId];
-            killImage.src = '/www/images/kill.png';
+            killImage.src = '/src/images/kill.png';
             deadImage.src = images[kill.victimId];
             redX.src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Red_x.svg/240px-Red_x.svg.png";
             $(redX).addClass('redX').appendTo(deadSide);
