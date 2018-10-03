@@ -1944,8 +1944,6 @@ background-color: green;
 
 .itemRedX {
   position: absolute;
-  width: 10px;
-  height: 10px;
   bottom: 2px;
   right: 2px;
   z-index: 1;

@@ -391,9 +391,11 @@ async function addBuildItems(container, version, summItems) {
                 image.className = 'sold';
                 var redX = document.createElement('img');
                 redX.src = "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Red_x.svg/240px-Red_x.svg.png";
+                redX.style.width = "10px";
+                redX.style.height = "10px";
                 $(redX).addClass('itemRedX').appendTo(innerItem);
             }
-            $(image).appendTo(innerItem);
+            $(image).addClass('buildItem').appendTo(innerItem);
 
             if (currItem.timestamp < currentTimestamp + 15000 && nextItem.timestamp < currentTimestamp + 15000) {
             // Check if this item and the next item are the same
