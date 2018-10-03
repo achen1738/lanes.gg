@@ -32,6 +32,6 @@ $(document).ready(function() {
         // addRank(obj);
         // addMatches(obj, f);
     };
-    oReq.open("get", "/www/php/riot.php?userName=" + f, true);
+    oReq.open("get", "/src/php/riot.php?userName=" + f, true);
     oReq.send();
 });
