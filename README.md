@@ -23,13 +23,6 @@ From here simply run the Apache server, open up your browser and go to your loca
 ## Demo
 ![](lanegif1.gif)
 ## To Do (Will start working on this again when winter break starts)
-There is a bunch I want to change, I want to eventually use actual frameworks like ReactJS for the front end and NodeJS for the backend. I also need a database to store data for each region. The specifics for the databases would probably be something like this(?):
-```
-PLAYER(accID Integer, summonerID Integer, summonerName VARCHAR(20), division VARCHAR(20), points Integer);
-MATCHES(accID Integer, matchID Integer);
-DETAILS(matchID Integer, …);
-```
-A big concern of this is that is it smarter to have individual tables of matches for each player, such that I can easily regulate the size of this table. This makes it so that I can store less data like only 100 matches per player. However this would then mean I would have to create millions of tables. Also, I would have to think about how I want to normalize the details of each match, and what I consider to be important. Another concern would be whether or not my details tables is created for each player or just one giant global one. I do not know if it is feasible to have a details table for each player, but I also do not know if it is possible to have a table with around 200 million entries, which could also apply to the matches table. Once, I set up the capability to hold onto large amounts of data I want to keep track of stats like, first kill, first death, average amount of kills outside of lane, etc…
-Also, I currently cannot handle the special game modes, so that might be messing some stuff up.
+There is a bunch I want to change, I want to eventually use actual frameworks like ReactJS for the front end and NodeJS for the backend. I also need a database to store data for each region.
 
 
