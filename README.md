@@ -23,6 +23,6 @@ From here simply run the Apache server, open up your browser and go to your loca
 ## Demo
 ![](lanegif1.gif)
 ## To Do (Currently working on it again!)
-There is a bunch I want to change, I want to eventually use actual frameworks like ReactJS for the front end and NodeJS for the backend. I also need a database to store data for each region.
+There is a bunch I want to change, I want to eventually use actual frameworks like ReactJS for the front end and NodeJS for the backend. I also need a database to store data for each region, and I'm going to try to use GraphQL/TSQL.
 
 
