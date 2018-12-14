@@ -20,6 +20,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
+    "gitignore": "^0.6.0",
     "graphql": "^14.0.2",
     "kayn": "^0.8.26",
     "mssql": "^4.3.0"
