@@ -22,7 +22,7 @@ Go to https://developer.riotgames.com/, sign in with your League account if you 
 From here simply run the Apache server, open up your browser and go to your localhost. From there go to src->html->home.html. From here a browser should appear with a text field right in the middle. The website functions just like na.op.gg so just type in a username from League of Legends and it’ll redirect you. In a couple of seconds, a bunch of matches will appear on your screen. At the top, you can click on the individual blue square to see which games resulted in either your greatest win rate or worst win rate against. For each match below, you can click on the side with the darkened arrow in order to view more specific game. From here you can see the overview of the game, builds for each individual player, and the events of each lane for the first eighteen minutes.
 ## Demo
 ![](lanegif1.gif)
-## To Do (Will start working on this again when winter break starts)
+## To Do (Currently working on it again!)
 There is a bunch I want to change, I want to eventually use actual frameworks like ReactJS for the front end and NodeJS for the backend. I also need a database to store data for each region.
 
 
