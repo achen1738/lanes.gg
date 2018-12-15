@@ -19,7 +19,7 @@ var name = "chaumifan";
 var conn = new sql.ConnectionPool(dbConfig);
 var req = new sql.Request(conn);
 conn.connect().then(function() {
-    req.query(`SELECT * FROM players p WHERE p.name = \'${name}\'`).then(function(res) {
+    req.query(`SELECT * FROM players WHERE name = \'${name}\'`).then(function(res) {
         if (res.recordset.length == 0) {
             kayn.Summoner.by.name(name).then(summoner => {
                 console.log(summoner);
@@ -30,11 +30,16 @@ conn.connect().then(function() {
             }).catch(error => console.error(error));
         }
 
-        req.query(`SELECT * FROM players where name = \'${name}\'`).then(function(res) {
+        req.query(`SELECT * FROM players WHERE name = \'${name}\'`).then(function(res) {
             getSummonerInfo(res.recordset[0].summonerID, conn);
         }).catch(function(err) {
             console.error(err);
         });
+
+        req = new sql.Request(conn);
+        kayn.Matchlist.by.accountID(res.recordset[0].accountID).then(matchList => {
+            updateMatches(conn, res.recordset[0].accountID, matchList);
+        }).catch(err => console.error(err));
     }).catch(function(err) {
         console.error(err);
         conn.close();
@@ -89,6 +94,36 @@ function insertLeague(league, conn, sumID) {
             SET QUOTED_IDENTIFIER ON;
         END
     `).catch(error => console.error(error));
+}
+
+function updateMatches(conn, accID, matchList) {
+    var req = new sql.Request(conn);
+    req.query(`SELECT TOP(1) matchID FROM games WHERE accountID = ${accID} ORDER BY matchID DESC`).then(
+        function(res) {
+            // console.log(matchList);
+            var gameID = 0;
+            if (res.recordset.length == 1) {
+                gameID = res.recordset[0].matchID;
+            }
+            var i, match, matches = matchList.matches;
+            var size = matchList.matches.length;
+            
+            for (i = 0; i < size; i++) {
+                match = matches[i];
+                if (match.gameId == gameID) {
+                    console.log("Broke on ", match.gameId);
+                    break;
+                }
+                var subReq = new sql.Request(conn);
+                subReq.input('role', sql.VarChar(20), match.role)
+                .input('lane', sql.VarChar(20), match.lane)
+                .query(`INSERT INTO games (accountID, matchID, season, role, lane, queue, champion) 
+                    VALUES (${accID}, ${match.gameId}, ${match.season}, @role, @lane, ${match.queue}, ${match.champion})`)
+                .catch(err => console.error(err));
+
+            }
+        }
+    ).catch(err => console.error(err));
 }
 
 
