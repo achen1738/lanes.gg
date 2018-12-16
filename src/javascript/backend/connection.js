@@ -3,8 +3,7 @@ require('dotenv').load();
 const { Kayn, REGIONS } = require('kayn');
 const kayn = Kayn(process.env.key) ();
 
-
-
+// Pepperminht's accID = 216014260 summonerID = 53382097
 
 // Database config
 var dbConfig = {
@@ -57,20 +56,22 @@ function populateTables(name, conn) {
 function getMatches(matchList, conn, accID, latestGame) {
     var matches = matchList.matches;
     const promises = [];
-    // console.log(matches);
     var i, size = matches.length;
+    // Iterate through all the matches
     for (i = 0; i < size; i++) {
         let match = matches[i];
+        // If a match has the same gameID as the latest game in the database for the given account ID
+        // then break.
         if (latestGame == match.gameId) break;
         currentGame = match.gameId;
+        // Push a promise that represents a single insert to games to an array
         promises.push(getMatch(conn, accID, match));
     }
+    // Return a promise of the array of promises.
     return Promise.all(promises);
 }
 
-// Pepperminht's accID = 216014260 summonerID = 53382097
 
-// Get the summonerID and accountID
 
 /**
  * Using the given summonerID, update or populate the leagues table
@@ -126,6 +127,12 @@ function insertLeague(league, conn, sumID) {
     `).catch(error => console.error(error));
 }
 
+/**
+ * Simply inserts into the games table a single entry for the given match and accountID
+ * @param {*} conn - connection to db
+ * @param {*} accID - accountID, bigint - will switch to string
+ * @param {*} match - matchID, bigint
+ */
 function getMatch(conn, accID, match) {
     var subReq = new sql.Request(conn);
     subReq.input('role', sql.VarChar(20), match.role)
@@ -136,6 +143,13 @@ function getMatch(conn, accID, match) {
     return subReq;
 }
 
+/**
+ * Requests the latest matchID in the games table with the given accountID,
+ * then inserts all matches until you reach the latest matchID found. Finally,
+ * remove all rows past the latest 100
+ * @param {*} accID - accountID -- string/bigint
+ * @param {*} conn - connection to db
+ */
 function populateMatches(accID, conn) {
     req = new sql.Request(conn);
     // Using the given found accountID, get the past 100 games.
@@ -166,6 +180,12 @@ function populateMatches(accID, conn) {
     }).catch(err => console.error(err));
 }
 
+/**
+ * Easy way for me to test
+ * @param {*} setting - a string, which will populate tables when it is 0, else just check results
+ * @param {*} name - desired name to update tables with
+ * @param {*} conn - connection to db
+ */
 function main(setting, name, conn) {
     // If 0
     conn.connect().then(function() {
@@ -184,6 +204,11 @@ function main(setting, name, conn) {
 
 main(process.argv[2], name, conn);
 
+/**
+ * Simply just checks what are in the tables for the given name
+ * @param {*} name - given name
+ * @param {*} conn - connection to db
+ */
 function checkResults(name, conn) {
     var req = new sql.Request(conn);
     req.query(`SELECT * FROM players WHERE name = \'${name}\'`)
@@ -209,17 +234,3 @@ function checkResults(name, conn) {
     })
     .catch(err => console.error(err));
 }
-// $(document).ready(function() {
-
-    // var url = window.location.href;
-    // // Index of when the word "userName" starts
-    // var a = url.indexOf("userName");
-    // // Returns the index of right after the word "userName="
-    // var d = a + 9;
-    // // Returns the word after "userName=" to the end
-    // var e = url.substring(d);
-    // // console.log(e);
-    // var f = e.replace(/\+/g, " ");
-    // console.log(e);
-
-// });
