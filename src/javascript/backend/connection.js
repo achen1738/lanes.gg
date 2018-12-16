@@ -20,30 +20,72 @@ var name = "eplaut112";
 // Setting up connections to database 
 var conn = new sql.ConnectionPool(dbConfig);
 var req = new sql.Request(conn);
-function populateTables(name, conn) {
-    console.log(name);
-    req.query(`SELECT * FROM players WHERE name = \'${name}\'`).then(function(res) {
-        // So, if the player currently doesn't exist in players, 
-        if (res.recordset.length == 0) {
-            // Get his account info.
-            kayn.Summoner.by.name(name).then(summoner => {
-                // Populate the players table with his summoner info
-                req.query(`INSERT INTO players (name, accountID, summonerID) 
-                    VALUES (\'${summoner.name}\', ${summoner.accountId}, ${summoner.id})`
-                ).catch(error => console.error(error));
-                // At the same time insert into the leagues table.
-                getSummonerInfo(summoner.id, conn);
-                populateMatches(summoner.accountId, conn);
-            }).catch(error => console.error(error));
-        } else {
-            // Since the player exists already, get their summonerID and update their data in leagues.
-            getSummonerInfo(res.recordset[0].summonerID, conn);
-            populateMatches(res.recordset[0].accountID, conn);
+
+/**
+ * Easy way for me to test
+ * @param {*} setting - a string, which will populate tables when it is 0, else just check results
+ * @param {*} name - desired name to update tables with
+ * @param {*} conn - connection to db
+ */
+function main(setting, name, conn) {
+    // If 0
+    conn.connect().then(function() {
+        if (setting === "0") {
+            console.log("0");
+            populateTables(name, conn);
+        } else if (setting === "1") {
+            console.log("1");
+            checkResults(name,conn);
+        } else if (setting === "2") {
+            console.log("2");
+            clearTables(conn);
         }
     }).catch(function(err) {
         console.error(err);
         conn.close();
+    });
+}
+
+/**
+ * Simply just checks what are in the tables for the given name
+ * @param {*} name - given name
+ * @param {*} conn - connection to db
+ */
+function checkResults(name, conn) {
+    var req = new sql.Request(conn);
+    req.query(`SELECT * FROM players WHERE name = \'${name}\'`)
+    .then(function(res) {
+        var promises = []
+        console.log(res.recordset[0]);
+        var subReq = new sql.Request(conn);
+        subReq.input('sumID', sql.VarChar(150), res.recordset[0].summonerID)
+        .query(`SELECT * FROM leagues WHERE summonerID = @sumID`)
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+        promises.push(subReq);
+        var secReq = new sql.Request(conn);
+        secReq.input('accID', sql.VarChar(150), res.recordset[0].accountID)
+        .query(`SELECT TOP(5) * FROM games where accountID = @accID`)
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+        promises.push(secReq);
+
+        var thirdReq = new sql.Request(conn);
+        thirdReq.input('accID', sql.VarChar(150), res.recordset[0].accountID)
+        .query(`SELECT COUNT(*) FROM games where accountID = @accID`)
+        .then(res => console.log(res))
+        .catch(err => console.error(err));
+        promises.push(thirdReq);
     })
+    .catch(err => console.error(err));
+}
+
+function clearTables(conn) {
+    truncateTable(conn, "players");
+    truncateTable(conn, "games");
+    truncateTable(conn, "leagues");
+    // truncateTable(conn, "gamesInfo"); -- clearing this table seems like it wouldnt be v useful for testing
+
 }
 
 /**
@@ -65,7 +107,8 @@ function getMatches(matchList, conn, accID, latestGame) {
         if (latestGame == match.gameId) break;
         currentGame = match.gameId;
         // Push a promise that represents a single insert to games to an array
-        promises.push(getMatch(conn, accID, match));
+        promises.push(insertMatchID(conn, accID, match));
+        // promises.push(insertMatchInfo(conn, accID, match));
     }
     // Return a promise of the array of promises.
     return Promise.all(promises);
@@ -81,7 +124,7 @@ function getMatches(matchList, conn, accID, latestGame) {
  */
 function getSummonerInfo(sumID, conn) {
     // Get the players league info
-    kayn.LeaguePositions.by.summonerID(sumID).then(leagues => {   
+    kayn.LeaguePositionsV4.by.summonerID(sumID).then(leagues => {   
         var i, league, size = leagues.length;
         // If the return result is not empty
         if (size != 0) {
@@ -95,7 +138,8 @@ function getSummonerInfo(sumID, conn) {
     }).catch(error => console.error(error));   
 }
 
-function truncateTable(req, name) {
+function truncateTable(conn, name) {
+    var req = new sql.Request(conn);
     req.query(`TRUNCATE TABLE ${name}`);
 }
 
@@ -103,17 +147,18 @@ function insertLeague(league, conn, sumID) {
     // Should probably change this to a stored procedure.
     var req = new sql.Request(conn);
     req.input('name', sql.VarChar(50), league.leagueName)
+    .input('sumID', sql.VarChar(150), sumID)
     .input('qType', sql.VarChar(30), league.queueType)
     .input('tier', sql.VarChar(15), league.tier)
     .input('rank', sql.VarChar(15), league.rank)
     .query(`
-        IF EXISTS (SELECT * FROM leagues WHERE summonerID = ${sumID} AND queueType = @qType )
+        IF EXISTS (SELECT * FROM leagues WHERE summonerID = @sumID AND queueType = @qType )
         BEGIN
             SET QUOTED_IDENTIFIER OFF;
 
             UPDATE leagues SET leagueName = @name, wins = ${league.wins}, losses = ${league.losses}, leaguePoints = ${league.leaguePoints}, 
                 tier = @tier, rank = @rank
-            WHERE summonerID = ${sumID} AND queueType = @qType;
+            WHERE summonerID = @sumID AND queueType = @qType;
 
             SET QUOTED_IDENTIFIER ON;
         END
@@ -121,7 +166,7 @@ function insertLeague(league, conn, sumID) {
         BEGIN
             SET QUOTED_IDENTIFIER OFF;
             INSERT INTO leagues (summonerID, leagueName, tier, rank, queueType, leaguePoints, wins, losses)
-            VALUES (${sumID}, @name, @tier, @rank, @qType, ${league.leaguePoints}, ${league.wins}, ${league.losses}); 
+            VALUES (@sumID, @name, @tier, @rank, @qType, ${league.leaguePoints}, ${league.wins}, ${league.losses}); 
             SET QUOTED_IDENTIFIER ON;
         END
     `).catch(error => console.error(error));
@@ -133,16 +178,20 @@ function insertLeague(league, conn, sumID) {
  * @param {*} accID - accountID, bigint - will switch to string
  * @param {*} match - matchID, bigint
  */
-function getMatch(conn, accID, match) {
+function insertMatchID(conn, accID, match) {
     var subReq = new sql.Request(conn);
     subReq.input('role', sql.VarChar(20), match.role)
+    .input('accID', sql.VarChar(150), accID)
     .input('lane', sql.VarChar(20), match.lane)
     .query(`INSERT INTO games (accountID, matchID, season, role, lane, queue, champion) 
-        VALUES (${accID}, ${match.gameId}, ${match.season}, @role, @lane, ${match.queue}, ${match.champion})`)
+        VALUES (@accID, ${match.gameId}, ${match.season}, @role, @lane, ${match.queue}, ${match.champion})`)
     .catch(err => console.error(err));
     return subReq;
 }
 
+function insertMatchInfo(conn, accID, match) {
+
+}
 /**
  * Requests the latest matchID in the games table with the given accountID,
  * then inserts all matches until you reach the latest matchID found. Finally,
@@ -154,9 +203,10 @@ function populateMatches(accID, conn) {
     req = new sql.Request(conn);
     // Using the given found accountID, get the past 100 games.
     console.log(accID);
-    kayn.Matchlist.by.accountID(accID).then(matchList => {
+    kayn.MatchlistV4.by.accountID(accID).then(matchList => {
         // Pass in the accoundID as in put, and get the latest game stored game
-        req.input('accID', sql.Int, accID)
+        console.log("get inside kayn Matchv4");
+        req.input('accID', sql.VarChar(150), accID)
         .query(`SELECT TOP(1) matchID FROM games WHERE accountID = @accID`)
         .then(function(result) {
             // Initially set latestGame to 0 in case table is empty for given accID
@@ -165,72 +215,51 @@ function populateMatches(accID, conn) {
             if (result.recordset.length == 1) latestGame = result.recordset[0].matchID;
             // allmatches is an array of promises, that each insert a row (accID, gameID) into games
             // console.log(matchList, conn, accID, latestGame);
+            console.log("can query table with accountid");
             var allMatches = getMatches(matchList, conn, accID, latestGame);
+            console.log("can get array of promises");
             // Once this array finishes, then
-            allMatches.then(function(res) {
-                // Create a new request, and remove all the excess matches (only 100 games per accID)
-                // for the given accID
-                req = new sql.Request(conn);
-                req.input('accID', sql.Int, accID)
-                .execute('removeExcessMatches').then(function(res) {
-                    console.log(res);
-                }).catch(err => console.error(err));
-            }).catch(err => console.error(err));                
+            // allMatches.then(function(res) {
+            //     // Create a new request, and remove all the excess matches (only 100 games per accID)
+            //     // for the given accID
+            //     req = new sql.Request(conn);
+            //     req.input('accID', sql.VarChar(150), accID)
+            //     .execute('removeExcessMatches').then(function(res) {
+            //         console.log(res);
+            //     }).catch(err => console.error(err));
+            // }).catch(err => console.error(err));                
         }).catch(err => console.error(err));
     }).catch(err => console.error(err));
 }
 
-/**
- * Easy way for me to test
- * @param {*} setting - a string, which will populate tables when it is 0, else just check results
- * @param {*} name - desired name to update tables with
- * @param {*} conn - connection to db
- */
-function main(setting, name, conn) {
-    // If 0
-    conn.connect().then(function() {
-        if (setting === "0") {
-            console.log("0");
-            populateTables(name, conn);
+function populateTables(name, conn) {
+    console.log(name);
+    req.query(`SELECT * FROM players WHERE name = \'${name}\'`).then(function(res) {
+        // So, if the player currently doesn't exist in players, 
+        if (res.recordset.length == 0) {
+            // Get his account info.
+            kayn.SummonerV4.by.name(name).then(summoner => {
+                // Populate the players table with his summoner info
+                req.input('accID', sql.VarChar(150), summoner.accountId)
+                .input('summID', sql.VarChar(150), summoner.id)
+                .input('name', sql.VarChar(20), summoner.name)
+                .query(`INSERT INTO players (name, accountID, summonerID) 
+                    VALUES (@name, @accID, @summID)`
+                ).catch(error => console.error(error));
+                // At the same time insert into the leagues table.
+                getSummonerInfo(summoner.id, conn);
+                populateMatches(summoner.accountId, conn);
+            }).catch(error => console.error(error));
         } else {
-            console.log("1");
-            checkResults(name,conn);
+            // Since the player exists already, get their summonerID and update their data in leagues.
+            getSummonerInfo(res.recordset[0].summonerID, conn);
+            populateMatches(res.recordset[0].accountID, conn);
         }
     }).catch(function(err) {
         console.error(err);
         conn.close();
-    });
+    })
 }
+
 
 main(process.argv[2], name, conn);
-
-/**
- * Simply just checks what are in the tables for the given name
- * @param {*} name - given name
- * @param {*} conn - connection to db
- */
-function checkResults(name, conn) {
-    var req = new sql.Request(conn);
-    req.query(`SELECT * FROM players WHERE name = \'${name}\'`)
-    .then(function(res) {
-        console.log(res.recordset[0]);
-        var subReq = new sql.Request(conn);
-        subReq.input('sumID', sql.Int, res.recordset[0].summonerID)
-        .query(`SELECT * FROM leagues WHERE summonerID = @sumID`)
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
-
-        var secReq = new sql.Request(conn);
-        secReq.input('accID', sql.Int, res.recordset[0].accountID)
-        .query(`SELECT TOP(5) * FROM games where accountID = @accID`)
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
-
-        var thirdReq = new sql.Request(conn);
-        thirdReq.input('accID', sql.Int, res.recordset[0].accountID)
-        .query(`SELECT COUNT(*) FROM games where accountID = @accID`)
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
-    })
-    .catch(err => console.error(err));
-}

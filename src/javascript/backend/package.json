@@ -22,7 +22,7 @@
     "express-graphql": "^0.7.1",
     "gitignore": "^0.6.0",
     "graphql": "^14.0.2",
-    "kayn": "^0.8.26",
+    "kayn": "^0.9.0",
     "mssql": "^4.3.0"
   }
 }
