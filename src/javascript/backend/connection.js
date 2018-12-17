@@ -3,7 +3,8 @@ require('dotenv').load();
 const { Kayn, REGIONS } = require('kayn');
 const kayn = Kayn(process.env.key) ();
 
-// Pepperminht's accID = 216014260 summonerID = 53382097
+// eplaut112's accID = n_zl9ZwvDTDijLrx6haaF5z2ZeZcLIp0i_J_UHEvUGfpyw
+// me arthur chen's accID = E31Vfs6rNnnjrPF_VIaXjVZ3qC-upjQ-6Hx93yIksLcEsRKTWAg_g1hn
 
 // Database config
 var dbConfig = {
@@ -65,7 +66,7 @@ function checkResults(name, conn) {
         promises.push(subReq);
         var secReq = new sql.Request(conn);
         secReq.input('accID', sql.VarChar(150), res.recordset[0].accountID)
-        .query(`SELECT TOP(5) * FROM games where accountID = @accID`)
+        .query(`SELECT TOP(5) * FROM games where accountID = @accID ORDER BY matchID DESC`)
         .then(res => console.log(res))
         .catch(err => console.error(err));
         promises.push(secReq);
@@ -89,6 +90,31 @@ function clearTables(conn) {
 }
 
 /**
+ * Given a matchID, makes a request to Riot's API which returns a big JSON object of data.
+ * Then, for each player execute a stored procedure that stores the players stats for that game
+ * in gameInfo.
+ * @param {*} conn - connection to database
+ * @param {*} match - matchID int.
+ */
+function getMatchInfo(conn, match) {
+    var participant, player;
+    return kayn.MatchV4.get(match.gameId)
+    .then(result => {
+        var i, index, ban;
+        for (i = 0; i < 10; i++) {
+            player = result.participantIdentities[i];
+            participant = result.participants[i];
+            if (i < 5) index = 0;
+            else index = 1;
+            ban = result.teams[index].bans[i % 5];
+            insertMatchInfo(conn, match.gameId, player, participant, ban, result.mapId, result.gameType, result.gameCreation);
+        }
+
+    })
+    .catch(err => console.error(err))
+}
+
+/**
  * 
  * @param {*} matchList - object with a matches field that represents an array of matches
  * @param {*} conn - connection object for db
@@ -104,11 +130,14 @@ function getMatches(matchList, conn, accID, latestGame) {
         let match = matches[i];
         // If a match has the same gameID as the latest game in the database for the given account ID
         // then break.
-        if (latestGame == match.gameId) break;
+        if (latestGame == match.gameId) {
+            console.log("Broke on iteration i: ", i, " matchID of ", match.gameId);
+            break;
+        }
         currentGame = match.gameId;
         // Push a promise that represents a single insert to games to an array
         promises.push(insertMatchID(conn, accID, match));
-        // promises.push(insertMatchInfo(conn, accID, match));
+        promises.push(getMatchInfo(conn, match));
     }
     // Return a promise of the array of promises.
     return Promise.all(promises);
@@ -151,25 +180,11 @@ function insertLeague(league, conn, sumID) {
     .input('qType', sql.VarChar(30), league.queueType)
     .input('tier', sql.VarChar(15), league.tier)
     .input('rank', sql.VarChar(15), league.rank)
-    .query(`
-        IF EXISTS (SELECT * FROM leagues WHERE summonerID = @sumID AND queueType = @qType )
-        BEGIN
-            SET QUOTED_IDENTIFIER OFF;
-
-            UPDATE leagues SET leagueName = @name, wins = ${league.wins}, losses = ${league.losses}, leaguePoints = ${league.leaguePoints}, 
-                tier = @tier, rank = @rank
-            WHERE summonerID = @sumID AND queueType = @qType;
-
-            SET QUOTED_IDENTIFIER ON;
-        END
-        ELSE
-        BEGIN
-            SET QUOTED_IDENTIFIER OFF;
-            INSERT INTO leagues (summonerID, leagueName, tier, rank, queueType, leaguePoints, wins, losses)
-            VALUES (@sumID, @name, @tier, @rank, @qType, ${league.leaguePoints}, ${league.wins}, ${league.losses}); 
-            SET QUOTED_IDENTIFIER ON;
-        END
-    `).catch(error => console.error(error));
+    .input('lp', sql.Int, league.leaguePoints)
+    .input('wins', sql.Int, league.wins)
+    .input('losses', sql.Int, league.losses)
+    .execute('insertLeague')
+    .catch(error => console.error(error));
 }
 
 /**
@@ -183,15 +198,63 @@ function insertMatchID(conn, accID, match) {
     subReq.input('role', sql.VarChar(20), match.role)
     .input('accID', sql.VarChar(150), accID)
     .input('lane', sql.VarChar(20), match.lane)
-    .query(`INSERT INTO games (accountID, matchID, season, role, lane, queue, champion) 
-        VALUES (@accID, ${match.gameId}, ${match.season}, @role, @lane, ${match.queue}, ${match.champion})`)
+    .input('gameID', sql.BigInt, match.gameId)
+    .input('season', sql.Int, match.season)
+    .input('queue', sql.Int, match.queue)
+    .input('champion', sql.Int, match.champion)
+    .execute('insertMatchID')
     .catch(err => console.error(err));
     return subReq;
 }
 
-function insertMatchInfo(conn, accID, match) {
-
+function insertMatchInfo(conn, gameId, player, participant, ban, mapId, gameType, gameCreation) {
+    var req = new sql.Request(conn);
+    var win;
+    if (participant.stats.win) win = 0
+    else win = 1;
+    req.input('matchID', sql.BigInt, gameId)
+    .input('accountID', sql.VarChar(150), player.player.accountId)
+    .input('name', sql.VarChar(20), player.player.summonerName)
+    .input('participantID', sql.Int, player.participantId)
+    .input('gameCreation', sql.BigInt, gameCreation)
+    .input('gameType', sql.VarChar(50), gameType)
+    .input('mapID', sql.Int, mapId)
+    .input('ban', sql.Int, bans.championId)
+    .input('spell1ID', sql.Int, participant.spell1Id)
+    .input('spell2ID', sql.Int, participant.spell2Id)
+    .input('teamID', sql.Int, participant.teamId)
+    .input('championID', sql.Int, participant.championId)
+    .input('visionScore', sql.Int, participant.stats.visionScore)
+    .input('kills', sql.Int, participant.stats.kills)
+    .input('deaths', sql.Int, participant.stats.deaths)
+    .input('assists', sql.Int, participant.stats.assists)
+    .input('item0', sql.Int, participant.stats.item0)
+    .input('item1', sql.Int, participant.stats.item1)
+    .input('item2', sql.Int, participant.stats.item2)
+    .input('item3', sql.Int, participant.stats.item3)
+    .input('item4', sql.Int, participant.stats.item4)
+    .input('item5', sql.Int, participant.stats.item5)
+    .input('item6', sql.Int, participant.stats.item6)
+    .input('win', sql.Int, win)
+    .input('wardsPlaced', sql.Int, participant.stats.wardsPlaced)
+    .input('primaryPerk', sql.Int, participant.stats.perkPrimaryStyle)
+    .input('secondaryPerk', sql.Int, participant.stats.perkSubstyle)
+    .input('champLevel', sql.Int, participant.stats.champLevel)
+    .input('visionWards', sql.Int, participant.stats.visionWardsBoughtInGame)
+    .input('keystone', sql.Int, participant.stats.perk0)
+    .input('primary0', sql.Int, participant.stats.perk1)
+    .input('primary1', sql.Int, participant.stats.perk2)
+    .input('primary2', sql.Int, participant.stats.perk3)
+    .input('secondary0', sql.Int, participant.stats.perk4)
+    .input('secondary1', sql.Int, participant.stats.perk5)
+    .input('statPerk0', sql.Int, participant.stats.statPerk0)
+    .input('statPerk1', sql.Int, participant.stats.statPerk1)
+    .input('statPerk2', sql.Int, participant.stats.statPerk2)
+    .execute('insertMatchInfo')
+    .catch(err => console.error(err));
+    return req;
 }
+
 /**
  * Requests the latest matchID in the games table with the given accountID,
  * then inserts all matches until you reach the latest matchID found. Finally,
@@ -207,7 +270,7 @@ function populateMatches(accID, conn) {
         // Pass in the accoundID as in put, and get the latest game stored game
         console.log("get inside kayn Matchv4");
         req.input('accID', sql.VarChar(150), accID)
-        .query(`SELECT TOP(1) matchID FROM games WHERE accountID = @accID`)
+        .query(`SELECT TOP(1) matchID FROM games WHERE accountID = @accID ORDER BY matchID DESC`)
         .then(function(result) {
             // Initially set latestGame to 0 in case table is empty for given accID
             var latestGame = 0;
@@ -219,15 +282,15 @@ function populateMatches(accID, conn) {
             var allMatches = getMatches(matchList, conn, accID, latestGame);
             console.log("can get array of promises");
             // Once this array finishes, then
-            // allMatches.then(function(res) {
-            //     // Create a new request, and remove all the excess matches (only 100 games per accID)
-            //     // for the given accID
-            //     req = new sql.Request(conn);
-            //     req.input('accID', sql.VarChar(150), accID)
-            //     .execute('removeExcessMatches').then(function(res) {
-            //         console.log(res);
-            //     }).catch(err => console.error(err));
-            // }).catch(err => console.error(err));                
+            allMatches.then(function(res) {
+                // Create a new request, and remove all the excess matches (only 100 games per accID)
+                // for the given accID
+                req = new sql.Request(conn);
+                req.input('accID', sql.VarChar(150), accID)
+                .execute('removeExcessMatches').then(function(res) {
+                    console.log(res);
+                }).catch(err => console.error(err));
+            }).catch(err => console.error(err));                
         }).catch(err => console.error(err));
     }).catch(err => console.error(err));
 }
@@ -243,9 +306,8 @@ function populateTables(name, conn) {
                 req.input('accID', sql.VarChar(150), summoner.accountId)
                 .input('summID', sql.VarChar(150), summoner.id)
                 .input('name', sql.VarChar(20), summoner.name)
-                .query(`INSERT INTO players (name, accountID, summonerID) 
-                    VALUES (@name, @accID, @summID)`
-                ).catch(error => console.error(error));
+                .execute('insertPlayers')
+                .catch(error => console.error(error));
                 // At the same time insert into the leagues table.
                 getSummonerInfo(summoner.id, conn);
                 populateMatches(summoner.accountId, conn);
