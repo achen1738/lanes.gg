@@ -2,7 +2,11 @@ var sql = require('mssql');
 var Promise = require('bluebird');
 require('dotenv').load();
 const { Kayn, REGIONS } = require('kayn');
-const kayn = Kayn(process.env.key) ();
+const kayn = Kayn(process.env.key) ({
+    requestOptions: {
+        burst: true
+    }
+});
 
 // eplaut112's accID = n_zl9ZwvDTDijLrx6haaF5z2ZeZcLIp0i_J_UHEvUGfpyw
 // me arthur chen's accID = E31Vfs6rNnnjrPF_VIaXjVZ3qC-upjQ-6Hx93yIksLcEsRKTWAg_g1hn
@@ -21,7 +25,6 @@ var dbConfig = {
 var name = "me arthur chen";
 
 // Setting up connections to database 
-var conn = new sql.ConnectionPool(dbConfig);
 
 /**
  * Easy way for me to test
@@ -29,16 +32,38 @@ var conn = new sql.ConnectionPool(dbConfig);
  * @param {*} name - desired name to update tables with
  * @param {*} conn - connection to db
  */
-async function main(args, name, conn) {
+async function main(args, name) {
+    var conn = new sql.ConnectionPool(dbConfig);
     await conn.connect();
 
     if (args[2] === "0") {
-        var res = populateTables(name, conn);
-        res.then(res => {
-            console.log("Connection should be closing. ", res);
+        var req = new sql.Request(conn);
+        try {
+            var res = await req.query(`SELECT * FROM players WHERE name = \'${name}\'`);
+            // So, if the player currently doesn't exist in players, 
+            var matchResults, summonerResults;
+            if (res.recordset.length == 0) {
+                var summonerInfoRequest = await kayn.SummonerV4.by.name(name);
+                req = new sql.Request(conn);
+
+                console.log("Storing summoner info");
+                await req.input('accID', sql.VarChar(150), summonerInfoRequest.accountId)
+                    .input('summID', sql.VarChar(150), summonerInfoRequest.id)
+                    .input('name', sql.VarChar(20), summonerInfoRequest.name)
+                    .execute('insertPlayers');
+
+                summonerResults = await getSummonerInfo(summonerInfoRequest.id, conn);
+                matchResults = await populateMatches(summonerInfoRequest.accountId, conn);
+            } else {
+                summonerResults = await getSummonerInfo(res.recordset[0].summonerID, conn);
+                matchResults = await populateMatches(res.recordset[0].accountID, conn);  
+            }
+            console.log("Closing connection");
             conn.close();
-        })
-        .catch(err => console.error(err));
+            process.exit();
+        } catch (err) {
+            console.error(err);
+        }
     } else if (args[2] === "1") {
         checkResults(name,conn);
     } else if (args[2] === "2") {
@@ -47,6 +72,18 @@ async function main(args, name, conn) {
         var matchID = parseInt(args[3],10);
         pushSpecificMatchInfo(conn, matchID);
     }
+}
+
+/**
+ * Given a matchID, makes a request to Riot's API which returns a big JSON object of data.
+ * Then, for each player execute a stored procedure that stores the players stats for that game
+ * in gameInfo.
+ * @param {*} conn - connection to database
+ * @param {*} match - matchID int.
+ */
+async function getMatchInfo(conn, matchID, timestamp) {
+    var match = await kayn.MatchV4.get(matchID)
+    return insertAllMatchInfos(match, conn, matchID, timestamp);
 }
 
 /**
@@ -68,11 +105,11 @@ async function checkResults(name, conn) {
         .query(`SELECT COUNT(*) FROM games where accountID = @accID`);
     
     var res3 = await req.input('accID', sql.VarChar(150), res.recordset[0].accountID)
-        .query(`SELECT DISTINCT matchID FROM gameInfo ORDER BY matchID DESC`)
+        .query(`SELECT DISTINCT matchID FROM gameInfo ORDER BY matchID DESC`);
     
     var res4 = await req.input('accID', sql.VarChar(150), res.recordset[0].accountID)
-        .query(`SELECT COUNT(*) FROM gameInfo`)
-    
+        .query(`SELECT COUNT(*) FROM gameInfo`);
+
     var res5 = await req.input('accID', sql.VarChar(150), res.recordset[0].accountID)
         .query(`SELECT * FROM gameInfo WHERE matchID = 2931343212`)
 
@@ -93,17 +130,6 @@ function clearTables(conn) {
     Promise.all(promises).then(res => conn.close()).catch(err => console.error(err));
 }
 
-/**
- * Given a matchID, makes a request to Riot's API which returns a big JSON object of data.
- * Then, for each player execute a stored procedure that stores the players stats for that game
- * in gameInfo.
- * @param {*} conn - connection to database
- * @param {*} match - matchID int.
- */
-async function getMatchInfo(conn, matchID, timestamp) {
-    var match = await kayn.MatchV4.get(matchID)
-    return insertAllMatchInfos(match, conn, matchID, timestamp);
-}
 
 /**
  * 
@@ -112,31 +138,29 @@ async function getMatchInfo(conn, matchID, timestamp) {
  * @param {*} accID - accountID of desired user
  * @param {*} latestGame - accountID of desired user
  */
-function getMatches(matchList, conn, accID, latestGame) {
+async function getMatches(matchList, conn, accID) {
     var matches = matchList.matches;
-    const promises = [];
+    var promises = [];
     var i, size = matches.length;
     // Iterate through all the matches
-    for (i = 0; i < 1; i++) {
+    for (i = 0; i < 20; i++) {
         let match = matches[i];
-        // If a match has the same gameID as the latest game in the database for the given account ID
-        // then continue.
-        if (latestGame == match.gameId) {
-            console.log("Ignored iteration i: ", i, " matchID of ", match.gameId);
-            continue;
+        const currentGame = match.gameId;
+        var req = new sql.Request(conn);
+
+        // Check if the database contains this match
+        const res = await req.query(`SELECT * FROM gameInfo WHERE matchID = ${currentGame}`)
+        if (res.recordset.length === 0) {
+            // If it doesnt, insert its data into the database
+            promises.push(insertMatchID(conn, accID, match));
+            promises.push(getMatchInfo(conn, currentGame, match.timestamp));
         }
-        var currentGame = match.gameId;
-        // Push a promise that represents a single insert to games to an array
-        promises.push(insertMatchID(conn, accID, match));
-        promises.push(getMatchInfo(conn, currentGame, match.timestamp));
     }
     // Return a promise of the array of promises.
     return Promise.all(promises);
 }
 
-function pushSpecificMatchInfo(conn, matchID) {
-    Promise.resolve(getMatchInfo(conn, matchID)).catch(err => console.error(err));
-}
+
 
 /**
  * Using the given summonerID, update or populate the leagues table
@@ -147,7 +171,9 @@ function pushSpecificMatchInfo(conn, matchID) {
 async function getSummonerInfo(sumID, conn) {
     // Get the players league info
     var leagues = await kayn.LeaguePositionsV4.by.summonerID(sumID);
-    return insertLeagues(leagues, conn, sumID);
+    insertLeagues(leagues, conn, sumID);
+    console.log(leagues);
+    return leagues;
 }
 
 function insertAllMatchInfos(result, conn, matchID, timestamp) {
@@ -156,21 +182,24 @@ function insertAllMatchInfos(result, conn, matchID, timestamp) {
     var size = result.participants.length;
     var half = size / 2;
     var promises = []
+    // Iterate through each participant
     for (i = 0; i < size; i++) {
         player = result.participantIdentities[i];
         participant = result.participants[i];
+        // There are two teams (different arrays), so using modular math
+        // Correctly look at all indexes of the teams.
         if (i < half) index = 0;
         else index = 1;
         var banNumber;
         if (result.teams[index].bans.length == 0) banNumber = -1
         else banNumber = result.teams[index].bans[i % half].championId;
-        promises.push(insertMatchInfo(conn, matchID, player, participant, banNumber, result.mapId, result.gameType, result.gameCreation, result.gameDuration, timestamp));
+        promises.push(insertMatchInfo(conn, matchID, player, participant, banNumber, 
+            result.mapId, result.gameType, result.gameCreation, result.gameDuration, timestamp));
     }
     return Promise.all(promises);
 }
 
 function insertLeague(league, conn, sumID) {
-    // Should probably change this to a stored procedure.
     var req = new sql.Request(conn);
     return req.input('name', sql.VarChar(50), league.leagueName)
     .input('sumID', sql.VarChar(150), sumID)
@@ -279,51 +308,13 @@ function insertMatchInfo(conn, gameId, player, participant, banNumber, mapId, ga
 async function populateMatches(accID, conn) {
     req = new sql.Request(conn);
     // Using the given found accountID, get the past 100 games.
-    var latestGame = 0
     console.log("Getting match list");
     var matchList = await kayn.MatchlistV4.by.accountID(accID);
-    console.log("Getting current latest game");
-    var gameRes = await req.input('accID', sql.VarChar(150), accID)
-        .query(`SELECT TOP(1) matchID FROM games WHERE accountID = @accID ORDER BY matchID DESC`);
 
-    if (gameRes.recordset.length == 1) latestGame = gameRes.recordset[0].matchID;
+    // Then insert each game into the database that isn't already there.
     console.log("Beginning to insert match info");
-    await getMatches(matchList, conn, accID, latestGame);
-    req = new sql.Request(conn);
-    console.log("Beginning to remove excess matches");
-    await req.input('accID', sql.VarChar(150), accID)
-        .execute('removeExcessMatches')
-        .catch(err => console.error(err));
-
-    return;
-}
-
-async function populateTables(name, conn) {
-    console.log(name);
-    var req = new sql.Request(conn);
-    try {
-        var res = await req.query(`SELECT * FROM players WHERE name = \'${name}\'`);
-        // So, if the player currently doesn't exist in players, 
-        if (res.recordset.length == 0) {
-            var summonerInfoRequest = await kayn.SummonerV4.by.name(name);
-            req = new sql.Request(conn);
-
-            console.log("Storing summoner info");
-            await req.input('accID', sql.VarChar(150), summonerInfoRequest.accountId)
-                .input('summID', sql.VarChar(150), summonerInfoRequest.id)
-                .input('name', sql.VarChar(20), summonerInfoRequest.name)
-                .execute('insertPlayers');
-
-            await getSummonerInfo(summonerInfoRequest.id, conn);
-            await populateMatches(summonerInfoRequest.accountId, conn);
-        } else {
-            await getSummonerInfo(res.recordset[0].summonerID, conn);
-            await populateMatches(res.recordset[0].accountID, conn);  
-        }
-        return;
-    } catch (err) {
-        console.error(err);
-    }
+    const res = await getMatches(matchList, conn, accID);
+    return res;
 }
 
 function truncateTable(conn, name) {
@@ -331,4 +322,4 @@ function truncateTable(conn, name) {
     return req.query(`TRUNCATE TABLE ${name}`);
 }
 
-main(process.argv, name, conn);
+main(process.argv, name);
