@@ -8,6 +8,10 @@ const kayn = Kayn(process.env.key) ({
     }
 });
 
+module.exports = {
+    top20: getTop20Matches
+}
+
 // eplaut112's accID = n_zl9ZwvDTDijLrx6haaF5z2ZeZcLIp0i_J_UHEvUGfpyw
 // me arthur chen's accID = E31Vfs6rNnnjrPF_VIaXjVZ3qC-upjQ-6Hx93yIksLcEsRKTWAg_g1hn
 
@@ -320,6 +324,30 @@ async function populateMatches(accID, conn) {
 function truncateTable(conn, name) {
     var req = new sql.Request(conn);
     return req.query(`TRUNCATE TABLE ${name}`);
+}
+
+async function getTop20Matches(name) {
+    var conn = new sql.ConnectionPool(dbConfig);
+    await conn.connect();
+    var req = new sql.Request(conn);
+    var resp = await req.input('name', sql.VarChar(20), name)
+    .execute('getTop20Matches')
+    .catch(error => console.error(error));
+    conn.close();
+    return resp.recordset;
+}
+
+async function getNext20Matches(matchID, name) {
+    var conn = new sql.ConnectionPool(dbConfig);
+    await conn.connect();
+    var req = new sql.Request(conn);
+    var resp = await req.input('name', sql.VarChar(20), name)
+    .input('latestMatch', sql.BigInt, matchID)
+    .execute('getNext20Matches')
+    .catch(error => console.error(error));
+    // console.log(resp.recordset);
+    conn.close();
+    return resp.recordset;
 }
 
 main(process.argv, name);
