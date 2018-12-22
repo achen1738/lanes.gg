@@ -1,0 +1,36 @@
+.header {
+  position: relative;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 17px 0px;
+  height: 32px;
+  width: 100%;
+}
+
+.site {
+  display: inline-block;
+  color: #fff;
+  position: relative;
+  line-height: 32px;
+  font-weight: 700;
+  margin-left: 25px;
+  font-size: 16px;
+
+  background-color: #7682ff;
+  border: 0;
+  outline: none;
+  padding: 5px 20px;
+  border-radius: 50px;
+}
+
+.site:hover {
+  background-color: #53adff;
+  transition-property: background-color;
+  cursor: pointer;
+  transition: ease-in;
+  transition-duration: 0.1s;
+}
+
+.options {
+  float: right !important;
+}
