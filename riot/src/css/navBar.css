@@ -1,3 +1,7 @@
+.header-wrapper {
+  margin-bottom: 30px;
+}
+
 .header {
   position: relative;
   max-width: 1300px;
@@ -14,13 +18,19 @@
   line-height: 32px;
   font-weight: 700;
   margin-left: 25px;
-  font-size: 16px;
-
-  background-color: #7682ff;
+  font-size: 13px;
   border: 0;
   outline: none;
   padding: 5px 20px;
   border-radius: 50px;
+}
+
+.site-light {
+  background-color: #026760;
+}
+
+.site-dark {
+  background-color: #4953ba;
 }
 
 .site:hover {
@@ -31,6 +41,8 @@
   transition-duration: 0.1s;
 }
 
-.options {
+.right-nav {
   float: right !important;
+  margin-left: 100px;
+  margin-top: 3px;
 }

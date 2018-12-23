@@ -1,3 +1,0 @@
-I just finished backend, so now I have to somehow push data to the frontend, such that it can
-build html stuff with it. I can either make the front end directly connect to the db, and pull data and build stuff
-with it, or i can Also, gotta learn reactjs lol.

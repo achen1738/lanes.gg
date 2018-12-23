@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import { BrowserRouter as Router, Link } from "react-router-dom";
 import "./../css/navBar.css";
 class navBar extends Component {
   //   state = {};
@@ -6,14 +7,16 @@ class navBar extends Component {
     return (
       <div className="header-wrapper">
         <div className="header">
-          <ul className="options">
-            <button className="site">Home</button>
-            <li className="site">About</li>
-            <li className="site">Leaderboards</li>
-            <li className="site quickswitcher">
-              <span>Light/Dark</span>
-            </li>
-          </ul>
+          <div className="right-nav">
+            <ul className="options">
+              <button className="site site-light">Home</button>
+              <li className="site site-light">About</li>
+              <li className="site site-light">Leaderboards</li>
+              <li className="site site-light quickswitcher">
+                <span>Light/Dark</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     );
