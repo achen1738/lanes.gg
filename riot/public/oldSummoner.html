@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/src/css/main_page.css" rel="stylesheet" type="text/css" />
+    <!-- Stuff like this should be in here
+<meta name="title" content="LoL Stats, Record Replay, Database, Guide, MMR - OP.GG"> 
+<meta property="og:title" content="LoL Stats, Record Replay, Database, Guide, MMR - OP.GG">
+<meta name="description" content="Real-time LoL Stats! Check your Summoner, MMR, Live Spectate and using powerful global League of Legends Statistics!">
+<meta property="og:description" content="Real-time LoL Stats! Check your Summoner, MMR, Live Spectate and using powerful global League of Legends Statistics!">
+etc... go on op.gg to find more
+ -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+	<script src="https://cdn.rawgit.com/emn178/Chart.PieceLabel.js/master/build/Chart.PieceLabel.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.3.0"></script>
+	<script type="text/javascript" src="/src/javascript/classSum.js"></script>
+	<script type="text/javascript" src="/src/javascript/summoner.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.5/svg.js"></script> -->
+  </head>
+
+  <body class="light">
+    <script type="text/javascript" src="/src/javascript/darkmode.js"></script>
+    <script type="text/javascript" src="/src/javascript/staticHTML.js"></script>
+
+    <div class="main" id="d">
+      <div class="l-header">
+        <div class="header">
+          <ul class="language--region">
+            <li class="site">Home</li>
+            <li class="site">About</li>
+            <li class="site quickswitcher" id="darkmode">
+              <span>Light/Dark</span>
+            </li>
+            <li class="site">
+              <form
+                class="refreshForm"
+                id="a"
+                autocomplete="off"
+                action="summoner.html"
+                method="get"
+              >
+                <input
+                  class="refreshFormText"
+                  type="text"
+                  name="userName"
+                  placeholder="Search League of Legends IGN"
+                />
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="summonerContainer">
+        <div class="summonerPage">
+          <div class="summonerContent summonerFS">
+            <div class="summonerInfo infoSize">
+              <div class="summonerTier sBox">
+                <div class="soloRank">
+                  <div class="tierMedal"></div>
+                  <div class="tierInfo">
+                    <div class="divLP"></div>
+                    <div class="winPercentage"></div>
+                    <div class="winLossGames"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="summonerMatches matchesSize">
+              <div class="Content">
+                <div class="overview">
+                  <div class="overviewHeader">
+                    <div class="title">Recent Winrate</div>
+                    <div class="title">Most Played</div>
+                    <div class="title">Enemy Winrates</div>
+                  </div>
+                  <div class="recentStats">
+                    <div class="recentWinRate">
+                      <div class="totalGames"></div>
+                      <canvas
+                        id="graph"
+                        style="width: 152px; height: 152px"
+                      ></canvas>
+                      <div class="averageKDA"></div>
+                    </div>
+                    <div class="mostPlayed"></div>
+                    <div class="mostPlayedAgainst"></div>
+                  </div>
+                </div>
+                <div class="matchList"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="l-footer"></div>
+    </div>
+
+    <svg class="absolute" width="0" height="0" visibility="hidden">
+      <linearGradient id="gradient-precision" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-color="#c8aa6e" offset="0%"></stop>
+        <stop stop-color="#aea789" offset="100%"></stop>
+      </linearGradient>
+      <linearGradient id="cup-gradient-precision" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-opacity="0" offset="80%" stop-color="#c8aa6e"></stop>
+        <stop stop-opacity="1" offset="100%" stop-color="#c8aa6e"></stop>
+      </linearGradient>
+      <linearGradient
+        id="circle-gradient-precision"
+        x1="1"
+        y1="0.6"
+        x2="0"
+        y2="0"
+      >
+        <stop stop-opacity="1" offset="0%" stop-color="#c8aa6e"></stop>
+        <stop stop-opacity="0" offset="70%" stop-color="#c8aa6e"></stop>
+      </linearGradient>
+      <linearGradient
+        id="keystone-flourish-precision"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="0%"
+      >
+        <stop offset="0%" stop-color="#aea789" stop-opacity="0"></stop>
+        <stop offset="50%" stop-color="#c8aa6e" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="#aea789" stop-opacity="0"></stop>
+      </linearGradient>
+      <linearGradient id="gradient-domination" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-color="#ca3e3f" offset="0%"></stop>
+        <stop stop-color="#dc4747" offset="100%"></stop>
+      </linearGradient>
+      <linearGradient id="cup-gradient-domination" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-opacity="0" offset="80%" stop-color="#ca3e3f"></stop>
+        <stop stop-opacity="1" offset="100%" stop-color="#ca3e3f"></stop>
+      </linearGradient>
+      <linearGradient
+        id="circle-gradient-domination"
+        x1="1"
+        y1="0.6"
+        x2="0"
+        y2="0"
+      >
+        <stop stop-opacity="1" offset="0%" stop-color="#ca3e3f"></stop>
+        <stop stop-opacity="0" offset="70%" stop-color="#ca3e3f"></stop>
+      </linearGradient>
+      <linearGradient
+        id="keystone-flourish-domination"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="0%"
+      >
+        <stop offset="0%" stop-color="#dc4747" stop-opacity="0"></stop>
+        <stop offset="50%" stop-color="#ca3e3f" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="#dc4747" stop-opacity="0"></stop>
+      </linearGradient>
+      <linearGradient id="gradient-sorcery" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-color="#9faafc" offset="0%"></stop>
+        <stop stop-color="#6c75f5" offset="100%"></stop>
+      </linearGradient>
+      <linearGradient id="cup-gradient-sorcery" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-opacity="0" offset="80%" stop-color="#9faafc"></stop>
+        <stop stop-opacity="1" offset="100%" stop-color="#9faafc"></stop>
+      </linearGradient>
+      <linearGradient
+        id="circle-gradient-sorcery"
+        x1="1"
+        y1="0.6"
+        x2="0"
+        y2="0"
+      >
+        <stop stop-opacity="1" offset="0%" stop-color="#9faafc"></stop>
+        <stop stop-opacity="0" offset="70%" stop-color="#9faafc"></stop>
+      </linearGradient>
+      <linearGradient
+        id="keystone-flourish-sorcery"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="0%"
+      >
+        <stop offset="0%" stop-color="#9faafc" stop-opacity="0"></stop>
+        <stop offset="50%" stop-color="#6c75f5" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="#9faafc" stop-opacity="0"></stop>
+      </linearGradient>
+      <linearGradient id="gradient-resolve" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-color="#a1d586" offset="0%"></stop>
+        <stop stop-color="#a4d08d" offset="100%"></stop>
+      </linearGradient>
+      <linearGradient id="cup-gradient-resolve" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-opacity="0" offset="80%" stop-color="#a1d586"></stop>
+        <stop stop-opacity="1" offset="100%" stop-color="#a1d586"></stop>
+      </linearGradient>
+      <linearGradient
+        id="circle-gradient-resolve"
+        x1="1"
+        y1="0.6"
+        x2="0"
+        y2="0"
+      >
+        <stop stop-opacity="1" offset="0%" stop-color="#a1d586"></stop>
+        <stop stop-opacity="0" offset="70%" stop-color="#a1d586"></stop>
+      </linearGradient>
+      <linearGradient
+        id="keystone-flourish-resolve"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="0%"
+      >
+        <stop offset="0%" stop-color="#a1d586" stop-opacity="0"></stop>
+        <stop offset="50%" stop-color="#a4d08d" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="#a1d586" stop-opacity="0"></stop>
+      </linearGradient>
+      <linearGradient id="gradient-inspiration" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-color="#49aab9" offset="0%"></stop>
+        <stop stop-color="#48b4be" offset="100%"></stop>
+      </linearGradient>
+      <linearGradient id="cup-gradient-inspiration" x1="0" y1="0" x2="0" y2="1">
+        <stop stop-opacity="0" offset="80%" stop-color="#49aab9"></stop>
+        <stop stop-opacity="1" offset="100%" stop-color="#49aab9"></stop>
+      </linearGradient>
+      <linearGradient
+        id="circle-gradient-inspiration"
+        x1="1"
+        y1="0.6"
+        x2="0"
+        y2="0"
+      >
+        <stop stop-opacity="1" offset="0%" stop-color="#49aab9"></stop>
+        <stop stop-opacity="0" offset="70%" stop-color="#49aab9"></stop>
+      </linearGradient>
+      <linearGradient
+        id="keystone-flourish-inspiration"
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="0%"
+      >
+        <stop offset="0%" stop-color="#49aab9" stop-opacity="0"></stop>
+        <stop offset="50%" stop-color="#48b4be" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="#49aab9" stop-opacity="0"></stop>
+      </linearGradient>
+    </svg>
+    <svg class="absolute" width="0" height="0" visibility="hidden">
+      <symbol id="icon-circle" viewbox="0 0 60 60">
+        <circle cx="50%" cy="50%" r="45%" stroke-width="3" fill="transparent" />
+      </symbol>
+      <symbol id="icon-mid" viewbox="0 0 40 40">
+        <path class="midLane" d="M 40,0 L 0,40" />
+        <polygon class="sideLane" points="28,0 0,0 0,28 8,20 8,8 20,8" />
+        <polygon
+          class="sideLane"
+          points="40,12 40,40 12,40 20,32 32,32 32,20"
+        />
+      </symbol>
+      <symbol id="icon-top" viewbox="0 0 40 40">
+        <polygon class="activeLane" points="36,0 0,0 0,36 9,27 9,9 27,9" />
+        <polygon class="sideLane" points="40,4 40,40 4,40 13,31 31,31 31,13" />
+        <polygon class="sideLane" points="15,15 25,15, 25,25 15,25" />
+      </symbol>
+      <symbol id="icon-bottom" viewbox="0 0 40 40">
+        <polygon class="sideLane" points="36,0 0,0 0,36 9,27 9,9 27,9" />
+        <polygon
+          class="activeLane"
+          points="40,4 40,40 4,40 13,31 31,31 31,13"
+        />
+        <polygon class="sideLane" points="15,15 25,15, 25,25 15,25" />
+      </symbol>
+      <symbol id="icon-support" viewbox="0 0 40 40">
+        <polygon class="activeLane" points="15,0 25,0 28,5 20,12, 12,5" />
+        <polygon
+          class="activeLane"
+          points="15,35 20,40 25,35 21,15 20,16 19,15"
+        />
+        <path
+          class="activeLane"
+          d="M29 15 L 34 21 L 27 25 L 23 14 L 30 8 H 40 C 36 17, 32 14, 29 15"
+        />
+        <path
+          class="activeLane"
+          d="M11 15 L 6 21 L 13 25 L 17 14 L 10 8 H 0 C 4 17, 8 14, 11 15"
+        />
+      </symbol>
+      <symbol id="icon-jungle" viewbox="0 0 40 40">
+        <path
+          class="activeLane"
+          d="M 20,40 C 25 30, 25 23, 7 0 
+									C 14 16, 15.3 20, 14 24 
+									C 12 21, 10 17, 0 12
+									C 8 20, 9 28, 9 30
+									C 12.5 32, 14.5 34, 20 40"
+        />
+        <path
+          class="activeLane"
+          d="M 40 12 C 32 20, 28 22, 24.5 36
+									C 27.5 32.5, 27.5 32.5, 31.5 31 
+									C 32 23, 36 18, 40 12"
+        />
+        <path
+          class="activeLane"
+          d="M 25 26 L 27 22
+									C 26 15, 31 4, 33 0 
+									C 25 12, 29 5, 22 18
+									C 24 23, 24 22, 25 26"
+        />
+      </symbol>
+    </svg>
+  </body>
+</html>
