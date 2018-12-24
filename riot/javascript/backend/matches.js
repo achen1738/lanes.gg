@@ -33,11 +33,20 @@ app.get("/leagues/:userName", async function(req, res) {
   res.json(leagues);
 });
 
-app.get("/matches", async function(req, res) {
-  const matches = await connection.top20("me arthur chen");
+app.get("/matches/:userName", async function(req, res) {
+  const matches = await connection.top20(req.params.userNam);
   console.log(matches);
   var json = JSON.stringify(matches);
   res.send(json);
+});
+
+app.get("/matches/overview/:userName/:numGames", async function(req, res) {
+  const leagues = await connection.getOverview(
+    req.params.userName,
+    req.params.numGames
+  );
+  console.log(leagues);
+  res.json(leagues);
 });
 
 app.patch("/update/:userName", async function(req, res) {

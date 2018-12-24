@@ -8,6 +8,33 @@ import Body from "./body";
 class Home extends Component {
   state = {};
 
+  async initializeChamps() {
+    const version = await fetch(
+      "https://ddragon.leagueoflegends.com/api/versions.json"
+    );
+
+    const versionJSON = await version.json();
+
+    const champ = await fetch(
+      `https://ddragon.leagueoflegends.com/cdn/${
+        versionJSON[0]
+      }/data/en_US/champion.json`
+    );
+
+    const champJSON = await champ.json();
+
+    var myChampObject = {};
+    const data = champJSON.data;
+
+    var subObject, value;
+    Object.keys(data).forEach(function(key, index) {
+      value = data[key];
+      subObject = { image: value.image, id: value.id, name: value.name };
+      myChampObject[value.key] = subObject;
+    });
+    return myChampObject;
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -35,7 +62,7 @@ class Home extends Component {
       <React.Fragment>
         <div class="main orig-dark-mc">
           <NavSearch />
-          <Body />
+          <Body champs={this.initializeChamps()} />
         </div>
       </React.Fragment>
     );

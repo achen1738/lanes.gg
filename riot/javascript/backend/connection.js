@@ -11,7 +11,8 @@ const kayn = Kayn(process.env.key)({
 module.exports = {
   top20: getTop20Matches,
   getLeagues: getLeagues,
-  update: update
+  update: update,
+  getOverview: getOverview
 };
 
 // eplaut112's accID = n_zl9ZwvDTDijLrx6haaF5z2ZeZcLIp0i_J_UHEvUGfpyw
@@ -28,7 +29,7 @@ var dbConfig = {
 };
 
 // Init the desired name
-var name = "me arthur chen";
+// var name = "me arthur chen";
 
 // Setting up connections to database
 
@@ -362,18 +363,6 @@ function truncateTable(conn, name) {
   return req.query(`TRUNCATE TABLE ${name}`);
 }
 
-async function getTop20Matches(name) {
-  var conn = new sql.ConnectionPool(dbConfig);
-  await conn.connect();
-  var req = new sql.Request(conn);
-  var resp = await req
-    .input("name", sql.VarChar(20), name)
-    .execute("getTop20Matches")
-    .catch(error => console.error(error));
-  conn.close();
-  return resp.recordset;
-}
-
 async function getNext20Matches(matchID, name) {
   var conn = new sql.ConnectionPool(dbConfig);
   await conn.connect();
@@ -393,16 +382,41 @@ async function update(name) {
   return Promise.resolve(1);
 }
 
+async function oneNameInput(name, executedFunction) {
+  const conn = new sql.ConnectionPool(dbConfig);
+  await conn.connect();
+  var req = new sql.Request(conn);
+  const resp = await req
+    .input("username", sql.VarChar(20), name)
+    .execute(executedFunction)
+    .catch(error => console.error(error));
+  conn.close();
+  return resp.recordset;
+}
+
+async function getTop20Matches(name) {
+  return await oneNameInput(name, "getTop20Matches");
+}
+
 async function getLeagues(name) {
+  const resp = await oneNameInput(name, "getLeagues");
+  return resp;
+}
+
+async function getOverview(name, num) {
   var conn = new sql.ConnectionPool(dbConfig);
   await conn.connect();
   var req = new sql.Request(conn);
   var resp = await req
     .input("username", sql.VarChar(20), name)
-    .execute("getLeagues")
+    .input("numGames", sql.Int, num)
+    .execute("getUserOverview")
     .catch(error => console.error(error));
-
   console.log(resp);
   conn.close();
   return resp.recordset;
 }
+
+// getOverview("me arthur chen", 20);
+// main("me arthur chen");
+// getLeagues("rexmonstro");
