@@ -28,9 +28,9 @@ class SummonerInfo extends Component {
         "% Win Ratio";
       var rank = `${imgRank[1]} ${league.rank} ${league.leaguePoints} LP`;
       return (
-        <div class="soloRank">
+        <div key={league.queueType} class="soloRank">
           <div class="tierMedal">
-            <img src={imgRank[0]} />
+            <img src={imgRank[0]} alt="Summoner Rank" />
           </div>
           <div class="tierInfo">
             <div class="divLP">{rank}</div>
@@ -41,9 +41,12 @@ class SummonerInfo extends Component {
       );
     } else {
       return (
-        <div class="soloRank">
+        <div key="unranked" class="soloRank">
           <div class="tierMedal">
-            <img src="http://opgg-static.akamaized.net/images/medals/default.png" />
+            <img
+              src="http://opgg-static.akamaized.net/images/medals/default.png"
+              alt="Default rank"
+            />
           </div>
           <div class="tierInfo">
             <div class="divLP">
@@ -73,9 +76,9 @@ class SummonerInfo extends Component {
             ? "Twisted Treeline"
             : "Ranked Flex";
         return (
-          <div className="notSolo">
+          <div key={league.queueType} className="notSolo">
             <div className="tierMedal">
-              <img src={imgRank[0]} />
+              <img src={imgRank[0]} alt="Summoner Rank" />
             </div>
             <div className="queueType">
               <div className="queueName">{queueName}</div>

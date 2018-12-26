@@ -32,6 +32,7 @@ class Home extends Component {
       subObject = { image: value.image, id: value.id, name: value.name };
       myChampObject[value.key] = subObject;
     });
+    myChampObject["version"] = versionJSON[0];
     return myChampObject;
   }
 

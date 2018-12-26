@@ -40,19 +40,46 @@ app.get("/matches/:userName", async function(req, res) {
   res.send(json);
 });
 
-app.get("/matches/overview/:userName/:numGames", async function(req, res) {
-  const leagues = await connection.getOverview(
+app.get("/matches/userOverview/:userName/:numGames", async function(req, res) {
+  const resp = await connection.getUserOverview(
     req.params.userName,
     req.params.numGames
   );
-  console.log(leagues);
-  res.json(leagues);
+  const finalArray = putChampsInArrays(resp);
+  res.json(finalArray);
 });
 
+app.get("/matches/enemyOverview/:userName/:numGames", async function(req, res) {
+  const resp = await connection.getEnemyOverview(
+    req.params.userName,
+    req.params.numGames
+  );
+  const finalArray = putChampsInArrays(resp);
+  res.json(finalArray);
+});
+
+function putChampsInArrays(resp) {
+  var finalArray = [];
+  var currArray = [];
+  var currChamp = -1;
+  if (resp.length > 0) currChamp = resp[0].championID;
+  for (var idx in resp) {
+    var element = resp[idx];
+    if (currChamp === element.championID) {
+      currArray.push(element);
+    } else {
+      finalArray.push(currArray);
+      currArray = [element];
+      currChamp = element.championID;
+    }
+  }
+  finalArray.push(currArray);
+  return finalArray;
+}
+
 app.patch("/update/:userName", async function(req, res) {
-  var resp = await connection.update(req.params.userName);
+  const resp = await connection.update(req.params.userName);
   res.json(resp);
-  // resp.then(result => res.send(0)).catch(err => console.error(err));
 });
 
 app.listen(5000, function() {

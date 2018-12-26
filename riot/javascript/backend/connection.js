@@ -12,12 +12,14 @@ module.exports = {
   top20: getTop20Matches,
   getLeagues: getLeagues,
   update: update,
-  getOverview: getOverview
+  getUserOverview: getUserOverview,
+  getEnemyOverview: getEnemyOverview
 };
 
 // eplaut112's accID = n_zl9ZwvDTDijLrx6haaF5z2ZeZcLIp0i_J_UHEvUGfpyw
 // me arthur chen's accID = E31Vfs6rNnnjrPF_VIaXjVZ3qC-upjQ-6Hx93yIksLcEsRKTWAg_g1hn
-
+// rexmonstro's accID = oTGIR5g9KxAlPMUdRkfyC58O9yPfdtRnIWIB0n9kzfx7V5Y
+// 2938355678
 // Database config
 // unix timestamp in milliseconds
 var dbConfig = {
@@ -185,7 +187,7 @@ async function getSummonerInfo(sumID, conn) {
   // Get the players league info
   var leagues = await kayn.LeaguePositionsV4.by.summonerID(sumID);
   insertLeagues(leagues, conn, sumID);
-  console.log(leagues);
+  // console.log(leagues);
   return leagues;
 }
 
@@ -403,7 +405,7 @@ async function getLeagues(name) {
   return resp;
 }
 
-async function getOverview(name, num) {
+async function getUserOverview(name, num) {
   var conn = new sql.ConnectionPool(dbConfig);
   await conn.connect();
   var req = new sql.Request(conn);
@@ -412,7 +414,21 @@ async function getOverview(name, num) {
     .input("numGames", sql.Int, num)
     .execute("getUserOverview")
     .catch(error => console.error(error));
-  console.log(resp);
+  // console.log(resp);
+  conn.close();
+  return resp.recordset;
+}
+
+async function getEnemyOverview(name, num) {
+  var conn = new sql.ConnectionPool(dbConfig);
+  await conn.connect();
+  var req = new sql.Request(conn);
+  var resp = await req
+    .input("username", sql.VarChar(20), name)
+    .input("numGames", sql.Int, num)
+    .execute("getEnemyOverview")
+    .catch(error => console.error(error));
+  // console.log(resp.recordset);
   conn.close();
   return resp.recordset;
 }
@@ -420,3 +436,5 @@ async function getOverview(name, num) {
 // getOverview("me arthur chen", 20);
 // main("me arthur chen");
 // getLeagues("rexmonstro");
+
+getEnemyOverview("me arthur chen", 20);

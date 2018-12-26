@@ -171,13 +171,13 @@ h1 {
 
 .summonerFS > .infoSize {
   display: inline-block;
-  width: 300px;
+  width: 275px;
   vertical-align: top;
 }
 
 .summonerFS > .matchesSize {
   display: inline-block;
-  width: 685px;
+  width: 700px;
   margin-left: 10px;
   vertical-align: top;
   margin-top: 10px;
