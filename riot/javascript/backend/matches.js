@@ -45,6 +45,7 @@ app.get("/matches/userOverview/:userName/:numGames", async function(req, res) {
     req.params.userName,
     req.params.numGames
   );
+
   const finalArray = putChampsInArrays(resp);
   res.json(finalArray);
 });
@@ -56,6 +57,15 @@ app.get("/matches/enemyOverview/:userName/:numGames", async function(req, res) {
   );
   const finalArray = putChampsInArrays(resp);
   res.json(finalArray);
+});
+
+app.get("/matches/numLosses/:userName/:numGames", async function(req, res) {
+  const resp = await connection.getNumLosses(
+    req.params.userName,
+    req.params.numGames
+  );
+  console.log("numWins ", resp);
+  res.json(resp);
 });
 
 function putChampsInArrays(resp) {

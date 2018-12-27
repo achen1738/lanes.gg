@@ -13,7 +13,8 @@ module.exports = {
   getLeagues: getLeagues,
   update: update,
   getUserOverview: getUserOverview,
-  getEnemyOverview: getEnemyOverview
+  getEnemyOverview: getEnemyOverview,
+  getNumLosses: getNumLosses
 };
 
 // eplaut112's accID = n_zl9ZwvDTDijLrx6haaF5z2ZeZcLIp0i_J_UHEvUGfpyw
@@ -433,8 +434,22 @@ async function getEnemyOverview(name, num) {
   return resp.recordset;
 }
 
+async function getNumLosses(name, num) {
+  var conn = new sql.ConnectionPool(dbConfig);
+  await conn.connect();
+  var req = new sql.Request(conn);
+  var resp = await req
+    .input("username", sql.VarChar(20), name)
+    .input("numGames", sql.Int, num)
+    .execute("getNumLosses")
+    .catch(error => console.error(error));
+  console.log(resp.recordset);
+  conn.close();
+  return resp.recordset[0];
+}
+
 // getOverview("me arthur chen", 20);
 // main("me arthur chen");
 // getLeagues("rexmonstro");
-
-getEnemyOverview("me arthur chen", 20);
+// getNumLosses("rexmonstro", 20);
+// update("hellowhosthere");
