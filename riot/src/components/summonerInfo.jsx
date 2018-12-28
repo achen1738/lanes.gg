@@ -59,6 +59,7 @@ class SummonerInfo extends Component {
   }
 
   createLeagueInfo() {
+    // eslint-disable-next-line
     return this.state.leagues.map(league => {
       var imgRank = this.rankImage(league.tier, league.rank);
       var winLoss = `${league.wins}W ${league.losses}L`;

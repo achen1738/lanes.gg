@@ -21,6 +21,19 @@ class Home extends Component {
       }/data/en_US/champion.json`
     );
 
+    const runes = await fetch(
+      `https://ddragon.leagueoflegends.com/cdn/${
+        versionJSON[0]
+      }/data/en_US/runesReforged.json`
+    );
+    const summonerSpells = await fetch(
+      `http://ddragon.leagueoflegends.com/cdn/${
+        versionJSON[0]
+      }/data/en_US/summoner.json`
+    );
+
+    const runesJSON = await runes.json();
+    const summonerSpellsJSON = await summonerSpells.json();
     const champJSON = await champ.json();
 
     var myChampObject = {};
@@ -33,6 +46,12 @@ class Home extends Component {
       myChampObject[value.key] = subObject;
     });
     myChampObject["version"] = versionJSON[0];
+    myChampObject["spellURL"] = `http://ddragon.leagueoflegends.com/cdn/${
+      versionJSON[0]
+    }/img/spell/`;
+    myChampObject["runeURL"] = `https://ddragon.leagueoflegends.com/cdn/img/`;
+    myChampObject["runes"] = runesJSON;
+    myChampObject["summonerSpells"] = summonerSpellsJSON;
     return myChampObject;
   }
 

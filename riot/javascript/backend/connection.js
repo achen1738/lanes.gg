@@ -134,11 +134,13 @@ async function checkResults(name, conn) {
   conn.close();
 }
 
-function clearTables(conn) {
+async function clearTables() {
+  var conn = new sql.ConnectionPool(dbConfig);
+  await conn.connect();
   var promises = [
-    truncateTable(conn, "players"),
+    // truncateTable(conn, "players"),
     truncateTable(conn, "games"),
-    truncateTable(conn, "leagues"),
+    // truncateTable(conn, "leagues"),
     truncateTable(conn, "gameInfo")
   ];
   Promise.all(promises)
@@ -338,6 +340,10 @@ function insertMatchInfo(
     .input("statPerk2", sql.Int, stats.statPerk2)
     .input("gameDuration", sql.BigInt, gameDuration)
     .input("timestamp", sql.BigInt, timestamp)
+    .input("jungleEnemy", sql.Int, stats.neutralMinionsKilledEnemyJungle)
+    .input("jungleTeam", sql.Int, stats.neutralMinionsKilledTeamJungle)
+    .input("totalMinionsKilled", sql.Int, stats.totalMinionsKilled)
+
     .execute("insertMatchInfo")
     .catch(err => console.error(err));
 }
@@ -429,7 +435,7 @@ async function getEnemyOverview(name, num) {
     .input("numGames", sql.Int, num)
     .execute("getEnemyOverview")
     .catch(error => console.error(error));
-  // console.log(resp.recordset);
+  console.log(resp.recordset);
   conn.close();
   return resp.recordset;
 }
@@ -448,8 +454,24 @@ async function getNumLosses(name, num) {
   return resp.recordset[0];
 }
 
-// getOverview("me arthur chen", 20);
+async function testSomething() {
+  var conn = new sql.ConnectionPool(dbConfig);
+  await conn.connect();
+  var req = new sql.Request(conn);
+  var resp = await req
+    .query(
+      `SELECT * FROM gameInfo gi 
+    `
+    )
+    .catch(error => console.error(error));
+  conn.close();
+  console.log(resp);
+}
+// getUserOverview("rexmonstro", 20);
 // main("me arthur chen");
 // getLeagues("rexmonstro");
+// getEnemyOverview("rexmonstro", 20);
 // getNumLosses("rexmonstro", 20);
-// update("hellowhosthere");
+// update("rexmonstro");
+// clearTables();
+// testSomething();

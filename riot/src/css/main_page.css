@@ -530,10 +530,10 @@ h1 {
   line-height: 1.35;
 }
 
-.Stats {
+/* .Stats {
   padding-left: 6px;
   padding-right: 9px;
-}
+} */
 
 .Summoner > div {
   display: inline-block;
@@ -631,163 +631,10 @@ h1 {
   margin-top: 3.5px;
 }
 
-.expandedContainer {
-  color: black;
-  position: absolute;
-  top: 1%;
-  left: 1%;
-  background: rgb(8, 37, 84);
-  width: 90.5%;
-  height: 97.5%;
-  border-radius: 8px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
-  z-index: 1;
-}
-
-.expandedContainer::before {
-  content: "";
-  position: absolute;
-  right: -8px;
-  top: 9%;
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-left: 8px solid rgb(8, 37, 84);
-  border-bottom: 5px solid transparent;
-  overflow: hidden;
-  /* box-shadow: 0 5px 20px rgba(0,0,0, .5); */
-}
-
 .ChampImg > img {
   width: 60px;
   height: 60px;
   clip-path: circle(27px at center);
-}
-
-.champHeader {
-  margin-top: 4px;
-}
-
-.champHeader > div {
-  display: inline-block;
-}
-
-.champImage {
-  width: 40px;
-  height: 40px;
-  clip-path: circle(19px);
-}
-
-.champImage > img {
-  width: 100%;
-  height: 100%;
-}
-
-#bar {
-  display: inline-block;
-}
-
-.champMatch > div {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.champMatch > .Items {
-  padding-top: 7.5px;
-  width: 58px;
-  overflow: hidden;
-}
-
-.champMatch > .Items > .Item {
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  margin-left: 1px;
-  margin-top: -3px;
-  clip-path: circle(11.5px);
-}
-
-.champMatch {
-  display: table;
-  height: 42.5px;
-  border: 1px solid black;
-  width: 98%;
-  margin-left: 2px;
-}
-
-.champMatch:not(:first-child) {
-  margin-top: 1px;
-}
-
-.champMatch > .Stats {
-  font-size: 14px;
-}
-
-.Rune {
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  background: black;
-  margin-top: -2.5px;
-  margin-left: 1px;
-  border-radius: 3px;
-  clip-path: circle(11.5px);
-}
-
-.Rune > img {
-  width: 100%;
-  height: 100%;
-}
-
-.champMatch > .SpellsnRunes {
-  width: 50px;
-  padding-top: 7px;
-  position: relative;
-}
-
-.cLevel {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  z-index: 1;
-  left: 31%;
-  top: 26%;
-  clip-path: circle(8px);
-  background: #63be63;
-  font-size: 11px;
-  color: white;
-}
-
-.champList::-webkit-scrollbar {
-  display: none;
-}
-
-.cLevelContainer {
-  margin-top: 4px;
-  margin-right: 1.25px;
-  text-align: center;
-}
-
-.champList {
-  margin-top: -2px;
-  height: 143px;
-  overflow-y: scroll;
-}
-
-.champMatch > .Trinket {
-  /* margin-left: -4px; */
-  width: 18px;
-  padding-right: 2px;
-  border-radius: 3px;
-}
-
-.champMatch > .Trinket > .Item {
-  margin-top: 1px;
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  margin-left: 0.5px;
-  clip-path: circle(11.5px);
 }
 
 .Button {
