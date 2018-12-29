@@ -52,6 +52,12 @@ class Home extends Component {
     myChampObject["runeURL"] = `https://ddragon.leagueoflegends.com/cdn/img/`;
     myChampObject["runes"] = runesJSON;
     myChampObject["summonerSpells"] = summonerSpellsJSON;
+    myChampObject["itemURL"] = `http://ddragon.leagueoflegends.com/cdn/${
+      versionJSON[0]
+    }/img/item/`;
+    myChampObject["champURL"] = `http://ddragon.leagueoflegends.com/cdn/${
+      versionJSON[0]
+    }/img/champion/`;
     return myChampObject;
   }
 
@@ -80,7 +86,7 @@ class Home extends Component {
   main() {
     return (
       <React.Fragment>
-        <div class="main orig-dark-mc">
+        <div className="main orig-dark-mc">
           <NavSearch />
           <Body champs={this.initializeChamps()} />
         </div>

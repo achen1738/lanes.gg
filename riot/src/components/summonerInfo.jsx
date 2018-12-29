@@ -28,28 +28,28 @@ class SummonerInfo extends Component {
         "% Win Ratio";
       var rank = `${imgRank[1]} ${league.rank} ${league.leaguePoints} LP`;
       return (
-        <div key={league.queueType} class="soloRank">
-          <div class="tierMedal">
+        <div key={league.queueType} className="soloRank">
+          <div className="tierMedal">
             <img src={imgRank[0]} alt="Summoner Rank" />
           </div>
-          <div class="tierInfo">
-            <div class="divLP">{rank}</div>
-            <div class="winPercentage">{winRatio}</div>
-            <div class="winLossGames">{winLoss}</div>
+          <div className="tierInfo">
+            <div className="divLP">{rank}</div>
+            <div className="winPercentage">{winRatio}</div>
+            <div className="winLossGames">{winLoss}</div>
           </div>
         </div>
       );
     } else {
       return (
-        <div key="unranked" class="soloRank">
-          <div class="tierMedal">
+        <div key="unranked" className="soloRank">
+          <div className="tierMedal">
             <img
               src="http://opgg-static.akamaized.net/images/medals/default.png"
               alt="Default rank"
             />
           </div>
-          <div class="tierInfo">
-            <div class="divLP">
+          <div className="tierInfo">
+            <div className="divLP">
               <span>Unranked</span>
             </div>
           </div>
@@ -137,8 +137,8 @@ class SummonerInfo extends Component {
 
   render() {
     return (
-      <div class="summonerInfo infoSize">
-        <div class="summonerTier sBox">
+      <div className="summonerInfo infoSize">
+        <div className="summonerTier sBox">
           {this.createRankedSoloInfo()}
           {this.createLeagueInfo()}
         </div>

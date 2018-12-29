@@ -22,7 +22,7 @@ class SearchBar extends Component {
       <React.Fragment>
         <form
           className="search-form"
-          autocomplete="off"
+          autoComplete="off"
           action="/lol/summoner"
           // onSubmit={this.handleSubmit}
           method="get"

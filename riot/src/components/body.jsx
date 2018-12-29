@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Info from "./summonerInfo";
-import MatchArea from "./matchArea";
+import MatchArea from "./match/matchArea";
 class Body extends Component {
   state = { components: 5 };
 
@@ -27,8 +27,10 @@ class Body extends Component {
 
   render() {
     return (
-      <div class="summonerPage">
-        <div class="summonerContent summonerFS">{this.state.components}</div>
+      <div className="summonerPage">
+        <div className="summonerContent summonerFS">
+          {this.state.components}
+        </div>
       </div>
     );
   }

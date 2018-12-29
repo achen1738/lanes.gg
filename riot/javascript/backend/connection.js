@@ -125,12 +125,12 @@ async function checkResults(name, conn) {
     .input("accID", sql.VarChar(150), res.recordset[0].accountID)
     .query(`SELECT * FROM gameInfo WHERE matchID = 2931343212`);
 
-  console.log(res0);
-  console.log(res1);
-  console.log(res2);
-  console.log(res3);
-  console.log(res4);
-  console.log(res5);
+  // console.log(res0);
+  // console.log(res1);
+  // console.log(res2);
+  // console.log(res3);
+  // console.log(res4);
+  // console.log(res5);
   conn.close();
 }
 
@@ -435,7 +435,7 @@ async function getEnemyOverview(name, num) {
     .input("numGames", sql.Int, num)
     .execute("getEnemyOverview")
     .catch(error => console.error(error));
-  console.log(resp.recordset);
+  // console.log(resp.recordset);
   conn.close();
   return resp.recordset;
 }
@@ -449,7 +449,7 @@ async function getNumLosses(name, num) {
     .input("numGames", sql.Int, num)
     .execute("getNumLosses")
     .catch(error => console.error(error));
-  console.log(resp.recordset);
+  // console.log(resp.recordset);
   conn.close();
   return resp.recordset[0];
 }

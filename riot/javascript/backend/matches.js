@@ -29,14 +29,32 @@ app.use(function(req, res, next) {
 
 app.get("/leagues/:userName", async function(req, res) {
   const leagues = await connection.getLeagues(req.params.userName);
-  console.log(leagues);
+  // console.log(leagues);
   res.json(leagues);
 });
 
 app.get("/matches/:userName", async function(req, res) {
-  const matches = await connection.top20(req.params.userNam);
-  console.log(matches);
-  var json = JSON.stringify(matches);
+  const matches = await connection.top20(req.params.userName);
+  // console.log(matches);
+  const lower = req.params.userName.toLowerCase();
+  var userMatches = [];
+  var dividedMatches = {};
+  var subArray = [];
+  var i = 0;
+  matches.forEach(match => {
+    if (match.name.toLowerCase() === lower) {
+      userMatches.push(match);
+    }
+    subArray.push(match);
+    if (i % 10 === 9) {
+      dividedMatches[match.matchID] = subArray;
+      subArray = [];
+    }
+    i++;
+  });
+
+  var final = { matches: userMatches, allMatches: dividedMatches };
+  var json = JSON.stringify(final);
   res.send(json);
 });
 
@@ -64,7 +82,7 @@ app.get("/matches/numLosses/:userName/:numGames", async function(req, res) {
     req.params.userName,
     req.params.numGames
   );
-  console.log("numWins ", resp);
+  // console.log("numWins ", resp);
   res.json(resp);
 });
 
