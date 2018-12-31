@@ -12,6 +12,7 @@
     "kayn": "^0.9.0",
     "mssql": "^4.3.0",
     "nodemon": "^1.18.9",
+    "npm": "^6.5.0",
     "react": "^16.7.0",
     "react-chartjs": "^1.2.0",
     "react-chartjs-2": "^2.7.4",

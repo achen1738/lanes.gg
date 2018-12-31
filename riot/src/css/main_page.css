@@ -303,260 +303,6 @@ h1 {
   text-align: left;
 }
 
-.container {
-  display: table;
-  width: 685px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-top: 1px solid black;
-}
-
-.matchItem > .container > div {
-  display: table-cell;
-  height: 110px;
-  vertical-align: middle;
-}
-
-.matchItem > .Win > div:not(.Button) {
-  border-bottom: 1px solid #0e6289;
-}
-
-.matchItem > .Loss > div:not(.Button) {
-  border-bottom: 1px solid #972a2a;
-}
-
-.matchItem > .container > .Players {
-  width: 200px;
-  font-size: 0;
-}
-
-.matchItem > .container > .Players > .Team {
-  float: left;
-  width: 50%;
-  /* display: inline-block; */
-}
-
-.matchItem > .container > .Players > .Team > .Summoner {
-  margin-top: 3.5px;
-  display: block;
-  width: 100px;
-  height: 18px;
-  margin-left: 3px;
-  text-align: left;
-  /* overflow: hidden; */
-  white-space: nowrap;
-}
-
-.Win {
-  box-sizing: border-box;
-  background-color: #a9e2fc;
-}
-
-.Loss {
-  box-sizing: border-box;
-  background-color: #f6a3a3;
-}
-
-.IGN {
-  width: 75px;
-  font-size: 13px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.SpellsnRunes {
-  overflow: hidden;
-  vertical-align: middle;
-}
-
-.Runes {
-  overflow: hidden;
-  vertical-align: middle;
-}
-
-.Spells {
-  position: relative;
-  width: 120px;
-  vertical-align: middle;
-}
-
-.ChampName {
-  text-align: center;
-  font-size: 14px;
-  padding-top: 4px;
-}
-
-.biggestBox {
-  position: relative;
-  height: 95px;
-  margin-top: -2px;
-}
-
-.biggestBox > div {
-  position: absolute;
-}
-
-.ChampImg {
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-.ChampImg > g {
-  width: 60px;
-  height: 60px;
-  clip-path: circle(27px at center);
-}
-
-.Spell {
-  width: 24px;
-  height: 24px;
-  clip-path: circle(12px at center);
-}
-
-.Spell > img {
-  width: 100%;
-  height: 100%;
-}
-
-.left {
-  left: 27%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  top: 50%;
-}
-
-.right {
-  left: 73%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  top: 50%;
-}
-
-.lowerImage {
-  width: 13px;
-  height: 13px;
-  /* clip-path: circle(5px at center); */
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  top: 77%;
-  z-index: 2;
-  border-radius: 50%;
-  background: black;
-}
-
-.Secondary {
-  left: 60%;
-  padding-bottom: 2px;
-}
-
-.Level {
-  left: 40%;
-  padding-top: 2px;
-  color: white;
-  font-size: 11px;
-  padding-right: 1px;
-  text-align: center;
-}
-
-.Secondary > img {
-  width: 100%;
-  height: 100%;
-}
-
-.MainTree {
-  width: 40px;
-  height: 40px;
-  clip-path: circle(14px at center);
-  background: black;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  top: 55%;
-}
-
-.MainTree > img {
-  width: 100%;
-  height: 100%;
-}
-
-.ItemsList {
-  width: 94px;
-  margin: 0 auto;
-  display: inline-block;
-}
-
-.ItemsList > .Item {
-  display: inline-block;
-  width: 29px;
-  height: 29px;
-  border-radius: 3px;
-  margin-top: -2px;
-  margin-right: 2px;
-  overflow: hidden;
-}
-
-.container > .Trinket > .Item {
-  display: inline-block;
-  width: 29px;
-  height: 29px;
-  border-radius: 3px;
-  margin-top: -2px;
-  margin-right: 2px;
-  overflow: hidden;
-  margin-left: -1px;
-}
-
-.Trinket {
-  display: inline-block;
-}
-
-.Item > img {
-  width: 100%;
-  height: 100%;
-}
-
-.container > .Stats > div {
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.35;
-}
-
-.container > .Info > div {
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.35;
-}
-
-/* .Stats {
-  padding-left: 6px;
-  padding-right: 9px;
-} */
-
-.Summoner > div {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.Summoner > .IGN {
-  margin-left: 2px;
-}
-
-.SummImage > img {
-  width: 18px;
-  height: 18px;
-}
-
-.Players {
-  padding-bottom: 2.5px;
-}
-
-.matchItem {
-  margin-bottom: 3px;
-}
-
 .language--region {
   display: inline-block;
 }
@@ -637,206 +383,9 @@ h1 {
   clip-path: circle(27px at center);
 }
 
-.Button {
-  width: 30px;
-  height: 100%;
-  position: relative;
-  cursor: pointer;
-}
-
-.Win .Button {
-  background-color: #2d93c2;
-  border-left: 1px solid #0e6289;
-}
-
-.Loss .Button {
-  background: #d05454;
-  border-left: 1px solid #972a2a;
-}
-
-.Arrow {
-  width: 25px;
-  height: 15px;
-  position: absolute;
-  bottom: 1px;
-  left: 2.25px;
-  clip-path: polygon(0 0, 20% 0, 50% 40%, 80% 0, 100% 0, 50% 60%);
-  background-color: black;
-}
-
-.Win .Arrow {
-  background-color: #03587f;
-  border-left: 1px solid #0e6289;
-}
-
-.Loss .Arrow {
-  background-color: #9d0808;
-  border-left: 1px solid #972a2a;
-}
-
 /* .tabs {
   float: bottom;
 } */
-
-.tabsContainer {
-  width: 100%;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
-  box-sizing: border-box;
-}
-
-.blue {
-  background-color: #2d93c2;
-}
-
-.red {
-  background-color: #d05454;
-}
-
-.tabs {
-  padding: 8px 15px 0;
-}
-
-.tabs > li {
-  display: inline-block;
-}
-
-.tabLinks {
-  border-radius: 3px 3px 0 0;
-  border-bottom: none;
-  width: 12%;
-  text-align: center;
-  font-size: 14px;
-  margin-right: 6px;
-}
-
-.details {
-  width: 100%;
-  border: none;
-  margin-top: -1px;
-  /* background-color: white; */
-}
-
-.detailsContainer {
-  border-right: 1px solid black;
-  border-left: 1px solid black;
-}
-
-.tab {
-  display: none;
-}
-
-.active {
-  display: block;
-  background-color: white;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-a:visited {
-  text-decoration: none;
-  color: black;
-}
-
-.teamHeader {
-  height: 32px;
-  background-color: white;
-}
-
-.lightRed {
-  background-color: #fee6e6;
-}
-
-.lightBlue {
-  background-color: #daf3ff;
-}
-
-.teamRow {
-  height: 50px;
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-
-.teamRow > div {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.summaryContainer {
-  background-color: #b69797;
-}
-
-.summary {
-  height: 50px;
-  display: table;
-  width: 100%;
-}
-
-.summary > div {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.playerItems > .Item {
-  display: inline-block;
-  width: 23px;
-  height: 23px;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-left: 1px;
-}
-
-.playerRunes {
-  width: 50px;
-  position: relative;
-  padding-top: 9px;
-}
-
-.playerLevel {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  z-index: 1;
-  left: 20%;
-  top: 32%;
-  clip-path: circle(8px);
-  background: #63be63;
-  font-size: 11px;
-  color: white;
-}
-
-.playerChamp {
-  width: 45px;
-  height: 45px;
-  clip-path: circle(20px);
-}
-
-.playerChamp > img {
-  width: 100%;
-  height: 100%;
-}
-
-.playerName {
-  width: 90px;
-  font-size: 13px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  table-layout: fixed;
-}
-
-.playerItems {
-  width: 170px;
-  padding-top: 7px;
-}
-
-.teamRow > div:not(.playerName) {
-  font-size: 13px;
-}
 
 .buildsHeader {
   background-color: white;
@@ -1146,7 +695,7 @@ i {
   display: none;
 }
 
-.buildTabLinks > a > img {
+.buildTabLinks > img {
   width: 50px;
   clip-path: circle(24px);
   transition: all 0.2s ease-in-out;
@@ -1154,9 +703,10 @@ i {
 
 .buildActive {
   display: block;
+  transform: scale(1.15);
 }
 
-.buildTabLinks:not(.buildActive) > a > img {
+.buildTabLinks:not(.buildActive) > img {
   -webkit-filter: grayscale(100%);
   -moz-filter: grayscale(100%);
   filter: grayscale(100%);
@@ -1173,95 +723,31 @@ i {
   z-index: -1;
 }
 
-.rowCell {
-  text-align: center;
-  vertical-align: middle;
-  font-size: 13px;
-  padding-top: 4px;
+.buildTabLinks:not(.buildActive) > img:hover {
+  transform: scale(1.15);
+  -webkit-filter: grayscale(50%);
+  -moz-filter: grayscale(50%);
+  filter: grayscale(50%);
 }
 
-.playerRunes {
-  width: 50px;
-}
-.playerName {
-  width: 90px;
-}
-
-.playerStats {
-  width: 66px;
-}
-
-.playerDmg {
-  width: 66px;
-}
-
-.playerVision {
-  width: 66px;
-  position: relative;
-}
-
-.playerVision::after {
-  content: attr(data-tool-tip);
-  display: block;
-  position: absolute;
-  transform: scale(0);
-  width: 100px;
-  padding: 1em;
-  background-color: #3e3e3e;
-  border-radius: 3px;
-  font-size: 12px;
-  bottom: 0;
-  left: -26px;
-  line-height: 1.5;
-  transition: transform ease-out 100ms, bottom ease-out 100ms;
-  color: white;
-}
-
-.playerVision:hover::after {
-  transform: scale(1);
-  bottom: 90%;
-}
-.playerCS {
-  width: 66px;
-}
-
-.playerGold {
-  width: 47px;
-}
-
-table {
-  border-spacing: 0px;
-  border-collapse: collapse;
-}
-
-.teamHeader tr {
-  width: 100%;
-  display: table;
-}
-
-.teamHeader > tr > th {
-  font-size: 13px;
-  font-weight: normal;
-  padding: 8px 0;
-}
-
-.buildTabLinks > a > img:hover {
-  transform: scale(1.25);
-}
-
-.pathTabLinks > a > svg {
+.pathTabLinks > svg {
   transition: all 0.2s ease-in-out;
 }
 
-.pathTabLinks > a > .icon:hover {
-  transform: scale(1.25);
+.pathTabLinks > .icon:hover {
+  transform: scale(1.15);
 }
 
-.pathTabLinks > a > .iconCircle:hover {
-  transform: scale(1.25);
+.pathTabLinks > .iconCircle:hover {
+  transform: scale(1.15);
+  cursor: pointer;
 }
 
-.tabs > .tabLinks > a {
+.pathTabLinks.buildActive .iconCircle {
+  transform: scale(1.15);
+}
+
+.tabs > .tabLinks > div {
   padding: 0 10px;
   display: block;
   height: 27px;
@@ -1282,7 +768,7 @@ table {
 }
 
 .Win .WinLoss {
-  color: #020254;
+  color: #0000bc;
 }
 
 .pathLane {

@@ -1,7 +1,7 @@
 require("dotenv").load();
 var express = require("express");
 var app = express();
-var connection = require("./connection");
+var connection = require("./newConnection");
 
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
@@ -36,24 +36,36 @@ app.get("/leagues/:userName", async function(req, res) {
 app.get("/matches/:userName", async function(req, res) {
   const matches = await connection.top20(req.params.userName);
   // console.log(matches);
+  // console.log(matches);
   const lower = req.params.userName.toLowerCase();
-  var userMatches = [];
   var dividedMatches = {};
-  var subArray = [];
-  var i = 0;
-  matches.forEach(match => {
-    if (match.name.toLowerCase() === lower) {
-      userMatches.push(match);
-    }
-    subArray.push(match);
-    if (i % 10 === 9) {
-      dividedMatches[match.matchID] = subArray;
-      subArray = [];
-    }
-    i++;
+  var userMatches = [];
+  matches.forEach(matchObj => {
+    // console.log(arr);
+    var arr = matchObj.matches;
+    var matchID = arr[0].matchID;
+    dividedMatches[matchID] = matchObj;
+    userMatches.push(
+      arr.find(match => {
+        return match.username.toLowerCase() === lower;
+      })
+    );
   });
-
+  // var subArray = [];
+  // var i = 0;
+  // matches.forEach(match => {
+  //   if (match.name.toLowerCase() === lower) {
+  //     userMatches.push(match);
+  //   }
+  //   subArray.push(match);
+  //   if (i % 10 === 9) {
+  //     dividedMatches[match.matchID] = subArray;
+  //     subArray = [];
+  //   }
+  //   i++;
+  // });
   var final = { matches: userMatches, allMatches: dividedMatches };
+  // console.log(dividedMatches);
   var json = JSON.stringify(final);
   res.send(json);
 });
@@ -64,8 +76,8 @@ app.get("/matches/userOverview/:userName/:numGames", async function(req, res) {
     req.params.numGames
   );
 
-  const finalArray = putChampsInArrays(resp);
-  res.json(finalArray);
+  // const finalArray = putChampsInArrays(resp);
+  res.json(resp);
 });
 
 app.get("/matches/enemyOverview/:userName/:numGames", async function(req, res) {
@@ -73,8 +85,8 @@ app.get("/matches/enemyOverview/:userName/:numGames", async function(req, res) {
     req.params.userName,
     req.params.numGames
   );
-  const finalArray = putChampsInArrays(resp);
-  res.json(finalArray);
+  // const finalArray = putChampsInArrays(resp);
+  res.json(resp);
 });
 
 app.get("/matches/numLosses/:userName/:numGames", async function(req, res) {
@@ -82,7 +94,7 @@ app.get("/matches/numLosses/:userName/:numGames", async function(req, res) {
     req.params.userName,
     req.params.numGames
   );
-  // console.log("numWins ", resp);
+  console.log("numWins ", resp);
   res.json(resp);
 });
 

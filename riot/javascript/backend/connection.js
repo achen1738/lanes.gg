@@ -343,6 +343,8 @@ function insertMatchInfo(
     .input("jungleEnemy", sql.Int, stats.neutralMinionsKilledEnemyJungle)
     .input("jungleTeam", sql.Int, stats.neutralMinionsKilledTeamJungle)
     .input("totalMinionsKilled", sql.Int, stats.totalMinionsKilled)
+    .input("goldEarned", sql.Int, stats.goldEarned)
+    .input("damageDone", sql.Int, stats.totalDamageDealtToChampions)
 
     .execute("insertMatchInfo")
     .catch(err => console.error(err));
