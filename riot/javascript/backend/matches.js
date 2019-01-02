@@ -64,7 +64,8 @@ app.get("/matches/:userName", async function(req, res) {
   //   }
   //   i++;
   // });
-  var final = { matches: userMatches, allMatches: dividedMatches };
+  var reversed = userMatches.reverse();
+  var final = { matches: reversed, allMatches: dividedMatches };
   // console.log(dividedMatches);
   var json = JSON.stringify(final);
   res.send(json);
@@ -94,7 +95,12 @@ app.get("/matches/numLosses/:userName/:numGames", async function(req, res) {
     req.params.userName,
     req.params.numGames
   );
-  console.log("numWins ", resp);
+  // console.log("numWins ", resp);
+  res.json(resp);
+});
+
+app.get("/timeline/:matchNum", async function(req, res) {
+  const resp = await connection.getTimeline(req.params.matchNum);
   res.json(resp);
 });
 

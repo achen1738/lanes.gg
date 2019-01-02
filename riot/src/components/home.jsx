@@ -58,6 +58,9 @@ class Home extends Component {
     myChampObject["champURL"] = `http://ddragon.leagueoflegends.com/cdn/${
       versionJSON[0]
     }/img/champion/`;
+    myChampObject["champJSON"] = `https://ddragon.leagueoflegends.com/cdn/${
+      versionJSON[0]
+    }/data/en_US/champion/`;
     return myChampObject;
   }
 

@@ -591,9 +591,10 @@ i {
 }
 
 .classRuneContainer > img {
-  width: 37px;
-  height: 37px;
+  width: 36px;
+  height: 33px;
   position: absolute;
+  padding-top: 2px;
 }
 
 .runesContent > div > div {
