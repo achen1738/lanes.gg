@@ -394,18 +394,34 @@ h1 {
 
 .sectionHeader {
   color: white;
-  background: linear-gradient(45deg, #356693, #3c75aa);
   padding: 8px;
   font-size: 13px;
 }
 
-.itemsContent {
-  background: linear-gradient(45deg, rgb(184, 242, 242), rgb(160, 217, 217));
+/* .sectionHeader.won {
+  background: rgb(0, 42, 68);
 }
 
-.skillsContent {
-  background: linear-gradient(180deg, rgb(190, 238, 238), rgb(184, 242, 242));
+.sectionHeader.lost {
+  background-color: rgb(42, 1, 0);
+} */
+
+.contentColor.lost {
+  background: rgb(255, 230, 230);
 }
+
+.contentColor.won {
+  background: rgb(218, 241, 255);
+}
+
+.itemsHeader.won {
+  background-color: #2d93c2;
+}
+
+.itemsHeader.lost {
+  background-color: #d05454;
+}
+
 .itemsContent > ul > .Item {
   display: inline-block;
   margin: 0 0 23px;
@@ -485,10 +501,14 @@ i {
 }
 
 .skillsContent table {
-  margin: 0px 12px;
+  margin-left: 19px;
   padding: 8px 0px;
-  border-spacing: 7px;
+  border-spacing: 3px;
   border-collapse: separate;
+}
+
+.skillsWrapper {
+  /* background: linear-gradient(135deg, white, #ff5c5c); */
 }
 
 .skillsContent td {
@@ -499,7 +519,7 @@ i {
 }
 
 .number {
-  background-color: #afbebd;
+  background-color: #8e9191;
 }
 .activeCell {
   background-color: #00b2a3;
@@ -553,8 +573,11 @@ i {
   left: 69px;
 }
 
+.staticSize {
+  display: inline-flex;
+}
 .smallRune {
-  left: 12%;
+  left: 13.5%;
 }
 
 .bigRuneContainer > img {
@@ -595,6 +618,7 @@ i {
   height: 33px;
   position: absolute;
   padding-top: 2px;
+  padding-left: 1px;
 }
 
 .runesContent > div > div {
@@ -630,8 +654,8 @@ i {
   position: absolute;
   height: 253px;
   width: 5px;
-  left: 95px;
-  top: 97px;
+  left: 96px;
+  top: 24%;
   border: 2px solid rgba(200, 170, 110, 0.2);
   border-top: none;
   padding: 0 1.5px 0 2px;
@@ -641,8 +665,8 @@ i {
   position: absolute;
   height: 120px;
   width: 5px;
-  left: 214px;
-  top: 170px;
+  left: 34.6%;
+  top: 41%;
   border: 2px solid rgba(200, 170, 110, 0.2);
   border-top: none;
   padding: 0 1.5px 0 2px;
@@ -667,12 +691,12 @@ i {
 
 .erRune {
   top: 47%;
-  left: 200px;
+  left: 199px;
 }
 
 .sanRune {
   top: 64%;
-  left: 200px;
+  left: 199px;
 }
 
 .absolute {
@@ -680,16 +704,43 @@ i {
 }
 
 .buildTabs {
-  padding: 13px 30px 10px 68px;
-  background: linear-gradient(45deg, rgb(160, 217, 217), rgb(184, 242, 242));
+  /* padding: 13px 30px 10px 68px; */
   position: relative;
   z-index: 0;
+  display: inline-block;
+  width: 12%;
+  /* padding: 15px 0; */
+  padding-top: 8px;
+}
+
+.buildTabs.lost {
+  border-top: 3px solid #f6a3a3;
+  border-bottom: 3px solid #f6a3a3;
+}
+
+.buildTabs.won {
+  border-top: 3px solid #a9e2fc;
+  border-bottom: 3px solid #a9e2fc;
+}
+
+.buildSkillsRunes {
+  display: inline-block;
+}
+
+.staticSize.won {
+  background: rgb(0, 42, 68);
+}
+
+.staticSize.lost {
+  background: rgb(42, 1, 0);
 }
 
 .buildTabs > li {
-  display: inline-block;
   vertical-align: middle;
-  margin-right: 5px;
+  /* margin-right: 5px; */
+  /* padding-left: 15px; */
+  padding: 0 10px;
+  width: 50px;
 }
 
 .buildTab {
@@ -704,7 +755,7 @@ i {
 
 .buildActive {
   display: block;
-  transform: scale(1.15);
+  /* transform: scale(1.15); */
 }
 
 .buildTabLinks:not(.buildActive) > img {
@@ -749,7 +800,7 @@ i {
 }
 
 .tabs > .tabLinks > div {
-  padding: 0 10px;
+  /* padding: 0 10px; */
   display: block;
   height: 27px;
   text-align: center;
@@ -915,6 +966,14 @@ background-color: green;
   stroke-width: 1;
 }
 
+.wonLaneContent {
+  background-color: rgb(138, 204, 255);
+}
+
+.lostLaneContent {
+  background-color: rgb(255, 134, 134);
+}
+
 .laneContainer {
   display: inline-block;
   width: 50px;
@@ -942,11 +1001,11 @@ background-color: green;
 }
 
 .loseLane {
-  background: linear-gradient(45deg, rgb(150, 40, 40), rgb(255, 210, 176));
+  background: linear-gradient(180deg, rgb(208, 84, 84), rgb(255, 134, 134));
 }
 
 .winLane {
-  background: linear-gradient(45deg, rgb(70, 139, 215), rgb(167, 217, 255));
+  background: linear-gradient(180deg, rgb(45, 147, 194), rgb(138, 204, 255));
 }
 
 .pathTabLinks {

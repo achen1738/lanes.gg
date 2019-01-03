@@ -28,16 +28,18 @@ app.use(function(req, res, next) {
 });
 
 app.get("/leagues/:userName", async function(req, res) {
-  const leagues = await connection.getLeagues(req.params.userName);
+  const username = req.params.userName.split("+").join(" ");
+  const leagues = await connection.getLeagues(username);
   // console.log(leagues);
   res.json(leagues);
 });
 
 app.get("/matches/:userName", async function(req, res) {
-  const matches = await connection.top20(req.params.userName);
+  const username = req.params.userName.split("+").join(" ");
+  const matches = await connection.top20(username);
   // console.log(matches);
   // console.log(matches);
-  const lower = req.params.userName.toLowerCase();
+  const lower = username.toLowerCase();
   var dividedMatches = {};
   var userMatches = [];
   matches.forEach(matchObj => {
@@ -72,29 +74,23 @@ app.get("/matches/:userName", async function(req, res) {
 });
 
 app.get("/matches/userOverview/:userName/:numGames", async function(req, res) {
-  const resp = await connection.getUserOverview(
-    req.params.userName,
-    req.params.numGames
-  );
+  const username = req.params.userName.split("+").join(" ");
+  const resp = await connection.getUserOverview(username, req.params.numGames);
 
   // const finalArray = putChampsInArrays(resp);
   res.json(resp);
 });
 
 app.get("/matches/enemyOverview/:userName/:numGames", async function(req, res) {
-  const resp = await connection.getEnemyOverview(
-    req.params.userName,
-    req.params.numGames
-  );
+  const username = req.params.userName.split("+").join(" ");
+  const resp = await connection.getEnemyOverview(username, req.params.numGames);
   // const finalArray = putChampsInArrays(resp);
   res.json(resp);
 });
 
 app.get("/matches/numLosses/:userName/:numGames", async function(req, res) {
-  const resp = await connection.getNumLosses(
-    req.params.userName,
-    req.params.numGames
-  );
+  const username = req.params.userName.split("+").join(" ");
+  const resp = await connection.getNumLosses(username, req.params.numGames);
   // console.log("numWins ", resp);
   res.json(resp);
 });
@@ -124,7 +120,8 @@ function putChampsInArrays(resp) {
 }
 
 app.patch("/update/:userName", async function(req, res) {
-  const resp = await connection.update(req.params.userName);
+  const username = req.params.userName.split("+").join(" ");
+  const resp = await connection.update(username);
   res.json(resp);
 });
 
