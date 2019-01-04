@@ -66,8 +66,8 @@ app.get("/matches/:userName", async function(req, res) {
   //   }
   //   i++;
   // });
-  var reversed = userMatches.reverse();
-  var final = { matches: reversed, allMatches: dividedMatches };
+  // var reversed = userMatches.reverse();
+  var final = { matches: userMatches, allMatches: dividedMatches };
   // console.log(dividedMatches);
   var json = JSON.stringify(final);
   res.send(json);

@@ -177,8 +177,8 @@ h1 {
 
 .summonerFS > .matchesSize {
   display: inline-block;
-  width: 700px;
-  margin-left: 10px;
+  width: 685px;
+  margin-left: 25px;
   vertical-align: top;
   margin-top: 10px;
 }
@@ -570,20 +570,27 @@ i {
 }
 
 .bigRune {
-  left: 69px;
+  /* left: 69px; */
+}
+
+.bigRune > img {
+  width: 64px;
+  height: 64px;
+  /* position: absolute; */
 }
 
 .staticSize {
   display: inline-flex;
 }
+
 .smallRune {
-  left: 13.5%;
+  left: 33.5%;
 }
 
 .bigRuneContainer > img {
-  width: 64px;
+  /* width: 64px;
   height: 64px;
-  position: absolute;
+  position: absolute; */
 }
 
 .runeContainer > img {
@@ -593,24 +600,25 @@ i {
 }
 
 .classRune {
-  top: 10%;
-  left: 84px;
+  top: 13%;
+  left: 35%;
 }
 
 .firstRune {
-  top: 26.5%;
+  top: 33%;
+  left: 22%;
 }
 
 .secondRune {
-  top: 47%;
+  top: 55%;
 }
 
 .thirdRune {
-  top: 64%;
+  top: 74.5%;
 }
 
 .fourthRune {
-  top: 81%;
+  top: 93%;
 }
 
 .classRuneContainer > img {
@@ -654,8 +662,8 @@ i {
   position: absolute;
   height: 253px;
   width: 5px;
-  left: 96px;
-  top: 24%;
+  left: 48%;
+  top: 29%;
   border: 2px solid rgba(200, 170, 110, 0.2);
   border-top: none;
   padding: 0 1.5px 0 2px;
@@ -665,8 +673,8 @@ i {
   position: absolute;
   height: 120px;
   width: 5px;
-  left: 34.6%;
-  top: 41%;
+  left: 34.5%;
+  top: 26%;
   border: 2px solid rgba(200, 170, 110, 0.2);
   border-top: none;
   padding: 0 1.5px 0 2px;
@@ -685,18 +693,21 @@ i {
 }
 
 .secondClass {
-  top: 27%;
-  left: 201px;
+  top: 13%;
+  left: 50%;
 }
 
+.secondarySmallRune {
+  left: 48.4%;
+}
 .erRune {
-  top: 47%;
-  left: 199px;
+  top: 36.25%;
+  /* left: 199px; */
 }
 
 .sanRune {
-  top: 64%;
-  left: 199px;
+  top: 55%;
+  /* left: 199px; */
 }
 
 .absolute {
@@ -755,7 +766,7 @@ i {
 
 .buildActive {
   display: block;
-  /* transform: scale(1.15); */
+  transform: scale(1.15);
 }
 
 .buildTabLinks:not(.buildActive) > img {
@@ -856,23 +867,23 @@ background-color: green;
 
 .champKill {
   position: relative;
-  width: 34px;
-  height: 110px;
+  width: 30px;
+  height: 97px;
   padding: 10px;
   border-radius: 33px;
   display: inline-block;
 }
 
 .aliveSide img {
-  width: 40px;
-  height: 40px;
-  clip-path: circle(19px);
+  width: 35px;
+  height: 35px;
+  clip-path: circle(17px);
 }
 
 .deadImage {
-  width: 40px;
-  height: 40px;
-  clip-path: circle(19px);
+  width: 35px;
+  height: 35px;
+  clip-path: circle(17px);
   opacity: 0.7;
 }
 
@@ -882,8 +893,8 @@ background-color: green;
 }
 
 .killDivider img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }
 
 .aliveSide {
@@ -901,7 +912,7 @@ background-color: green;
 }
 
 .teamKill {
-  background: linear-gradient(180deg, #b7ffec, #88cef2);
+  background: linear-gradient(180deg, #b7ffec, #92e9d2);
 }
 
 .enemyKill {
@@ -910,21 +921,23 @@ background-color: green;
 
 .redX {
   position: absolute;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   bottom: 10px;
   right: 3px;
   z-index: 1;
 }
 
 .champNext {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
+  background: -webkit-linear-gradient(45deg, #0a083d, #364b8b);
   background: linear-gradient(45deg, #0a083d, #364b8b);
-  clip-path: circle(14px);
+  -webkit-clip-path: circle(14px);
+  clip-path: circle(10px);
   text-align: center;
   color: white;
-  line-height: 1.7;
+  /* line-height: 1.7; */
 }
 
 .champKillContainer > div {
@@ -966,6 +979,10 @@ background-color: green;
   stroke-width: 1;
 }
 
+.laneContent {
+  padding: 10px;
+}
+
 .wonLaneContent {
   background-color: rgb(138, 204, 255);
 }
@@ -994,6 +1011,10 @@ background-color: green;
   stroke: rgb(240, 229, 210);
   vertical-align: middle;
   margin-left: -45px;
+}
+
+.buildActive > .iconCircle {
+  stroke: rgb(99, 99, 99);
 }
 
 .champKills {
