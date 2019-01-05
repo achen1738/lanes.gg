@@ -862,33 +862,49 @@ background-color: green;
 .champKillContainer {
   position: relative;
   display: inline-block;
-  padding-bottom: 20px;
+  padding: 25px 0 20px;
 }
 
 .champKill {
   position: relative;
   width: 30px;
   height: 97px;
-  padding: 10px;
+  padding: 12px 15px 40px 11px;
   border-radius: 33px;
   display: inline-block;
 }
 
-.aliveSide img {
-  width: 35px;
-  height: 35px;
-  clip-path: circle(17px);
+.assistKills > div > img {
+  width: 20px;
+  height: 20px;
+  clip-path: circle(10px);
+}
+
+.aliveSide {
+  width: 40px;
+  height: 40px;
+}
+
+.aliveSide > img {
+  width: 40px;
+  height: 40px;
+  clip-path: circle(19px);
+}
+
+.relative {
+  position: relative;
 }
 
 .deadImage {
-  width: 35px;
-  height: 35px;
-  clip-path: circle(17px);
+  width: 40px;
+  height: 40px;
+  clip-path: circle(19px);
   opacity: 0.7;
 }
 
 .killDivider {
-  margin-top: -3px;
+  margin-top: 19px;
+  margin-bottom: 3px;
   margin-left: 1.5px;
 }
 
@@ -905,6 +921,8 @@ background-color: green;
   margin-left: -3px;
   margin-top: -5px;
   position: relative;
+  width: 35px;
+  height: 35px;
 }
 
 .champKill > div {
@@ -916,28 +934,27 @@ background-color: green;
 }
 
 .enemyKill {
-  background: linear-gradient(180deg, #ffa7a7, #ffa973);
+  background: linear-gradient(180deg, #ff6060, #d45959);
 }
 
 .redX {
   position: absolute;
   width: 10px;
   height: 10px;
-  bottom: 10px;
-  right: 3px;
+  bottom: 2px;
+  right: 2px;
   z-index: 1;
 }
 
 .champNext {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 19px;
   background: -webkit-linear-gradient(45deg, #0a083d, #364b8b);
   background: linear-gradient(45deg, #0a083d, #364b8b);
   -webkit-clip-path: circle(14px);
-  clip-path: circle(10px);
+  clip-path: circle(7px);
   text-align: center;
   color: white;
-  /* line-height: 1.7; */
 }
 
 .champKillContainer > div {
@@ -988,7 +1005,7 @@ background-color: green;
 }
 
 .lostLaneContent {
-  background-color: rgb(255, 134, 134);
+  background-color: rgb(255, 163, 163);
 }
 
 .laneContainer {
@@ -1022,7 +1039,7 @@ background-color: green;
 }
 
 .loseLane {
-  background: linear-gradient(180deg, rgb(208, 84, 84), rgb(255, 134, 134));
+  background: linear-gradient(180deg, rgb(208, 84, 84), rgb(255, 163, 163));
 }
 
 .winLane {
@@ -1096,4 +1113,8 @@ background-color: green;
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
+}
+
+.assistKills {
+  /* position: absolute; */
 }
