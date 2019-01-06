@@ -15,7 +15,6 @@ class BoxScore extends Component {
     var topTeam = [];
     var bottomTeam = [];
     const matches = this.props.matches;
-    // console.log(this.props.matches[0].teamID);
     const username = window.location.search
       .substring(10)
       .split("+")

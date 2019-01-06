@@ -25,7 +25,7 @@ class Lanes extends Component {
   };
 
   componentWillMount() {
-    console.log(this.props.timeline);
+    // console.log(this.props.timeline);
     const timelineObj = this.props.timeline;
     const top = this.dividePath(timelineObj.TOP);
     const jungle = this.dividePath(timelineObj.JUNGLE);
