@@ -1,0 +1,531 @@
+.teamDetails {
+  width: 100%;
+}
+
+.tabsContainer {
+  width: 100%;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  box-sizing: border-box;
+}
+
+.lightBlue > .userActive {
+  background: #b4e2f8;
+}
+
+.lightRed > .userActive {
+  background: #f6cbcb;
+}
+
+.tabs > li {
+  display: inline-block;
+}
+
+.tabLinks {
+  margin: 8px 5px;
+  border-radius: 9px;
+  border-bottom: none;
+  width: 12%;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px 0px;
+  transition: all 0.15s ease-in-out;
+}
+
+.tabLinks.Won:not(.active) {
+  border: 1px solid #014767;
+  background-color: #a9e2fc;
+}
+
+.tabLinks.Lost:not(.active) {
+  border: 1px solid #5b0000;
+  background-color: #f6a3a3;
+}
+
+.tabLinks.Won:not(.active):hover {
+  cursor: pointer;
+  background-color: rgb(0, 76, 123);
+  color: white;
+}
+
+.tabLinks.Lost:not(.active):hover {
+  cursor: pointer;
+  background-color: rgb(122, 2, 0);
+  color: white;
+}
+
+.details {
+  width: 100%;
+  border: none;
+  margin-top: -1px;
+  /* background-color: white; */
+}
+
+.detailsContainer {
+  width: 100%;
+  box-sizing: border-box;
+  /* margin-bottom: 15px; */
+}
+
+.tab {
+  display: none;
+}
+
+.active {
+  display: block;
+  background-color: white !important;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.teamHeader {
+  height: 32px;
+  background-color: white;
+}
+
+.lightRed {
+  background-color: #fee6e6;
+}
+
+.lightBlue {
+  background-color: #daf3ff;
+}
+
+.teamRow {
+  height: 50px;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.teamRow > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.summaryContainer {
+  background-color: #071d40;
+  display: inline-flex;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.summary {
+  height: 50px;
+  display: table;
+  width: 100%;
+}
+
+.summary > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.playerItems > .Item {
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-left: 1px;
+}
+
+.playerRunes {
+  width: 50px;
+  position: relative;
+  padding-top: 9px;
+}
+
+.playerLevel {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 1;
+  left: 20%;
+  top: 32%;
+  clip-path: circle(8px);
+  background: #63be63;
+  font-size: 11px;
+  color: white;
+}
+
+.playerChamp {
+  width: 45px;
+  height: 45px;
+  clip-path: circle(20px);
+}
+
+.playerChamp > img {
+  width: 100%;
+  height: 100%;
+}
+
+.playerName {
+  width: 90px;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  table-layout: fixed;
+}
+
+.playerItems {
+  width: 170px;
+  padding-top: 7px;
+}
+
+.teamRow > div:not(.playerName) {
+  font-size: 13px;
+}
+
+.rowCell {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 13px;
+  padding-top: 4px;
+}
+
+.playerRunes {
+  width: 50px;
+}
+.playerName {
+  width: 90px;
+}
+
+.playerStats {
+  width: 66px;
+}
+
+.playerDmg {
+  width: 66px;
+}
+
+.playerVision {
+  width: 66px;
+  position: relative;
+}
+
+.playerVision::after {
+  content: attr(data-tool-tip);
+  display: block;
+  position: absolute;
+  transform: scale(0);
+  width: 100px;
+  padding: 1em;
+  background-color: #3e3e3e;
+  border-radius: 3px;
+  font-size: 12px;
+  bottom: 0;
+  left: -26px;
+  line-height: 1.5;
+  transition: transform ease-out 100ms, bottom ease-out 100ms;
+  color: white;
+}
+
+.playerVision:hover::after {
+  transform: scale(1);
+  bottom: 90%;
+}
+.playerCS {
+  width: 66px;
+}
+
+.playerGold {
+  width: 47px;
+}
+
+table {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+.teamHeader tr {
+  width: 100%;
+  display: table;
+}
+
+.teamHeader > tr > th {
+  font-size: 13px;
+  font-weight: normal;
+  padding: 11px 0;
+}
+
+.statRunes {
+  position: absolute;
+  left: 33%;
+  top: 66.5%;
+}
+
+.statRune {
+  position: relative;
+}
+
+.mainTreeContainer {
+  left: 50px;
+  top: 0%;
+  position: absolute;
+}
+
+.bigRelativeContainer {
+  position: relative;
+  width: 100px;
+  height: 350px;
+}
+
+.secondTreeContainer {
+  left: 150px;
+  top: 0%;
+  position: absolute;
+}
+
+.statRuneBorder {
+  position: absolute;
+}
+
+.midStat {
+  padding-top: 5px;
+}
+
+.bottomStat {
+  padding-top: 5px;
+}
+
+.statCircle {
+  stroke: #fbecb4;
+}
+
+.thirdBar {
+  top: 26%;
+}
+
+.barContent {
+  position: absolute;
+  height: 12px;
+  width: 5px;
+  left: 9.25px;
+  border: 2px solid rgba(200, 170, 110, 0.2);
+  border-top: none;
+  padding: 0 1.5px 0 2px;
+}
+.fourthBar {
+  top: 60%;
+}
+
+.smallRelativeContainer {
+  position: relative;
+}
+
+.killDesc {
+  position: absolute;
+  text-align: center;
+  color: white;
+  top: -21px;
+  left: 0;
+  right: 0;
+}
+
+.assistKills > div {
+  position: absolute;
+}
+
+.oneAssist {
+  left: 10px;
+  bottom: -16px;
+  z-index: 1;
+}
+
+.l2Assist {
+  left: -3px;
+  bottom: -14px;
+  z-index: 2;
+}
+
+.r2Assist {
+  right: -4px;
+  bottom: -14px;
+  z-index: 2;
+}
+
+.l3Assist {
+  left: -5px;
+  bottom: -11px;
+  z-index: 2;
+}
+
+.m3Assist {
+  left: 10px;
+  bottom: -20px;
+  z-index: 4;
+}
+
+.r3Assist {
+  right: -5px;
+  bottom: -11px;
+  z-index: 2;
+}
+
+.l4Assist {
+  left: -7px;
+  bottom: -6px;
+  z-index: 2;
+}
+
+.bl4Assist {
+  left: 3px;
+  bottom: -18px;
+  z-index: 4;
+}
+
+.br4Assist {
+  right: 1px;
+  bottom: -18px;
+  z-index: 4;
+}
+
+.r4Assist {
+  right: -7.5px;
+  bottom: -6px;
+  z-index: 2;
+}
+
+.svgoneAssist {
+  bottom: 10.5px;
+  left: 7.5px;
+  z-index: 5;
+}
+
+.svgl2Assist {
+  bottom: 12.5px;
+  left: -6px;
+  z-index: 5;
+}
+
+.svgr2Assist {
+  bottom: 12.5px;
+  left: 22px;
+  z-index: 5;
+}
+
+.svgl3Assist {
+  bottom: 15.5px;
+  left: -8px;
+  z-index: 3;
+}
+
+.svgm3Assist {
+  left: 7.5px;
+  bottom: 6.5px;
+  z-index: 5;
+}
+
+.svgr3Assist {
+  bottom: 15.5px;
+  left: 23px;
+  z-index: 3;
+}
+
+.svgl4Assist {
+  bottom: 20.5px;
+  left: -9px;
+  z-index: 3;
+}
+
+.svgbl4Assist {
+  left: 0;
+  bottom: 8.5px;
+  z-index: 5;
+}
+
+.svgbr4Assist {
+  bottom: 8.5px;
+  left: 17px;
+  z-index: 5;
+}
+
+.svgr4Assist {
+  bottom: 20.5px;
+  left: 25px;
+  z-index: 3;
+}
+
+.assistCircle {
+  stroke: white;
+}
+
+.boxscoreGraphs {
+  width: 375;
+  display: inline-flex;
+  color: white;
+  font-size: 13px;
+}
+
+.boxscoreGraphs > span {
+  width: 70px;
+  line-height: 1.4;
+}
+
+.objectives {
+  display: inline-flex;
+}
+
+.objectives > img {
+  margin-top: 7px;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.objectiveCount > span {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.objectiveCount {
+  vertical-align: middle;
+  color: white;
+  margin-top: 14px;
+  padding: 0 5px;
+}
+
+.topObjectives {
+  padding-left: 5px;
+}
+
+.bottomObjectives {
+  padding-right: 1px;
+}
+
+.graphSection {
+  margin-left: 10px;
+}
+
+.emptyPath {
+  height: 4.25em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyText {
+  margin: 0;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: red;
+}
+
+.wonLaneContent .emptyText {
+  background-color: #187194;
+}
+
+.lostLaneContent .emptyText {
+  background-color: #b01212;
+}

@@ -1,0 +1,466 @@
+.recentStats {
+  padding: 7px 0 5px;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* .recentStats > div {
+  display: table-cell;
+  height: 198px;
+  text-align: center;
+  vertical-align: top;
+  position: relative;
+} */
+
+/* .recentWinRate {
+  width: 196px;
+  margin-top: 5px;
+  border-right: 1px solid black;
+} */
+
+.barGraph {
+  display: inline-block;
+}
+
+.mostPlayed {
+  position: relative;
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+.mostPlayedAgainst {
+  position: relative;
+  margin-top: 5px;
+}
+
+.buttonBackground {
+  position: absolute;
+  width: 229px;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.mostPlayed > div > .buttonBackground:hover {
+  background-color: #043d65;
+}
+
+.mostPlayedAgainst > div > .buttonBackground:hover {
+  background-color: #601111;
+}
+
+.mostPlayed > div > .lightBlue {
+  background-color: #2b79b2;
+}
+
+.mostPlayedAgainst > div > .lightRed {
+  background-color: #c33e3e;
+}
+
+.mostPlayed > div > .darkBlue {
+  background-color: #043d65;
+}
+
+.mostPlayedAgainst > div > .darkRed {
+  background-color: #601111;
+}
+
+.mostPlayed > div > i {
+  border-color: #cdf4ff;
+}
+
+i {
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.mostPlayedAgainst > div > i {
+  border-color: #ffd9cb;
+}
+
+.leftArrow {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  position: relative;
+  z-index: 1;
+  margin-left: 6px;
+}
+
+.first > .buttonBackground {
+  height: 59px;
+}
+
+.second > .buttonBackground {
+  height: 57px;
+}
+
+.third > .buttonBackground {
+  height: 55.5px;
+}
+
+.totalGames {
+  /* margin-top: 5px; */
+  padding-top: 4px;
+}
+
+.subContainer.second {
+  margin-top: 7.5px;
+}
+.subContainer.third {
+  margin-top: 7.5px;
+}
+.averageKDA {
+  /* margin: 2px 0px; */
+  padding: 3px 0;
+}
+
+.mostPlayed3 {
+  border-bottom: none;
+}
+
+.recentStats span {
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 500;
+}
+
+.recentWinRateWrapper > span {
+  margin-left: 55px;
+}
+
+.mostPlayedWrapper > span {
+  margin-left: 67px;
+}
+
+.mostPlayedAgainstWrapper > span {
+  margin-left: 42px;
+}
+
+.mostPlayedAgainst3 {
+  border-bottom: none;
+}
+
+/* .recentStats > div:not(:first-child) {
+    width: 245px;
+  } */
+.champHeader {
+  margin-top: 4px;
+}
+
+.champHeader > div {
+  display: inline-block;
+}
+
+.champImage {
+  width: 40px;
+  height: 40px;
+  margin-left: 3px;
+  clip-path: circle(19px);
+}
+
+.champImage > img {
+  width: 100%;
+  height: 100%;
+}
+
+#bar {
+  display: inline-block;
+}
+
+.champMatch > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.champMatch > .Items {
+  padding-top: 7.5px;
+  width: 58px;
+  overflow: hidden;
+}
+
+.champMatch > .Items > .Item {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: 1px;
+  margin-top: -3px;
+  clip-path: circle(11.5px);
+}
+
+.champMatch {
+  display: table;
+  height: 42.5px;
+  border: 1px solid black;
+  width: 100%;
+  margin-left: 2px;
+}
+
+.champMatch:not(:first-child) {
+  margin-top: 1px;
+}
+
+.Stats > div {
+  text-align: center;
+}
+
+.champMatch > .Stats > .KDA {
+  width: 72px;
+}
+.champMatch > .Stats {
+  font-size: 13px;
+  padding: 0 2px;
+  /* padding-right: 9px; */
+}
+
+.Rune {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background: black;
+  margin-top: -2.5px;
+  margin-left: 1px;
+  border-radius: 3px;
+  clip-path: circle(11.5px);
+}
+
+.Rune > img {
+  width: 100%;
+  height: 100%;
+}
+
+.champMatch > .SpellsnRunes {
+  width: 41px;
+  padding-top: 7px;
+  position: relative;
+}
+
+.cLevel {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 1;
+  left: 19%;
+  top: 29%;
+  clip-path: circle(8px);
+  background: #63be63;
+  font-size: 11px;
+  color: white;
+}
+
+.champList::-webkit-scrollbar {
+  display: none;
+}
+
+.cLevelContainer {
+  margin-top: 4px;
+  margin-right: 1.25px;
+  text-align: center;
+}
+
+.champList {
+  margin-top: -2px;
+  height: 132px;
+  overflow-y: scroll;
+}
+
+.champMatch > .Trinket {
+  /* margin-left: -4px; */
+  width: 18px;
+  padding-right: 2px;
+  border-radius: 3px;
+}
+
+.champMatch > .Trinket > .Item {
+  margin-top: 1px;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: 0.5px;
+  clip-path: circle(11.5px);
+}
+
+.recentWinRate {
+  background: linear-gradient(90deg, rgb(145, 215, 215), rgb(109, 186, 186));
+  color: white;
+  border-radius: 8px;
+  /* margin-right: 10px;
+  margin-left: 7px; */
+  margin: 5px 10px 0 7px;
+}
+
+.overviewBorder {
+  border: 3px solid rgb(0, 116, 116);
+  border-radius: 15px;
+  width: 100%;
+}
+
+.recentWinRate > div {
+  text-align: center;
+}
+
+#graph {
+  padding: 0px 20px;
+}
+
+.mostPlayedChamp {
+  text-align: left;
+  display: inline-block;
+  padding-left: 5px;
+  border-radius: 8px;
+  color: white;
+  background: linear-gradient(90deg, rgb(145, 215, 215), rgb(109, 186, 186));
+  position: relative;
+  z-index: 1;
+}
+
+.mostPlayedChamp > div {
+  display: inline-block;
+}
+
+.cImg {
+  vertical-align: middle;
+}
+
+.champStats {
+  width: 150px;
+  font-size: 13px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+  margin-left: 5px;
+}
+
+.cImg > img {
+  width: 50px;
+  height: 50px;
+  clip-path: circle(23px at center);
+}
+
+.first > .mostPlayedChamp {
+  padding-top: 4.5px;
+}
+
+.second > .mostPlayedChamp {
+  padding-top: 3px;
+}
+
+.third > .mostPlayedChamp {
+  padding-top: 1.5px;
+}
+
+.imgContainer {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.cWins {
+  display: inline-block;
+  font-size: 12px;
+}
+
+.champStats > .KDA {
+  display: inline-block;
+  padding-left: 9px;
+  font-size: 12px;
+}
+
+.overview {
+  display: flex;
+}
+
+.overviewHeader {
+  border: 1px solid black;
+  border-bottom: none;
+  display: table;
+  font-size: 0;
+}
+
+.overviewHeader > .title:first-child {
+  width: 196px;
+}
+
+.overviewHeader > .title:not(:first-child) {
+  width: 245px;
+}
+
+.title {
+  font-size: 14px;
+  padding: 4px 0;
+  margin: 0 auto;
+  display: table-cell;
+  text-align: center;
+}
+
+.cName {
+  font-size: 16px;
+}
+
+.cButtonContainer {
+  width: 18.5px;
+  height: 100%;
+  vertical-align: top;
+  background-color: #b8e7ff;
+  float: right;
+  box-sizing: border-box;
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: #202468;
+}
+
+.subContainer {
+  /* margin-bottom: 7px; */
+  position: relative;
+  z-index: 1;
+}
+
+.nava {
+  display: inline-block;
+}
+
+.cButton {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+}
+
+.cButtonContainer:hover {
+  background-color: white;
+}
+
+.expandedContainer {
+  color: black;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  background: rgb(8, 37, 84);
+  width: 90.5%;
+  height: 97.5%;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+  z-index: 2;
+}
+
+/* .expandedContainer::before {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 9%;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 8px solid rgb(8, 37, 84);
+  border-bottom: 5px solid transparent;
+  overflow: hidden;
+   box-shadow: 0 5px 20px rgba(0,0,0, .5); 
+} */

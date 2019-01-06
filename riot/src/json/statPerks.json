@@ -1,0 +1,62 @@
+{
+  "5001": {
+    "id": 5001,
+    "name": "HealthScaling",
+    "majorChangePatchVersion": "",
+    "tooltip": "+@f1@ Health (based on level)",
+    "shortDesc": "+15-90 Health (based on level)",
+    "longDesc": "+15-90 Health (based on level)",
+    "iconPath": "/src/images/statPerks/health.png",
+    "endOfGameStatDescs": []
+  },
+  "5002": {
+    "id": 5002,
+    "name": "Armor",
+    "majorChangePatchVersion": "",
+    "tooltip": "+5 Armor",
+    "shortDesc": "+5 Armor",
+    "longDesc": "+5 Armor",
+    "iconPath": "/src/images/statPerks/armor.png",
+    "endOfGameStatDescs": []
+  },
+  "5003": {
+    "id": 5003,
+    "name": "MagicRes",
+    "majorChangePatchVersion": "",
+    "tooltip": "+6 Magic Resist",
+    "shortDesc": "+6 Magic Resist",
+    "longDesc": "+6 Magic Resist",
+    "iconPath": "/src/images/statPerks/mr.png",
+    "endOfGameStatDescs": []
+  },
+  "5005": {
+    "id": 5005,
+    "name": "AttackSpeed",
+    "majorChangePatchVersion": "",
+    "tooltip": "+9% Attack Speed",
+    "shortDesc": "+9% Attack Speed",
+    "longDesc": "+9% Attack Speed",
+    "iconPath": "/src/images/statPerks/as.png",
+    "endOfGameStatDescs": []
+  },
+  "5007": {
+    "id": 5007,
+    "name": "CDRScaling",
+    "majorChangePatchVersion": "",
+    "tooltip": "+@f1@% CDR (based on level)",
+    "shortDesc": "+1-10% <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>CDR</lol-uikit-tooltipped-keyword> (based on level)",
+    "longDesc": "+1-10% <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>CDR</lol-uikit-tooltipped-keyword> (based on level)",
+    "iconPath": "/src/images/statPerks/cdr.png",
+    "endOfGameStatDescs": []
+  },
+  "5008": {
+    "id": 5008,
+    "name": "Adaptive",
+    "majorChangePatchVersion": "",
+    "tooltip": "+<scaleAD>@f2@ Attack Damage</scaleAD>",
+    "shortDesc": "+10 <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>Adaptive Force</font></lol-uikit-tooltipped-keyword>",
+    "longDesc": "+10 <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>Adaptive Force</font></lol-uikit-tooltipped-keyword>",
+    "iconPath": "/src/images/statPerks/adaptive.png",
+    "endOfGameStatDescs": []
+  }
+}
