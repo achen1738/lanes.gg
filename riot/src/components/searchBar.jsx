@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./../css/searchBar.css";
+
 class SearchBar extends Component {
   //   state = {};
   constructor() {
@@ -24,7 +25,6 @@ class SearchBar extends Component {
           className="search-form"
           autoComplete="off"
           action="/lol/summoner"
-          // onSubmit={this.handleSubmit}
           method="get"
         >
           <div className="search search-form-att" id="search-form--size">

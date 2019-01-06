@@ -1,6 +1,7 @@
-.container {
-  display: table;
-  width: 100%;
+.matchItem {
+  width: 685px;
+  margin-bottom: 3px;
+  border: 1px solid black;
 }
 
 .matchItem > .container > div {
@@ -39,6 +40,11 @@
   white-space: nowrap;
 }
 
+.container {
+  display: table;
+  width: 100%;
+}
+
 .Win {
   box-sizing: border-box;
   background-color: #a9e2fc;
@@ -71,13 +77,6 @@
   position: relative;
   width: 120px;
   vertical-align: middle;
-}
-
-.ChampName {
-  text-align: center;
-  font-size: 14px;
-  padding-top: 4px;
-  font-weight: bold;
 }
 
 .biggestBox {
@@ -175,6 +174,13 @@
   height: 100%;
 }
 
+.ChampName {
+  text-align: center;
+  font-size: 14px;
+  padding-top: 4px;
+  font-weight: bold;
+}
+
 .ItemsList {
   width: 94px;
   margin: 0 auto;
@@ -245,12 +251,6 @@
 
 .Players {
   padding-bottom: 2.5px;
-}
-
-.matchItem {
-  width: 685px;
-  margin-bottom: 3px;
-  border: 1px solid black;
 }
 
 .Button {

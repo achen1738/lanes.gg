@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-// import { BrowserRouter as Router, Link } from "react-router-dom";
 import "./../css/navBar.css";
+
 class navBar extends Component {
-  //   state = {};
+  state = {};
   render() {
     return (
       <div className="header-wrapper">

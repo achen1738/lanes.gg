@@ -20,6 +20,8 @@ class SummonerInfo extends Component {
       return element.queueType === "RANKED_SOLO_5x5";
     });
 
+    // If there is no ranked solo 5v5 league, then create an unranked
+    // solo rank
     if (typeof league != "undefined") {
       var imgRank = this.rankImage(league.tier, league.rank);
       var winLoss = `${league.wins}W ${league.losses}L`;
@@ -59,9 +61,11 @@ class SummonerInfo extends Component {
   }
 
   createLeagueInfo() {
-    // eslint-disable-next-line
+    // Iterate through all the players leagues
     return this.state.leagues.map(league => {
       var imgRank = this.rankImage(league.tier, league.rank);
+
+      // Initialize just a bunch of constants pretty literal tbh
       var winLoss = `${league.wins}W ${league.losses}L`;
       var winRatio =
         Math.ceil((league.wins / (league.wins + league.losses)) * 100) +
@@ -92,6 +96,7 @@ class SummonerInfo extends Component {
           </div>
         );
       }
+      return null;
     });
   }
 

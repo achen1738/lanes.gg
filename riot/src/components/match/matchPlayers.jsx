@@ -5,6 +5,7 @@ class MatchPlayers extends Component {
   createPlayers() {
     const matches = this.props.matches;
     var arr = [];
+    // Create teams (first 5 are in one team, rest are the in the second)
     for (var i = 0; i < 2; i++) {
       var team = [];
       for (var j = 0; j < 5; j++) {

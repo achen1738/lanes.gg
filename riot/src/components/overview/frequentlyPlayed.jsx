@@ -54,6 +54,10 @@ class FrequentlyPlayed extends Component {
     const container = id.substring(0, length - 3);
     var newVisibility = {};
 
+    /* Basically whenever I click a button, close all other tabs by making
+    their state in mostPlayed/mostPlayedAgainst false. However, for the tab that
+    was clicked, its visibility value is negated allowing us to be able to close 
+    and open the same tab. */
     for (var i = 0; i < 3; i++) {
       if (type === classes[i]) {
         newVisibility[type] = !this.state[container][type];
@@ -87,6 +91,9 @@ class FrequentlyPlayed extends Component {
     // console.log(arr[0]);
     // console.log(this.props.runes);
     // console.log(this.props.summonerSpells);
+
+    /* Iterate through each game in the array. (The array only holds games
+    of the same champ ID) */
     return arr.map(game => {
       const CS = game.jungleEnemy + game.jungleTeam + game.totalMinionsKilled;
       const itemURL = this.props.itemURL;
@@ -120,21 +127,28 @@ class FrequentlyPlayed extends Component {
     var keystoneURL, secondaryURL, spell1URL, spell2URL;
     const runesObj = this.props.runes;
     const trees = Object.values(runesObj);
+
+    /* Iterate through the runes object's values */
     trees.forEach(tree => {
+      // If the id matches with the primary perk or secondary Perk
       if (tree.id === match.primaryPerk) {
         const keystones = tree.slots[0].runes;
+        // Find the keystone that matches, then store its URL
         keystones.forEach(keystone => {
           if (keystone.id === match.primaryTree[0]) {
             keystoneURL = keystone.icon;
           }
         });
       } else if (tree.id === match.secondaryPerk) {
+        // Store its URL
         secondaryURL = tree.icon;
       }
     });
 
     const spellsObj = this.props.summonerSpells;
     const spells = Object.values(spellsObj.data);
+    // Same thing, iterate through spells object's values and store
+    // the image URLs for the spells that match with the users spells.
     spells.forEach(spell => {
       if (parseInt(spell.key) === match.spell1ID) {
         spell1URL = spell.image.full;
@@ -167,6 +181,9 @@ class FrequentlyPlayed extends Component {
       match.items[5]
     ];
     // console.log(match);
+
+    // Items doesn't include the trinket, but I probably could have just
+    // used an if statement
     var counter = 0;
     return items.map(item => {
       if (item === 0) item = 3637;

@@ -4,10 +4,6 @@ class MatchItems extends Component {
 
   createItems() {
     const match = this.props.match;
-    var items = [];
-    for (var i = 0; i < 6; i++) {
-      items.push(match[`item${i}`]);
-    }
     var counter = 0;
     return match.items.map(item => {
       if (counter++ !== 6) {
@@ -17,9 +13,8 @@ class MatchItems extends Component {
             <img src={this.props.itemURL + number + ".png"} alt="Item!" />
           </div>
         );
-      } else {
-        return null;
       }
+      return null;
     });
   }
 

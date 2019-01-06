@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter } from "react-router-dom";
 import MainImage from "../images/oie-t-rotated.png";
 import SearchBar from "./searchBar";
+
 class SearchArea extends Component {
-  //   state = {};
+  state = {};
 
   render() {
     return (

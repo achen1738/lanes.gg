@@ -19,6 +19,7 @@ class Body extends Component {
   }
 
   async updateSummoner() {
+    // Update summoner info
     const username = window.location.search.substring(10);
     await fetch("http://localhost:5000/update/" + username, {
       method: "PATCH"

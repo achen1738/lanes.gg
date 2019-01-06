@@ -40,6 +40,8 @@ class Home extends Component {
     const data = champJSON.data;
 
     var subObject, value;
+
+    /* Take the champJSON file and trim it to just keep the name, id, and image object */
     Object.keys(data).forEach(function(key, index) {
       value = data[key];
       subObject = { image: value.image, id: value.id, name: value.name };

@@ -13,8 +13,11 @@ class MatchInfo extends Component {
     const duration = `${gameMinutes}m ${gameSeconds}s`;
 
     var date = new Date();
+    // Both gameTimestamp and currentTimestamp are in milliseconds
     const gameTimestamp = match.timestamp;
     const currentTimestamp = date.getTime();
+
+    // Get the time of when the game started (current time - end of game time - duration time)
     const time =
       Math.floor((currentTimestamp - gameTimestamp) / 1000) -
       match.gameDuration;
@@ -24,6 +27,7 @@ class MatchInfo extends Component {
     });
     // console.log(queueObj);
     // console.log(match);
+
     var timeAgo;
     if (days === 0) {
       const seconds = time % 86400;

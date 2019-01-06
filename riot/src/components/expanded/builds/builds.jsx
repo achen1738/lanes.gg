@@ -21,6 +21,12 @@ class Builds extends Component {
     }
   };
 
+  /**
+   * Sets the visibility of all tabs to be false, however for the clicked element
+   * its boolean value is just set to true. This way an element is always
+   * visible, but only one at max is visible.
+   * @param {*} index - index of the clicked element
+   */
   setVisible(index) {
     var visible = {
       0: false,
@@ -43,11 +49,13 @@ class Builds extends Component {
       return match.username === this.props.match.username;
     });
     console.log(this.props.timeline);
+    // Sets the visibility of the user's element to be visible
     this.setVisible(index);
   }
 
   expand(e) {
     const index = e.currentTarget.getAttribute("index");
+    // Changes the visibility of the clicked element.
     this.setVisible(index);
   }
 

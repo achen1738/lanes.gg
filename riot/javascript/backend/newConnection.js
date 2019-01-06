@@ -261,7 +261,7 @@ async function update(username) {
   if (res.length === 0) {
     console.log("Creating Summoner");
     const summonerInfoRequest = await kayn.SummonerV4.by.name(username);
-    var createSummoner = await Users.create({
+    await Users.create({
       username: summonerInfoRequest.name,
       accountID: summonerInfoRequest.accountId,
       summonerID: summonerInfoRequest.id
@@ -508,10 +508,15 @@ async function getLeagues(username) {
 }
 
 async function getUserOverview(username, numGames) {
+  // Get the users accountID.
   const accID = await Users.findOne({
     username: { $regex: new RegExp(username, "i") }
   });
   const num = parseInt(numGames);
+  // In the last "numGames" find the users most played champions,
+  // by matching, then sorting, then limiting the number of games,
+  // grouping and summing by champID, then sorting again by occurence
+  // of champID, and finally limiting the top 3.
   const resp = await MatchInfo.aggregate([
     { $match: { accountID: accID.accountID } },
     { $sort: { matchID: -1 } },
@@ -531,6 +536,8 @@ async function getUserOverview(username, numGames) {
     arr.push(champ._id);
   });
 
+  // For the top 3 played champs, find their match Infos
+  // in MatchInfo for the last "numGames".
   const mostPlayed = await MatchInfo.aggregate([
     { $match: { accountID: accID.accountID } },
     { $sort: { matchID: -1 } },
@@ -542,12 +549,10 @@ async function getUserOverview(username, numGames) {
   //   console.log(mostPlayed);
   var final = [];
   var subArr = [];
-  // console.log(mostPlayed);
   if (mostPlayed.length != 0) {
     var currChamp = mostPlayed[0].championID;
     mostPlayed.forEach(match => {
       if (match.championID != currChamp) {
-        // console.log(match.championID, currChamp);
         final.push(subArr);
         subArr = [];
         currChamp = match.championID;
@@ -647,6 +652,7 @@ async function getEnemyOverview(username, numGames) {
 }
 
 async function getTop20Matches(username) {
+  // Find the users last 20 match IDs
   const resp = await Users.aggregate([
     { $match: { username: { $regex: new RegExp(username, "i") } } },
     {
@@ -668,6 +674,9 @@ async function getTop20Matches(username) {
   // console.log(resp);
   console.log(games);
   var results = [];
+  // For each match, find every MatchInfo record that has the same
+  // matchID, sort by teamID and participant ID.
+  // Relational DB would have been so much more efficient here
   games.forEach(game => {
     results.push(
       MatchInfo.find({
@@ -690,10 +699,13 @@ async function getTop20Matches(username) {
 }
 
 async function getNumLosses(username, numGames) {
+  // Find the users account ID
   const accID = await Users.findOne({
     username: { $regex: new RegExp(username, "i") }
   });
   const num = parseInt(numGames);
+  // Sum the users kills, deaths, assists, and losses in the
+  // last "numGames" (an input).
   const resp = await MatchInfo.aggregate([
     { $match: { accountID: accID.accountID } },
     { $sort: { matchID: -1 } },

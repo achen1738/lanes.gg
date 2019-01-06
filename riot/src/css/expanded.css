@@ -1,5 +1,16 @@
-.teamDetails {
+/*========================== TABS ==========================*/
+
+.details {
   width: 100%;
+  border: none;
+  margin-top: -1px;
+  /* background-color: white; */
+}
+
+.detailsContainer {
+  width: 100%;
+  box-sizing: border-box;
+  /* margin-bottom: 15px; */
 }
 
 .tabsContainer {
@@ -7,14 +18,6 @@
   border-right: 1px solid black;
   border-left: 1px solid black;
   box-sizing: border-box;
-}
-
-.lightBlue > .userActive {
-  background: #b4e2f8;
-}
-
-.lightRed > .userActive {
-  background: #f6cbcb;
 }
 
 .tabs > li {
@@ -54,19 +57,6 @@
   color: white;
 }
 
-.details {
-  width: 100%;
-  border: none;
-  margin-top: -1px;
-  /* background-color: white; */
-}
-
-.detailsContainer {
-  width: 100%;
-  box-sizing: border-box;
-  /* margin-bottom: 15px; */
-}
-
 .tab {
   display: none;
 }
@@ -76,19 +66,34 @@
   background-color: white !important;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-}
+/* ========================== BOXSCORE ========================== */
 
-a:visited {
-  text-decoration: none;
-  color: black;
+.teamDetails {
+  width: 100%;
 }
 
 .teamHeader {
   height: 32px;
   background-color: white;
+}
+
+.teamHeader tr {
+  width: 100%;
+  display: table;
+}
+
+.teamHeader > tr > th {
+  font-size: 13px;
+  font-weight: normal;
+  padding: 11px 0;
+}
+
+.lightBlue > .userActive {
+  background: #b4e2f8;
+}
+
+.lightRed > .userActive {
+  background: #f6cbcb;
 }
 
 .lightRed {
@@ -106,27 +111,18 @@ a:visited {
   table-layout: fixed;
 }
 
+.teamRow > div:not(.playerName) {
+  font-size: 13px;
+}
+
 .teamRow > div {
   display: table-cell;
   vertical-align: middle;
 }
 
-.summaryContainer {
-  background-color: #071d40;
-  display: inline-flex;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-}
-
-.summary {
-  height: 50px;
-  display: table;
-  width: 100%;
-}
-
-.summary > div {
-  display: table-cell;
-  vertical-align: middle;
+.playerItems {
+  width: 170px;
+  padding-top: 7px;
 }
 
 .playerItems > .Item {
@@ -177,15 +173,6 @@ a:visited {
   table-layout: fixed;
 }
 
-.playerItems {
-  width: 170px;
-  padding-top: 7px;
-}
-
-.teamRow > div:not(.playerName) {
-  font-size: 13px;
-}
-
 .rowCell {
   text-align: center;
   vertical-align: middle;
@@ -196,6 +183,7 @@ a:visited {
 .playerRunes {
   width: 50px;
 }
+
 .playerName {
   width: 90px;
 }
@@ -234,6 +222,7 @@ a:visited {
   transform: scale(1);
   bottom: 90%;
 }
+
 .playerCS {
   width: 66px;
 }
@@ -247,26 +236,301 @@ table {
   border-collapse: collapse;
 }
 
-.teamHeader tr {
-  width: 100%;
+.summaryContainer {
+  background-color: #071d40;
+  display: inline-flex;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+/* .summary {
+  height: 50px;
   display: table;
+  width: 100%;
 }
 
-.teamHeader > tr > th {
+.summary > div {  
+  display: table-cell;
+  vertical-align: middle;
+} */
+
+.boxscoreGraphs {
+  width: 375;
+  display: inline-flex;
+  color: white;
   font-size: 13px;
-  font-weight: normal;
-  padding: 11px 0;
 }
 
-.statRunes {
-  position: absolute;
-  left: 33%;
-  top: 66.5%;
+.boxscoreGraphs > span {
+  width: 70px;
+  line-height: 1.4;
 }
 
-.statRune {
+.objectives {
+  display: inline-flex;
+}
+
+.objectives > img {
+  margin-top: 7px;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.objectiveCount > span {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.objectiveCount {
+  vertical-align: middle;
+  color: white;
+  margin-top: 14px;
+  padding: 0 5px;
+}
+
+.topObjectives {
+  padding-left: 5px;
+}
+
+.bottomObjectives {
+  padding-right: 1px;
+}
+
+.graphSection {
+  margin-left: 10px;
+}
+
+/* ========================== BUILDS ========================== */
+
+.staticSize {
+  display: inline-flex;
+}
+
+.staticSize.won {
+  background: rgb(0, 42, 68);
+}
+
+.staticSize.lost {
+  background: rgb(42, 1, 0);
+}
+
+.buildSkillsRunes {
+  display: inline-block;
+}
+
+.buildTabs {
+  /* padding: 13px 30px 10px 68px; */
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  width: 12%;
+  /* padding: 15px 0; */
+  padding-top: 8px;
+}
+
+.buildTabs.lost {
+  border-top: 3px solid #f6a3a3;
+  border-bottom: 3px solid #f6a3a3;
+}
+
+.buildTabs.won {
+  border-top: 3px solid #a9e2fc;
+  border-bottom: 3px solid #a9e2fc;
+}
+
+.buildTabs > li {
+  vertical-align: middle;
+  /* margin-right: 5px; */
+  /* padding-left: 15px; */
+  padding: 0 10px;
+  width: 50px;
+}
+
+.buildTab {
+  display: none;
+}
+
+.buildTabLinks > img {
+  width: 50px;
+  clip-path: circle(24px);
+  transition: all 0.2s ease-in-out;
+}
+
+.buildTabLinks:not(.buildActive) > img {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.buildTabLinks:not(.buildActive) > img:hover {
+  transform: scale(1.15);
+  -webkit-filter: grayscale(50%);
+  -moz-filter: grayscale(50%);
+  filter: grayscale(50%);
+}
+
+/* ======================= SKILLS ======================== */
+
+.skillsContent table {
+  margin-left: 19px;
+  padding: 8px 0px;
+  border-spacing: 3px;
+  border-collapse: separate;
+}
+
+.skillsContent td {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 3px;
+}
+
+.number {
+  background-color: #8e9191;
+}
+
+.activeCell {
+  background-color: #00b2a3;
+  text-align: center;
+  color: white;
+}
+
+.skillImg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  border-radius: 3px;
+}
+
+/* ======================= RUNES ======================== */
+
+.buildsHeader {
+  background-color: white;
+  height: 50px;
+}
+
+.sectionHeader {
+  color: white;
+  padding: 8px;
+  font-size: 13px;
+}
+
+.contentColor.lost {
+  background: rgb(255, 230, 230);
+}
+
+.contentColor.won {
+  background: rgb(218, 241, 255);
+}
+
+.svgBorder {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.bigImageContainer {
+  width: 55px;
+  height: 55px;
+}
+
+.imageContainer {
+  width: 40px;
+  height: 40px;
+}
+
+.runesBorder {
+  position: relative;
+  z-index: 1;
+}
+
+.runesContent {
   position: relative;
 }
+
+.mainTree {
+  position: absolute;
+  z-index: 2;
+}
+
+.backdrop > img {
+  width: 100%;
+}
+
+.bigRune > img {
+  width: 64px;
+  height: 64px;
+}
+
+.runeContainer > img {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+}
+
+.runesContent > div > div {
+  position: relative;
+}
+
+.barThing {
+  position: absolute;
+  height: 253px;
+  width: 5px;
+  left: 48%;
+  top: 29%;
+  border: 2px solid rgba(200, 170, 110, 0.2);
+  border-top: none;
+  padding: 0 1.5px 0 2px;
+}
+
+.secondBar {
+  position: absolute;
+  height: 120px;
+  width: 5px;
+  left: 34.5%;
+  top: 26%;
+  border: 2px solid rgba(200, 170, 110, 0.2);
+  border-top: none;
+  padding: 0 1.5px 0 2px;
+}
+
+.moreBarThing {
+  width: 90%;
+  height: 100%;
+  background: rgba(158, 169, 251, 0.3);
+}
+
+.classCircle {
+  width: 75px;
+  height: 75px;
+  margin: -18.7px;
+}
+
+.secondClass {
+  top: 13%;
+  left: 50%;
+}
+
+.secondarySmallRune {
+  left: 48.4%;
+}
+.erRune {
+  top: 36.25%;
+  /* left: 199px; */
+}
+
+.sanRune {
+  top: 55%;
+  /* left: 199px; */
+}
+
+.absolute {
+  position: absolute;
+}
+
+/* ======================= PRIMARY TREE RUNES ======================== */
 
 .mainTreeContainer {
   left: 50px;
@@ -280,10 +544,87 @@ table {
   height: 350px;
 }
 
+.classRune {
+  top: 13%;
+  left: 35%;
+}
+
+.classRuneContainer > img {
+  width: 36px;
+  height: 33px;
+  position: absolute;
+  padding-top: 2px;
+  padding-left: 1px;
+}
+
+.firstRune {
+  top: 33%;
+  left: 22%;
+}
+
+.secondRune {
+  top: 55%;
+}
+
+.thirdRune {
+  top: 74.5%;
+}
+
+.fourthRune {
+  top: 93%;
+}
+
+.classBorder {
+  margin: -10px;
+  position: absolute;
+  width: 58px;
+  height: 58px;
+}
+
+.classMoon {
+  cx: 50%;
+  cy: 50%;
+  r: 43%;
+  fill: none;
+  stroke-width: 2;
+  transform: translateY(6%);
+  transform-origin: 50% 50%;
+}
+
+.moon-left {
+  transform: rotate(120deg) translateY(6%);
+}
+
+.moon-right {
+  transform: rotate(240deg) translateY(6%);
+}
+
+.smallRune {
+  left: 33.5%;
+}
+
+/* ======================= SECONDARY TREE RUNES ======================== */
+
 .secondTreeContainer {
   left: 150px;
   top: 0%;
   position: absolute;
+}
+
+.statRunes {
+  position: absolute;
+  left: 33%;
+  top: 66.5%;
+}
+
+.smallRelativeContainer {
+  position: relative;
+}
+
+/* ======================= STAT RUNES ======================== */
+
+.statRune {
+  position: relative;
 }
 
 .statRuneBorder {
@@ -302,10 +643,6 @@ table {
   stroke: #fbecb4;
 }
 
-.thirdBar {
-  top: 26%;
-}
-
 .barContent {
   position: absolute;
   height: 12px;
@@ -315,12 +652,314 @@ table {
   border-top: none;
   padding: 0 1.5px 0 2px;
 }
+
+.thirdBar {
+  top: 26%;
+}
+
 .fourthBar {
   top: 60%;
 }
 
-.smallRelativeContainer {
+/* ======================= ITEMS ======================== */
+
+.itemsHeader.won {
+  background-color: #2d93c2;
+}
+
+.itemsHeader.lost {
+  background-color: #d05454;
+}
+
+.itemsContent > ul > .Item {
+  display: inline-block;
+  margin: 0 0 23px;
+}
+
+li .Item {
+  width: 25px;
+  height: 25px;
+  clip-path: circle(16px);
+  display: inline-block;
+  vertical-align: middle;
   position: relative;
+}
+
+ul > .Item > .Items {
+  background: #748d8b;
+  padding: 4px;
+  display: inline-block;
+  position: relative;
+}
+
+.itemsContent > ul {
+  font-size: 0;
+  padding: 12px 0px 0px;
+  margin: 0px 12px;
+}
+
+.Item > .Items > .Item:not(:first-child) {
+  margin-left: 4px;
+}
+
+i {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.arrowContainer {
+  clip-path: circle(8px);
+  background-color: #748d8b;
+  display: inline-block;
+}
+
+.nextArrow {
+  display: inline-block;
+  margin: 8px 8px;
+  vertical-align: middle;
+}
+
+.rightArrow {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  margin-right: 2px;
+}
+
+.tally {
+  color: white;
+  background-color: black;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 12px;
+  width: 12px;
+  font-size: 11px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.itemTime {
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.itemRedX {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  z-index: 1;
+}
+
+.sold {
+  opacity: 0.7;
+}
+
+/* ======================= LANES ======================== */
+
+/* ======================= LANE TABS ======================== */
+
+.pathTabLinks > svg {
+  transition: all 0.2s ease-in-out;
+}
+
+.pathTabLinks > .icon:hover {
+  transform: scale(1.15);
+}
+
+.pathTabLinks > .iconCircle:hover {
+  transform: scale(1.15);
+  cursor: pointer;
+}
+
+.pathTabLinks.buildActive .iconCircle {
+  transform: scale(1.15);
+}
+
+.pathTabLinks {
+  display: inline-block;
+  position: relative;
+  padding: 0px 13px;
+}
+
+.pathTabs {
+  padding: 10px 0 10px 188px;
+  position: relative;
+  z-index: 0;
+}
+
+.midLane {
+  fill: transparent;
+  stroke: rgb(240, 229, 210);
+  stroke-linecap: round;
+  stroke-width: 10;
+}
+
+.sideLane {
+  stroke: #a09b8c;
+  fill: #a09b8c;
+  stroke-width: 1;
+}
+
+.activeLane {
+  stroke: rgb(240, 229, 210);
+  fill: rgb(240, 229, 210);
+  stroke-width: 1;
+}
+
+.laneContainer {
+  display: inline-block;
+  width: 50px;
+  height: 100%;
+}
+
+.icon {
+  vertical-align: middle;
+  margin-left: 8.5px;
+}
+
+.iconCircle {
+  stroke: rgb(240, 229, 210);
+  vertical-align: middle;
+  margin-left: -45px;
+}
+
+.buildActive > .iconCircle {
+  stroke: rgb(99, 99, 99);
+}
+
+/* ======================= LANE CONTENT ======================== */
+
+.laneContent {
+  padding: 10px;
+}
+
+.wonLaneContent {
+  background-color: rgb(138, 204, 255);
+}
+
+.lostLaneContent {
+  background-color: rgb(255, 163, 163);
+}
+
+.wonLaneContent .emptyText {
+  background-color: #187194;
+}
+
+.lostLaneContent .emptyText {
+  background-color: #b01212;
+}
+
+.emptyPath {
+  height: 4.25em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyText {
+  margin: 0;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: red;
+}
+
+.champSVGWrap {
+  left: 40.5px;
+  top: 1.75px;
+  position: absolute;
+  z-index: -1;
+}
+
+.buildActive {
+  display: block;
+  transform: scale(1.15);
+}
+
+.pathLane {
+  padding: 10px 10px 5px 10px;
+  position: relative;
+  display: none;
+}
+
+.loseLane {
+  background: linear-gradient(180deg, rgb(208, 84, 84), rgb(255, 163, 163));
+}
+
+.winLane {
+  background: linear-gradient(180deg, rgb(45, 147, 194), rgb(138, 204, 255));
+}
+
+.champKillContainer {
+  position: relative;
+  display: inline-block;
+  padding: 25px 0 20px;
+}
+
+.champKillContainer > div {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 3px;
+}
+
+.champKills {
+  position: relative;
+  display: inline-block;
+  margin-left: 5.5px;
+}
+
+.champKill {
+  position: relative;
+  width: 30px;
+  height: 97px;
+  padding: 12px 15px 40px 11px;
+  border-radius: 33px;
+  display: inline-block;
+}
+
+.champKill > div {
+  vertical-align: middle;
+}
+
+.champTime {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: -20px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.killsContainer {
+  position: relative;
+}
+
+/* ====================== ALIVE SIDE ====================== */
+
+.aliveSide {
+  width: 40px;
+  height: 40px;
+  margin-left: -3px;
+}
+
+.aliveSide > img {
+  width: 40px;
+  height: 40px;
+  clip-path: circle(19px);
+}
+
+.assistKills > div > img {
+  width: 20px;
+  height: 20px;
+  clip-path: circle(10px);
 }
 
 .killDesc {
@@ -331,6 +970,12 @@ table {
   left: 0;
   right: 0;
 }
+
+.teamKill {
+  background: linear-gradient(180deg, #b7ffec, #92e9d2);
+}
+
+/* ====================== ASSISTS ====================== */
 
 .assistKills > div {
   position: absolute;
@@ -460,72 +1105,67 @@ table {
   stroke: white;
 }
 
-.boxscoreGraphs {
-  width: 375;
-  display: inline-flex;
+.relative {
+  position: relative;
+}
+
+/* ====================== KILL DIVIDER ====================== */
+
+.killDivider {
+  margin-top: 19px;
+  margin-bottom: 3px;
+  margin-left: 1.5px;
+}
+
+.killDivider img {
+  width: 25px;
+  height: 25px;
+}
+
+/* ====================== DEAD SIDE ====================== */
+
+.deadImage {
+  width: 40px;
+  height: 40px;
+  clip-path: circle(19px);
+  opacity: 0.7;
+}
+
+.deadSide {
+  margin-left: -3px;
+  margin-top: -5px;
+  position: relative;
+  width: 35px;
+  height: 35px;
+}
+
+.enemyKill {
+  background: linear-gradient(180deg, #ff6060, #d45959);
+}
+
+.redX {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  bottom: 2px;
+  right: 2px;
+  z-index: 1;
+}
+
+.champNext {
+  width: 16px;
+  height: 19px;
+  background: -webkit-linear-gradient(45deg, #0a083d, #364b8b);
+  background: linear-gradient(45deg, #0a083d, #364b8b);
+  -webkit-clip-path: circle(14px);
+  clip-path: circle(7px);
+  text-align: center;
   color: white;
-  font-size: 13px;
 }
 
-.boxscoreGraphs > span {
-  width: 70px;
-  line-height: 1.4;
-}
-
-.objectives {
-  display: inline-flex;
-}
-
-.objectives > img {
-  margin-top: 7px;
-  width: 30px;
-  height: 30px;
-  vertical-align: middle;
-}
-
-.objectiveCount > span {
-  font-size: 17px;
-  font-weight: 500;
-}
-
-.objectiveCount {
-  vertical-align: middle;
-  color: white;
-  margin-top: 14px;
-  padding: 0 5px;
-}
-
-.topObjectives {
-  padding-left: 5px;
-}
-
-.bottomObjectives {
-  padding-right: 1px;
-}
-
-.graphSection {
-  margin-left: 10px;
-}
-
-.emptyPath {
-  height: 4.25em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.emptyText {
-  margin: 0;
-  color: white;
-  padding: 15px;
-  border-radius: 12px;
-  background-color: red;
-}
-
-.wonLaneContent .emptyText {
-  background-color: #187194;
-}
-
-.lostLaneContent .emptyText {
-  background-color: #b01212;
+.pathEllipse {
+  z-index: -1;
+  position: absolute;
+  left: 162.5px;
+  top: 1px;
 }

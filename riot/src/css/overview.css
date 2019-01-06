@@ -1,3 +1,7 @@
+.overview {
+  display: flex;
+}
+
 .recentStats {
   padding: 7px 0 5px;
   display: flex;
@@ -5,19 +9,29 @@
   box-sizing: border-box;
 }
 
-/* .recentStats > div {
-  display: table-cell;
-  height: 198px;
+.recentStats span {
+  color: white;
   text-align: center;
-  vertical-align: top;
-  position: relative;
-} */
+  vertical-align: middle;
+  font-weight: 500;
+}
 
-/* .recentWinRate {
-  width: 196px;
-  margin-top: 5px;
-  border-right: 1px solid black;
-} */
+.recentWinRateWrapper > span {
+  margin-left: 55px;
+}
+
+.recentWinRate {
+  background: linear-gradient(90deg, rgb(145, 215, 215), rgb(109, 186, 186));
+  color: white;
+  border-radius: 8px;
+  /* margin-right: 10px;
+  margin-left: 7px; */
+  margin: 5px 10px 0 7px;
+}
+
+.recentWinRate > div {
+  text-align: center;
+}
 
 .barGraph {
   display: inline-block;
@@ -45,6 +59,18 @@
   transition: all 0.15s ease-in-out;
 }
 
+.first > .buttonBackground {
+  height: 59px;
+}
+
+.second > .buttonBackground {
+  height: 57px;
+}
+
+.third > .buttonBackground {
+  height: 55.5px;
+}
+
 .mostPlayed > div > .buttonBackground:hover {
   background-color: #043d65;
 }
@@ -55,6 +81,10 @@
 
 .mostPlayed > div > .lightBlue {
   background-color: #2b79b2;
+}
+
+.mostPlayed > div > i {
+  border-color: #cdf4ff;
 }
 
 .mostPlayedAgainst > div > .lightRed {
@@ -69,8 +99,8 @@
   background-color: #601111;
 }
 
-.mostPlayed > div > i {
-  border-color: #cdf4ff;
+.mostPlayedAgainst > div > i {
+  border-color: #ffd9cb;
 }
 
 i {
@@ -80,28 +110,12 @@ i {
   cursor: pointer;
 }
 
-.mostPlayedAgainst > div > i {
-  border-color: #ffd9cb;
-}
-
 .leftArrow {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
   position: relative;
   z-index: 1;
   margin-left: 6px;
-}
-
-.first > .buttonBackground {
-  height: 59px;
-}
-
-.second > .buttonBackground {
-  height: 57px;
-}
-
-.third > .buttonBackground {
-  height: 55.5px;
 }
 
 .totalGames {
@@ -124,17 +138,6 @@ i {
   border-bottom: none;
 }
 
-.recentStats span {
-  color: white;
-  text-align: center;
-  vertical-align: middle;
-  font-weight: 500;
-}
-
-.recentWinRateWrapper > span {
-  margin-left: 55px;
-}
-
 .mostPlayedWrapper > span {
   margin-left: 67px;
 }
@@ -147,15 +150,22 @@ i {
   border-bottom: none;
 }
 
-/* .recentStats > div:not(:first-child) {
-    width: 245px;
-  } */
 .champHeader {
   margin-top: 4px;
 }
 
 .champHeader > div {
   display: inline-block;
+}
+
+.champList::-webkit-scrollbar {
+  display: none;
+}
+
+.champList {
+  margin-top: -2px;
+  height: 132px;
+  overflow-y: scroll;
 }
 
 .champImage {
@@ -206,68 +216,20 @@ i {
   margin-top: 1px;
 }
 
-.Stats > div {
-  text-align: center;
-}
-
-.champMatch > .Stats > .KDA {
-  width: 72px;
-}
-.champMatch > .Stats {
-  font-size: 13px;
-  padding: 0 2px;
-  /* padding-right: 9px; */
-}
-
-.Rune {
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  background: black;
-  margin-top: -2.5px;
-  margin-left: 1px;
-  border-radius: 3px;
-  clip-path: circle(11.5px);
-}
-
-.Rune > img {
-  width: 100%;
-  height: 100%;
-}
-
 .champMatch > .SpellsnRunes {
   width: 41px;
   padding-top: 7px;
   position: relative;
 }
 
-.cLevel {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  z-index: 1;
-  left: 19%;
-  top: 29%;
-  clip-path: circle(8px);
-  background: #63be63;
-  font-size: 11px;
-  color: white;
+.champMatch > .Stats > .KDA {
+  width: 72px;
 }
 
-.champList::-webkit-scrollbar {
-  display: none;
-}
-
-.cLevelContainer {
-  margin-top: 4px;
-  margin-right: 1.25px;
-  text-align: center;
-}
-
-.champList {
-  margin-top: -2px;
-  height: 132px;
-  overflow-y: scroll;
+.champMatch > .Stats {
+  font-size: 13px;
+  padding: 0 2px;
+  /* padding-right: 9px; */
 }
 
 .champMatch > .Trinket {
@@ -286,23 +248,49 @@ i {
   clip-path: circle(11.5px);
 }
 
-.recentWinRate {
-  background: linear-gradient(90deg, rgb(145, 215, 215), rgb(109, 186, 186));
+.Stats > div {
+  text-align: center;
+}
+
+.Rune {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background: black;
+  margin-top: -2.5px;
+  margin-left: 1px;
+  border-radius: 3px;
+  clip-path: circle(11.5px);
+}
+
+.Rune > img {
+  width: 100%;
+  height: 100%;
+}
+
+.cLevel {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 1;
+  left: 19%;
+  top: 29%;
+  clip-path: circle(8px);
+  background: #63be63;
+  font-size: 11px;
   color: white;
-  border-radius: 8px;
-  /* margin-right: 10px;
-  margin-left: 7px; */
-  margin: 5px 10px 0 7px;
+}
+
+.cLevelContainer {
+  margin-top: 4px;
+  margin-right: 1.25px;
+  text-align: center;
 }
 
 .overviewBorder {
   border: 3px solid rgb(0, 116, 116);
   border-radius: 15px;
   width: 100%;
-}
-
-.recentWinRate > div {
-  text-align: center;
 }
 
 #graph {
@@ -324,6 +312,12 @@ i {
   display: inline-block;
 }
 
+.cImg > img {
+  width: 50px;
+  height: 50px;
+  clip-path: circle(23px at center);
+}
+
 .cImg {
   vertical-align: middle;
 }
@@ -334,12 +328,6 @@ i {
   vertical-align: middle;
   padding-bottom: 2px;
   margin-left: 5px;
-}
-
-.cImg > img {
-  width: 50px;
-  height: 50px;
-  clip-path: circle(23px at center);
 }
 
 .first > .mostPlayedChamp {
@@ -370,47 +358,8 @@ i {
   font-size: 12px;
 }
 
-.overview {
-  display: flex;
-}
-
-.overviewHeader {
-  border: 1px solid black;
-  border-bottom: none;
-  display: table;
-  font-size: 0;
-}
-
-.overviewHeader > .title:first-child {
-  width: 196px;
-}
-
-.overviewHeader > .title:not(:first-child) {
-  width: 245px;
-}
-
-.title {
-  font-size: 14px;
-  padding: 4px 0;
-  margin: 0 auto;
-  display: table-cell;
-  text-align: center;
-}
-
 .cName {
   font-size: 16px;
-}
-
-.cButtonContainer {
-  width: 18.5px;
-  height: 100%;
-  vertical-align: top;
-  background-color: #b8e7ff;
-  float: right;
-  box-sizing: border-box;
-  border-width: 0 1px 1px 1px;
-  border-style: solid;
-  border-color: #202468;
 }
 
 .subContainer {
@@ -421,21 +370,6 @@ i {
 
 .nava {
   display: inline-block;
-}
-
-.cButton {
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  -webkit-transition-duration: 0.4s;
-  /* Safari */
-  transition-duration: 0.4s;
-}
-
-.cButtonContainer:hover {
-  background-color: white;
 }
 
 .expandedContainer {

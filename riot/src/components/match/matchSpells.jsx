@@ -14,6 +14,10 @@ class MatchSpells extends Component {
       8300: "gradient-inspiration",
       8400: "gradient-resolve"
     };
+
+    // Same thing as always iterate through runes object's values
+    // Find the runes that match the primary perk and secondary perk.
+    // Then keep track of their URLs
     trees.forEach(tree => {
       if (tree.id === match.primaryPerk) {
         const keystones = tree.slots[0].runes;
@@ -27,6 +31,8 @@ class MatchSpells extends Component {
       }
     });
 
+    // Read above comment just replace the variables with
+    // the respective spells variables
     const spellsObj = this.props.summonerSpells;
     const spells = Object.values(spellsObj.data);
     spells.forEach(spell => {

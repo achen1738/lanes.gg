@@ -24,6 +24,8 @@ class MatchList extends Component {
     const allMatches = matchObj.allMatches;
     var expanded = {};
     console.log(matches);
+    // Create a mapping of matchIDs to boolean values to allow
+    // us to determine if the details of a match are visible.
     matches.forEach(match => {
       expanded[match.matchID] = false;
     });
@@ -34,6 +36,8 @@ class MatchList extends Component {
   async expand(e) {
     var expanded = this.state.expanded;
     const matchID = e.currentTarget.getAttribute("matchid");
+    // Negate the visibility of the clicked match allowing us to open and close
+    // the details.
     expanded[matchID] = !expanded[matchID];
     this.setState({ expanded });
   }

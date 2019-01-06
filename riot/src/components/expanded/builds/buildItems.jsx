@@ -74,16 +74,23 @@ class BuildItems extends Component {
       k = 0,
       z = 0;
 
-    while ((i < soldLen || j < purchasedLen || k < undoLen) && z < 30) {
+    // LIKE MERGING K NUMER OF ARRAYS BASED ON TIMESTAMP
+    // HOWEVER I COULDNT FIND A PRIORITY QUEUE LIBRARY
+    while ((i < soldLen || j < purchasedLen || k < undoLen) && z < 100) {
       var earliestItem = null;
       var earliestTime = Number.POSITIVE_INFINITY;
       var soldItem = null,
         purchItem = null,
         undoItem = null;
+      // If we did not look at all elements in an item array already
+      // set its respective item to a value in the array
       if (i < soldLen) soldItem = sold[i];
       if (j < purchasedLen) purchItem = purchased[j];
       if (k < undoLen) undoItem = undo[k];
 
+      // For each of the previously set items, as long as they are not null
+      // or undefined, do a simple comparison to keep track of the
+      // earliest timestamp and its repective item.
       if (soldItem !== null && typeof soldItem !== "undefined") {
         if (soldItem.timestamp < earliestTime) {
           earliestTime = soldItem.timestamp;
@@ -105,51 +112,41 @@ class BuildItems extends Component {
         }
       }
 
-      if (currentGroupTimestamp === null) {
+      // This is to initialize the timestamp for the first group
+      if (currentGroupTimestamp === null)
         currentGroupTimestamp = earliestItem.timestamp;
+
+      if (earliestItem !== null && typeof earliestItem !== "undefined") {
+        if (earliestItem.type === "ITEM_SOLD") i++;
+        else if (earliestItem.type === "ITEM_PURCHASED") j++;
+        else if (earliestItem.type === "ITEM_UNDO") k++;
       }
 
-      // allItems.push(earliestItem);
-      if (
-        earliestItem !== null &&
-        typeof earliestItem !== "undefined" &&
-        earliestItem.type === "ITEM_SOLD"
-      ) {
-        i++;
-      } else if (
-        earliestItem !== null &&
-        typeof earliestItem !== "undefined" &&
-        earliestItem.type === "ITEM_PURCHASED"
-      ) {
-        j++;
-      } else if (
-        earliestItem !== null &&
-        typeof earliestItem !== "undefined" &&
-        earliestItem.type === "ITEM_UNDO"
-      ) {
-        k++;
-      }
-
+      // Put all items that were bought/sold/undo'ed within 15 seconds of each other
+      // into a single group
       if (earliestItem.timestamp < currentGroupTimestamp + 15000) {
-        if (earliestItem.type === "ITEM_UNDO") {
-          subArr.pop();
-        } else {
-          subArr.push(earliestItem);
-        }
+        if (earliestItem.type === "ITEM_UNDO") subArr.pop();
+        else subArr.push(earliestItem);
       } else {
-        // console.log(currentGroupTimestamp, earliestItem.timestamp);
+        // If the current item is not within 15 seconds of the previous, then
+        // push the group of items into an array, and create a new array
+        // containing just the current item. Also update the groups timestamp
+        // to be the current items timestamp
         allItems.push(subArr);
         subArr = [earliestItem];
         currentGroupTimestamp = earliestItem.timestamp;
       }
 
+      // If we looksed at all the elements of every array, push the final
+      // group into the array of all items.
       if (i >= soldLen && j >= purchasedLen && k >= undoLen) {
         allItems.push(subArr);
       }
+
+      // A counter just to make sure I dont go into an infinite loop.
       z++;
     }
     return allItems;
-    // console.log(allItems);
   }
 
   render() {
