@@ -8,7 +8,7 @@ The backend is built with NodeJS and Express with REST endpoints that connect to
 Well, to be honest I do not know how to let other connect to my own databse safely? (is there like security issues / bad to give people actual access to my database) But, all you have to do is pull the repository, and create a .env file in the /riot/javascript/backend/ folder with 3 values. user, password, and key. "user" and "password" relate to your mongoDB database. Key refers to Riot's development key that you can get by visiting https://developer.riotgames.com/. Finally, all you have to do is type run -- (no quotes) "npm start" in the /riot folder, and "npm run server" in the riot/javascript/backent folder.
 
 ## Demo
-![](lanegif1.gif)
+![](newLane2.gif)
 
 ## To Do (Updated)
 I think CSS (I should switch to using like SASS or something) can always be worked on.
