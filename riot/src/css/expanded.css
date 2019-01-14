@@ -883,6 +883,10 @@ i {
   transform: scale(1.15);
 }
 
+.pathTabs > .buildActive {
+  display: inline-block;
+}
+
 .pathLane {
   padding: 10px 10px 5px 10px;
   position: relative;
