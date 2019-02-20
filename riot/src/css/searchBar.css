@@ -1,14 +1,3 @@
-.search-bar {
-  position: absolute;
-  top: 0.4em;
-  left: 0.5em;
-  right: 0.25em;
-  bottom: 1.5em;
-  z-index: 0;
-  box-sizing: content-box;
-  color: white;
-}
-
 .main .l-container {
   padding: 0;
   margin: 0 auto;
@@ -31,6 +20,17 @@
   outline: none;
   box-sizing: border-box;
   border: none;
+}
+
+.search-bar {
+  position: absolute;
+  top: 0.4em;
+  left: 0.5em;
+  right: 0.25em;
+  bottom: 1.5em;
+  z-index: 0;
+  box-sizing: content-box;
+  color: white;
 }
 
 .search-bar::placeholder {
