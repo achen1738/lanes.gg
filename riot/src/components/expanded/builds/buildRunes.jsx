@@ -1,9 +1,4 @@
 import React, { Component } from "react";
-import Domination from "./../../../images/backdrops/domination.jpeg";
-import Inspiration from "./../../../images/backdrops/inspiration.jpeg";
-import Resolve from "./../../../images/backdrops/resolve.jpeg";
-import Precision from "./../../../images/backdrops/precision.jpeg";
-import Sorcery from "./../../../images/backdrops/sorcery.jpeg";
 import Health from "./../../../images/statPerks/health.png";
 import AttackSpeed from "./../../../images/statPerks/as.png";
 import MagicResist from "./../../../images/statPerks/mr.png";
@@ -315,9 +310,6 @@ class BuildRunes extends Component {
         {this.addPrimaryRunes(mainEnv)}
         {this.addSecondaryRunes(secEnv)}
         {this.addTernaryRunes()}
-        <div className="backdrop">
-          <img src={mainEnv[0]} alt="BackDrop!" />
-        </div>
       </React.Fragment>
     );
   }
