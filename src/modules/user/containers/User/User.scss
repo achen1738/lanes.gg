@@ -1,0 +1,24 @@
+@import '../../../../scss/palette';
+
+.app {
+  min-height: 100vh;
+  background-color: $backgroundColor;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  padding: 3vh 10vw;
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.left {
+  width: 325px;
+}
+
+.right {
+  margin-left: 20px;
+  width: 700px;
+}

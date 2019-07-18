@@ -1,0 +1,74 @@
+@import '../../scss/position';
+@import '../../scss/palette';
+
+.header {
+  @extend %flex-middle;
+  justify-content: space-between;
+  color: white;
+  padding: 0 4vw;
+  background-color: darken($backgroundColor, 10%);
+  height: 60px;
+  border-bottom: 1px solid lighten($backgroundColor, 30%);
+  &__logo {
+    font-size: 1.6rem;
+    // font-size: 16px;
+  }
+
+  &__search {
+    width: 425px;
+    height: 70%;
+    color: white;
+    border: 3px solid white;
+    border-radius: 5px;
+    display: flex;
+    overflow: hidden;
+
+    &-region {
+      padding: 0 15px;
+      height: 100%;
+      @extend %flex-center;
+      background-color: rgb(75, 89, 159);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s all ease-in-out;
+
+      &:hover {
+        background-color: lighten(rgb(75, 89, 159), 10%);
+      }
+    }
+
+    &-form {
+      flex: 1 1 auto;
+      padding: 7px 12px 5px;
+      @extend %flex-middle;
+    }
+
+    &-input {
+      outline: none;
+      background-color: inherit;
+      padding: 0;
+      border: none;
+      color: white;
+      width: 100%;
+      height: 100%;
+      transition: 0.2s all ease-in-out;
+      line-height: 0.5;
+      &::placeholder {
+        color: rgb(230, 230, 230);
+        font-style: italic;
+      }
+
+      &:active,
+      &:focus {
+        border-bottom: 1px solid white;
+      }
+    }
+
+    &-icon {
+      margin-left: 8px;
+      font-size: 2.4rem;
+    }
+  }
+}

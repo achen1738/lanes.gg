@@ -20,7 +20,7 @@ The backend is built with NodeJS and Express with REST endpoints that connect to
 
 THIRD ITERATION
 
-Well, now that I know more, here are the following things I'm goint to do
+Well, now that I know more, here are the following things I'm going to do
 
 - [ ] Integrate redux + saga into each module.
 - [ ] Transition big CSS files to individual SCSS files for each component/container

@@ -1,0 +1,9 @@
+.matches {
+  &__match {
+    height: 100px;
+    background-color: white;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}

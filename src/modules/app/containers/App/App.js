@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Switch, Redirect, Route, withRouter } from 'react-router-dom';
+import { withCookies } from 'react-cookie';
+import Home from '../../../home/containers/Home';
+import User from '../../../user/containers/User/User';
 
 class App extends Component {
   render() {
-    return <div className="App">SAD</div>;
+    return (
+      <Switch>
+        <Redirect exact from="/" to="/summoner/me arthur chen" />
+        <Route path="/summoner/:username" component={User} />
+        <Route path="/" component={Home} />
+      </Switch>
+    );
   }
 }
 
-export default App;
+export default withCookies(withRouter(App));
