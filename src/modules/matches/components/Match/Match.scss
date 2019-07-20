@@ -1,0 +1,53 @@
+$win: rgb(61, 177, 235);
+$winTransparent: rgba(61, 177, 235, 0.5);
+$lose: rgb(231, 45, 85);
+$loseTransparent: rgba(231, 45, 85, 0.5);
+
+.match {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  color: white;
+
+  border-left: 1rem solid transparent;
+  margin-left: 1rem;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  &_win {
+    border-color: $win;
+  }
+
+  &_lose {
+    border-color: $lose;
+  }
+
+  & > div {
+    height: 100%;
+  }
+
+  &__summary {
+    margin-left: 8px;
+    width: 100%;
+    &_win {
+      background-color: $winTransparent;
+    }
+
+    &_lose {
+      background-color: $loseTransparent;
+    }
+  }
+
+  &__info {
+    font-size: 1.2rem;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-start;
+    justify-content: center;
+    position: relative;
+  }
+}
