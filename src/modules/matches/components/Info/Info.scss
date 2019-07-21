@@ -1,0 +1,12 @@
+.match__info {
+  &-result {
+    font-weight: bold;
+    &_win {
+      color: #71d0ff;
+    }
+
+    &_lose {
+      color: #ff4970;
+    }
+  }
+}

@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-import Queues from "./../../json/queues";
-
+import React, { Component } from 'react';
+import Queues from './../../json/queues';
 class MatchInfo extends Component {
   state = {};
 
   createInfo() {
     const match = this.props.match;
     const queue = this.props.queue;
-    const winLoss = match.win === 0 ? "Win" : "Loss";
+    const winLoss = match.win === 0 ? 'Win' : 'Loss';
     const gameMinutes = Math.floor(match.gameDuration / 60);
     const gameSeconds = match.gameDuration % 60;
     const duration = `${gameMinutes}m ${gameSeconds}s`;
@@ -18,9 +17,7 @@ class MatchInfo extends Component {
     const currentTimestamp = date.getTime();
 
     // Get the time of when the game started (current time - end of game time - duration time)
-    const time =
-      Math.floor((currentTimestamp - gameTimestamp) / 1000) -
-      match.gameDuration;
+    const time = Math.floor((currentTimestamp - gameTimestamp) / 1000) - match.gameDuration;
     const days = Math.floor(time / 86400);
     const queueObj = Queues.find(element => {
       return element.id === queue;

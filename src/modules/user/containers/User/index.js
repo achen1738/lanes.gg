@@ -1,2 +1,2 @@
-import User from './App';
+import User from './User';
 export default User;

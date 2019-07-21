@@ -1,30 +1,44 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Match.scss';
+import { WIN } from '../../constants';
+import { withRouter } from 'react-router-dom';
+import Info from '../Info/Info';
 
 class Match extends Component {
   state = {};
+
+  /**
+   * Returns a boolean based on whether the user won or not
+   */
+  calculateWin = match => {
+    const username = this.props.match.params.username.toLowerCase();
+    for (let participant of match.participantIdentities) {
+      const participantName = participant.player.summonerName.toLowerCase();
+      if (username === participantName) {
+        let team;
+        if (participant.participantId < 6) team = match.teams[0];
+        else team = match.teams[1];
+        return team.win === WIN;
+      }
+    }
+    return true;
+  };
+
   render() {
+    const win = this.calculateWin(this.props.game);
     let matchStyle = 'match';
-    if (this.props.win) matchStyle += ' match_win';
+    if (win) matchStyle += ' match_win';
     else matchStyle += ' match_lose';
 
     let matchSummaryStyle = 'match__summary';
-    if (this.props.win) matchSummaryStyle += ' match__summary_win';
+    if (win) matchSummaryStyle += ' match__summary_win';
     else matchSummaryStyle += ' match__summary_lose';
 
-    let matchInfoStyle = 'match__info';
-    if (this.props.win) matchInfoStyle += ' match__info_win';
-    else matchInfoStyle += ' match__info_lose';
     return (
       <div className={matchStyle}>
         <div className={matchSummaryStyle}>
-          <div className={matchInfoStyle}>
-            <div className="match__info-time">One day ago</div>
-            <div className="match__info-queue">Ranked Solo</div>
-            <div className="match__info_duration">34m 30s</div>
-            <div className="match__info_result">Victory</div>
-          </div>
+          <Info win={win} game={this.props.game} />
         </div>
       </div>
     );
@@ -32,7 +46,7 @@ class Match extends Component {
 }
 
 Match.propTypes = {
-  win: PropTypes.bool.isRequired
+  match: PropTypes.object.isRequired
 };
 
-export default Match;
+export default withRouter(Match);
