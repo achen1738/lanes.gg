@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getMatches } from '../../user/selectors';
+import { getMatches, getDDragon, getSummoner, getRunes } from '../../user/selectors';
 import { withRouter } from 'react-router-dom';
 import './Matches.scss';
 import Match from '../components/Match';
@@ -9,7 +9,15 @@ class Matches extends Component {
 
   renderMatches = () => {
     return this.props.matches.map((match, index) => {
-      return <Match key={index} game={match}></Match>;
+      return (
+        <Match
+          summoner={this.props.summoner}
+          ddragon={this.props.ddragon}
+          key={index}
+          game={match}
+          runes={this.props.runes}
+        ></Match>
+      );
     });
   };
 
@@ -20,7 +28,10 @@ class Matches extends Component {
 
 const mapStateToProps = state => {
   return {
-    matches: getMatches(state)
+    matches: getMatches(state),
+    ddragon: getDDragon(state),
+    summoner: getSummoner(state),
+    runes: getRunes(state)
   };
 };
 

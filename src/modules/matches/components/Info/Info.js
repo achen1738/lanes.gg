@@ -57,10 +57,16 @@ class Info extends Component {
     let matchResultStyle = 'match__info-result';
     if (win) matchResultStyle += ' match__info-result_win';
     else matchResultStyle += ' match__info-result_lose';
+
+    let matchBarStyle = 'match__info-bar';
+    if (win) matchBarStyle += ' match__info-bar_win';
+    else matchBarStyle += ' match__info-bar_lose';
+
     return (
       <div className={matchInfoStyle}>
         <div className="match__info-queue">Ranked Solo</div>
         <div className={matchResultStyle}>{this.calculateResult(win)}</div>
+        <div className={matchBarStyle}></div>
         <div className="match__info-duration">{this.calculateDuration()}</div>
         <div className="match__info-time">{this.calculateTime()}</div>
       </div>

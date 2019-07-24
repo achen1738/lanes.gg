@@ -1,0 +1,60 @@
+@import '../../../../scss/palette';
+.match__champ {
+  position: relative;
+  width: 80px;
+  height: 100%;
+  &-image {
+    position: absolute;
+    &_main {
+      z-index: 1;
+      width: 60px;
+      height: 60px;
+      clip-path: circle(45%);
+      top: -5px;
+      left: 10px;
+    }
+
+    &_secondary {
+      width: 25px;
+      height: 25px;
+      border-radius: 13px;
+      overflow: hidden;
+      z-index: 2;
+      bottom: 8px;
+      border: 2px solid transparent;
+
+      &_win {
+        border-color: $winTransparent;
+      }
+
+      &_lose {
+        border-color: $loseTransparent;
+      }
+
+      &-left {
+        left: 7.5px;
+      }
+
+      &-right {
+        right: 7.5px;
+      }
+
+      &-mid {
+        left: 27.5px;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6rem;
+        font-weight: bold;
+        bottom: -5px;
+        z-index: 3;
+      }
+    }
+
+    & > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

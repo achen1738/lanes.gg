@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import './Match.scss';
 import { WIN } from '../../constants';
 import { withRouter } from 'react-router-dom';
-import Info from '../Info/Info';
+import Info from '../Info';
+import Champ from '../Champ';
 
 class Match extends Component {
   state = {};
 
   /**
-   * Returns a boolean based on whether the user won or not
+   * Determines whether or not the user won the game.
+   * @returns A boolean representing if the user won or not.
    */
   calculateWin = match => {
     const username = this.props.match.params.username.toLowerCase();
@@ -25,7 +27,27 @@ class Match extends Component {
     return true;
   };
 
+  /**
+   * With the submitted username, find the corresponding participant index in the
+   * array of participants.
+   * @returns A number indicating the index of the user in the participants array.
+   */
+  calculateParticipantIndex = () => {
+    const participantIdentities = this.props.game.participantIdentities;
+    const username = this.props.match.params.username.toLowerCase();
+    const length = participantIdentities.length;
+    for (let i = 0; i < length; i++) {
+      const participantName = participantIdentities[i].player.summonerName.toLowerCase();
+      if (username === participantName) {
+        return i;
+      }
+    }
+    return 0;
+  };
+
   render() {
+    const username = this.props.match.params.username.toLowerCase();
+    const userIndex = this.calculateParticipantIndex();
     const win = this.calculateWin(this.props.game);
     let matchStyle = 'match';
     if (win) matchStyle += ' match_win';
@@ -38,7 +60,16 @@ class Match extends Component {
     return (
       <div className={matchStyle}>
         <div className={matchSummaryStyle}>
-          <Info win={win} game={this.props.game} />
+          <Info win={win} game={this.props.game} username={username} userIndex={userIndex} />
+          <Champ
+            win={win}
+            game={this.props.game}
+            username={username}
+            userIndex={userIndex}
+            ddragon={this.props.ddragon}
+            summoner={this.props.summoner}
+            runes={this.props.runes}
+          />
         </div>
       </div>
     );

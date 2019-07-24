@@ -1,7 +1,4 @@
-$win: rgb(61, 177, 235);
-$winTransparent: rgba(61, 177, 235, 0.5);
-$lose: rgb(231, 45, 85);
-$loseTransparent: rgba(231, 45, 85, 0.5);
+@import '../../../../scss/palette';
 
 .match {
   height: 90px;
@@ -31,23 +28,16 @@ $loseTransparent: rgba(231, 45, 85, 0.5);
   &__summary {
     margin-left: 8px;
     width: 100%;
+    display: flex;
+    padding: 10px 0;
     &_win {
-      background-color: $winTransparent;
+      // background-color: $winTransparent;
+      border: 1px solid $win;
     }
 
     &_lose {
-      background-color: $loseTransparent;
+      // background-color: $loseTransparent;
+      border: 1px solid $lose;
     }
-  }
-
-  &__info {
-    font-size: 1.2rem;
-    padding: 0 10px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    // align-items: flex-start;
-    justify-content: center;
-    position: relative;
   }
 }

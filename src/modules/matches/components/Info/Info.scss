@@ -1,4 +1,15 @@
+@import '../../../../scss/palette';
+
 .match__info {
+  font-size: 1.2rem;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  align-items: center;
   &-result {
     font-weight: bold;
     &_win {
@@ -7,6 +18,21 @@
 
     &_lose {
       color: #ff4970;
+    }
+  }
+
+  &-bar {
+    border: 2px solid transparent;
+    border-radius: 5px;
+    width: 70%;
+    margin: 4px 0 2px;
+
+    &_win {
+      border-color: $win;
+    }
+
+    &_lose {
+      border-color: $lose;
     }
   }
 }
