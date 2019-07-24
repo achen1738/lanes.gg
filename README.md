@@ -6,13 +6,17 @@ I wanted to create a website that functioned similar to na.op.gg, which analyzed
 
 The backend is built with NodeJS and Express with REST endpoints that connect to a mlab/mongoDB database using mongoose. The front end was built with ReactJS/Redux/Saga and styled with SCSS
 
+## Deployment
+
+Just type `npm run dev` in console and everything should work locally. Currently nothing is connected to DB so.
+
 ## Demo
 
-### Before
+### Before (first iteration)
 
 ![](lanegif1.gif)
 
-### After
+### Before (second iteration)
 
 ![](newLane2.gif)
 
