@@ -1,0 +1,33 @@
+.match__KDA {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  width: 90px;
+  &-numbers {
+    font-size: 1.6rem;
+  }
+
+  &-number {
+    font-weight: bold;
+  }
+
+  &-separator {
+    color: grey;
+    margin: 0 0.5rem;
+  }
+
+  &-ratio {
+    font-weight: bold;
+    &-container {
+      font-size: 1.4rem;
+    }
+
+    &-text {
+      margin-left: 0.5rem;
+      font-weight: normal;
+      color: grey;
+    }
+  }
+}

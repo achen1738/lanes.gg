@@ -5,6 +5,7 @@ import { WIN } from '../../constants';
 import { withRouter } from 'react-router-dom';
 import Info from '../Info';
 import Champ from '../Champ';
+import KDA from '../KDA';
 
 class Match extends Component {
   state = {};
@@ -70,6 +71,7 @@ class Match extends Component {
             summoner={this.props.summoner}
             runes={this.props.runes}
           />
+          <KDA game={this.props.game} username={username} userIndex={userIndex} />
         </div>
       </div>
     );

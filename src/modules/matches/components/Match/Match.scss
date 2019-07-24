@@ -31,12 +31,12 @@
     display: flex;
     padding: 10px 0;
     &_win {
-      // background-color: $winTransparent;
+      background-color: $winTransparent;
       border: 1px solid $win;
     }
 
     &_lose {
-      // background-color: $loseTransparent;
+      background-color: $loseTransparent;
       border: 1px solid $lose;
     }
   }
