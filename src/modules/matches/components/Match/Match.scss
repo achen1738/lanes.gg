@@ -21,15 +21,13 @@
     border-color: $lose;
   }
 
-  & > div {
-    height: 100%;
-  }
-
   &__summary {
     margin-left: 8px;
     width: 100%;
-    display: flex;
-    padding: 10px 0;
+    height: 100%;
+    // display: flex;
+    display: grid;
+    grid-template-columns: 12% 14% 12% 24% 31.5% 6.5%;
     &_win {
       background-color: $winTransparent;
       border: 1px solid $win;
@@ -38,6 +36,18 @@
     &_lose {
       background-color: $loseTransparent;
       border: 1px solid $lose;
+    }
+
+    &-cell {
+      height: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & > div {
+        height: 100%;
+      }
     }
   }
 }

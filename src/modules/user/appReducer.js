@@ -2,6 +2,7 @@ import { GET_USER_DETAILS } from './actionTypes';
 import Champions from '../../ddragon/data/en_US/champion.json';
 import Summoner from '../../ddragon/data/en_US/summoner.json';
 import Runes from '../../ddragon/data/en_US/runesReforged.json';
+import Items from '../../ddragon/data/en_US/item.json';
 
 /**
  * From the imported Champions json, create a mapping from
@@ -50,11 +51,21 @@ const createRuneIDMapping = () => {
   return mapping;
 };
 
+/**
+ * From the imported item json, store only the mapping from itemID
+ * to info
+ * @returns An object where the keys are runeIDs and value is an object
+ */
+const createItemIDMapping = () => {
+  return Items.data;
+};
+
 const initialState = {
   matches: [],
   ddragon: createChampIDMapping(),
   summoner: createSummonerIDMapping(),
-  runes: createRuneIDMapping()
+  runes: createRuneIDMapping(),
+  items: createItemIDMapping()
 };
 
 export default function appReducer(state = initialState, action) {

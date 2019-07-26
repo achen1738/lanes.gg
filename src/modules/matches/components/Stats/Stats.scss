@@ -1,4 +1,4 @@
-.match__KDA {
+.match__stats {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,7 +6,7 @@
   padding: 0 10px;
   width: 90px;
   &-numbers {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
 
   &-number {
@@ -21,13 +21,34 @@
   &-ratio {
     font-weight: bold;
     &-container {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
     }
 
     &-text {
       margin-left: 0.5rem;
       font-weight: normal;
       color: grey;
+    }
+  }
+
+  &-level {
+    &-container {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    &-text {
+      margin-right: 0.5rem;
+    }
+  }
+
+  &-cs {
+    font-size: 1.2rem;
+    font-weight: bold;
+    &-average {
+      margin: 0 0.5rem;
+      color: grey;
+      font-weight: normal;
     }
   }
 }

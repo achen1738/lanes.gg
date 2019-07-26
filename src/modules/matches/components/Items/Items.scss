@@ -1,0 +1,45 @@
+@import '../../../../scss/palette';
+
+.match__items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 2px;
+  grid-row-gap: 2px;
+
+  &-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 0.5px solid transparent;
+
+    &_win {
+      border-color: darken($win, 15%);
+    }
+
+    &_lose {
+      border-color: darken($lose, 15%);
+    }
+  }
+
+  &-container {
+    display: flex;
+    align-items: center;
+  }
+
+  &-ward {
+    position: relative;
+
+    &-count {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      left: 14.5px;
+      top: 14.5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      border-radius: 5px;
+    }
+  }
+}

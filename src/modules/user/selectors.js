@@ -39,3 +39,13 @@ export const getRunes = state => {
 
   return appState.runes;
 };
+
+export const getItems = state => {
+  const moduleName = NAME;
+  const appState = state[moduleName];
+  if (!appState) {
+    return {};
+  }
+
+  return appState.items;
+};

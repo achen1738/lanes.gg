@@ -1,0 +1,32 @@
+.match__players {
+  &-container {
+    display: flex;
+    align-items: center;
+  }
+  display: grid;
+  grid-template-columns: 90px 90px;
+  grid-column-gap: 10px;
+  &-group {
+  }
+
+  &-player {
+    display: flex;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &-image {
+    height: 16px;
+    width: 16px;
+    border-radius: 3px;
+  }
+
+  &-text {
+    margin: 0 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &_user {
+      font-weight: bold;
+    }
+  }
+}

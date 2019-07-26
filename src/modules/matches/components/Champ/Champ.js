@@ -28,6 +28,7 @@ class Champ extends Component {
   renderSummoners = () => {
     const user = this.props.game.participants[this.props.userIndex];
     const { spell1Id, spell2Id } = user;
+    const champLevel = user.stats.champLevel;
     const keystoneID = user.stats.perk0;
     // const level = user.stats.champLevel;
     let firstSpellURI = this.props.summoner[spell1Id].image.full;
@@ -36,7 +37,7 @@ class Champ extends Component {
     let styles = [
       'match__champ-image match__champ-image_secondary match__champ-image_secondary-left',
       'match__champ-image match__champ-image_secondary match__champ-image_secondary-right',
-      'match__champ-image match__champ-image_secondary match__champ-image_secondary-mid'
+      'match__champ-image_tertiary'
     ];
     if (this.props.win) styles[2] += ' match__champ-image_secondary_win';
     else styles[2] += ' match__champ-image_secondary_lose';
@@ -50,7 +51,12 @@ class Champ extends Component {
           <img src={summonerImages(`./${secondSpellURI}`)} alt="summoner spell" />
         </div>
         <div className={styles[2]}>
-          <img src={runeImages(`./${keystoneURI}`)} alt="summoner spell" />
+          <img
+            className="match__champ-keystone"
+            src={runeImages(`./${keystoneURI}`)}
+            alt="summoner spell"
+          />
+          <span className="match__champ-level">{champLevel}</span>
         </div>
       </div>
     );
@@ -58,9 +64,11 @@ class Champ extends Component {
 
   render() {
     return (
-      <div className="match__champ">
-        {this.renderChampion()}
-        {this.renderSummoners()}
+      <div className="match__champ-container">
+        <div className="match__champ">
+          {this.renderChampion()}
+          {this.renderSummoners()}
+        </div>
       </div>
     );
   }

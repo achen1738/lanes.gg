@@ -5,7 +5,10 @@ import { WIN } from '../../constants';
 import { withRouter } from 'react-router-dom';
 import Info from '../Info';
 import Champ from '../Champ';
-import KDA from '../KDA';
+import Stats from '../Stats';
+import Items from '../Items';
+import Players from '../Players';
+import Expansion from '../Expansion/Expansion';
 
 class Match extends Component {
   state = {};
@@ -61,17 +64,44 @@ class Match extends Component {
     return (
       <div className={matchStyle}>
         <div className={matchSummaryStyle}>
-          <Info win={win} game={this.props.game} username={username} userIndex={userIndex} />
-          <Champ
-            win={win}
-            game={this.props.game}
-            username={username}
-            userIndex={userIndex}
-            ddragon={this.props.ddragon}
-            summoner={this.props.summoner}
-            runes={this.props.runes}
-          />
-          <KDA game={this.props.game} username={username} userIndex={userIndex} />
+          <div className="match__summary-cell">
+            <Info win={win} game={this.props.game} username={username} userIndex={userIndex} />
+          </div>
+          <div className="match__summary-cell">
+            <Champ
+              win={win}
+              game={this.props.game}
+              username={username}
+              userIndex={userIndex}
+              ddragon={this.props.ddragon}
+              summoner={this.props.summoner}
+              runes={this.props.runes}
+            />
+          </div>
+          <div className="match__summary-cell">
+            <Stats win={win} game={this.props.game} username={username} userIndex={userIndex} />
+          </div>
+          <div className="match__summary-cell">
+            <Items
+              win={win}
+              items={this.props.items}
+              game={this.props.game}
+              username={username}
+              userIndex={userIndex}
+            />
+          </div>
+          <div className="match__summary-cell">
+            <Players
+              win={win}
+              game={this.props.game}
+              ddragon={this.props.ddragon}
+              username={username}
+              userIndex={userIndex}
+            />
+          </div>
+          <div className="match__summary-cell">
+            <Expansion win={win} />
+          </div>
         </div>
       </div>
     );

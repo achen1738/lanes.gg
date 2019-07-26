@@ -1,0 +1,22 @@
+@import '../../../../scss/palette';
+
+.match__expansion {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  font-size: 20px;
+  padding: 0 0 5px;
+  width: 100%;
+
+  & > svg {
+    width: 30px;
+  }
+
+  &_win {
+    background-color: darken($win, 30%);
+  }
+
+  &_lose {
+    background-color: darken($lose, 30%);
+  }
+}
