@@ -10,7 +10,11 @@
   position: relative;
   text-align: center;
   align-items: center;
-
+  padding-left: 10px;
+  padding-right: 5px;
+  width: 100%;
+  white-space: nowrap;
+  width: 100%;
   & > div {
     width: 100%;
   }
