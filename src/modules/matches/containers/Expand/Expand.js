@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
-import './Expansion.scss';
+import './Expand.scss';
 
-class Expansion extends Component {
+class Expand extends Component {
   state = {};
+
   render() {
     let expansionStyle = 'match__expansion';
     if (this.props.win) expansionStyle += ' match__expansion_win';
     else expansionStyle += ' match__expansion_lose';
     return (
-      <div className={expansionStyle}>
+      <div className={expansionStyle} onClick={() => this.props.handleExpand()}>
         <FiChevronDown />
       </div>
     );
   }
 }
 
-export default Expansion;
+export default Expand;

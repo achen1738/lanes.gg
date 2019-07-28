@@ -8,10 +8,13 @@ import Champ from '../Champ';
 import Stats from '../Stats';
 import Items from '../Items';
 import Players from '../Players';
-import Expansion from '../Expansion/Expansion';
+import Expand from '../../containers/Expand';
+import Expansion from '../../../expansion/containers/Expansion';
 
 class Match extends Component {
-  state = {};
+  state = {
+    expanded: true
+  };
 
   /**
    * Determines whether or not the user won the game.
@@ -49,6 +52,10 @@ class Match extends Component {
     return 0;
   };
 
+  handleExpand = () => {
+    this.setState({ expanded: !this.state.expanded });
+  };
+
   render() {
     const username = this.props.match.params.username.toLowerCase();
     const userIndex = this.calculateParticipantIndex();
@@ -62,47 +69,54 @@ class Match extends Component {
     else matchSummaryStyle += ' match__summary_lose';
 
     return (
-      <div className={matchStyle}>
-        <div className={matchSummaryStyle}>
-          <div className="match__summary-cell">
-            <Info win={win} game={this.props.game} username={username} userIndex={userIndex} />
-          </div>
-          <div className="match__summary-cell">
-            <Champ
-              win={win}
-              game={this.props.game}
-              username={username}
-              userIndex={userIndex}
-              ddragon={this.props.ddragon}
-              summoner={this.props.summoner}
-              runes={this.props.runes}
-            />
-          </div>
-          <div className="match__summary-cell">
-            <Stats win={win} game={this.props.game} username={username} userIndex={userIndex} />
-          </div>
-          <div className="match__summary-cell">
-            <Items
-              win={win}
-              items={this.props.items}
-              game={this.props.game}
-              username={username}
-              userIndex={userIndex}
-            />
-          </div>
-          <div className="match__summary-cell">
-            <Players
-              win={win}
-              game={this.props.game}
-              ddragon={this.props.ddragon}
-              username={username}
-              userIndex={userIndex}
-            />
-          </div>
-          <div className="match__summary-cell">
-            <Expansion win={win} />
+      <div className="match-container">
+        <div className={matchStyle}>
+          <div className={matchSummaryStyle}>
+            <div className="match__summary-cell">
+              <Info win={win} game={this.props.game} username={username} userIndex={userIndex} />
+            </div>
+            <div className="match__summary-cell">
+              <Champ
+                win={win}
+                game={this.props.game}
+                username={username}
+                userIndex={userIndex}
+                ddragon={this.props.ddragon}
+                summoner={this.props.summoner}
+                runes={this.props.runes}
+              />
+            </div>
+            <div className="match__summary-cell">
+              <Stats win={win} game={this.props.game} username={username} userIndex={userIndex} />
+            </div>
+            <div className="match__summary-cell">
+              <Items
+                win={win}
+                items={this.props.items}
+                game={this.props.game}
+                username={username}
+                userIndex={userIndex}
+              />
+            </div>
+            <div className="match__summary-cell">
+              <Players
+                win={win}
+                game={this.props.game}
+                ddragon={this.props.ddragon}
+                username={username}
+                userIndex={userIndex}
+              />
+            </div>
+            <div className="match__summary-cell">
+              <Expand
+                win={win}
+                handleExpand={this.handleExpand}
+                matchIndex={this.props.matchIndex}
+              />
+            </div>
           </div>
         </div>
+        {this.state.expanded ? <Expansion matchIndex={this.props.matchIndex} /> : null}
       </div>
     );
   }

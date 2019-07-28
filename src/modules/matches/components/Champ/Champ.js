@@ -13,8 +13,8 @@ class Champ extends Component {
   renderChampion = () => {
     const user = this.props.game.participants[this.props.userIndex];
     const championID = user.championId;
-    const champURI = this.props.ddragon[championID].image.full;
-
+    let champURI = this.props.ddragon[championID].image.full;
+    if (championID === 246) champURI = 'Qiyana.png';
     return (
       <div className="match__champ-image match__champ-image_main">
         <img src={championImages(`./${champURI}`)} alt="champion" />

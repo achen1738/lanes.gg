@@ -17,11 +17,8 @@ class Players extends Component {
       });
     }
     return players.map((player, index) => {
-      // console.log(player.champID);
-      if (!this.props.ddragon[player.champID]) console.log(player.champID);
       const champ = this.props.ddragon[player.champID];
-      let champURI = 'Akali.png';
-      if (champ) champURI = champ.image.full;
+      let champURI = champ.image.full;
       let textStyle = 'match__players-text';
       if (player.isUser) textStyle += ' match__players-text_user';
 

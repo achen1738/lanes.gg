@@ -1,0 +1,33 @@
+@import '../../../../scss/palette';
+
+.match__expansion {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  font-size: 20px;
+  padding: 0 0 5px;
+  width: 100%;
+  transition: 0.2s all ease-in-out;
+  cursor: pointer;
+
+  & > svg {
+    width: 30px;
+  }
+
+  &_win {
+    background-color: #09628e;
+    border-left: 1px solid $win;
+    &:hover {
+      background-color: lighten(#09628e, 10%);
+    }
+  }
+
+  &_lose {
+    background-color: #78041d;
+    border-left: 1px solid $lose;
+
+    &:hover {
+      background-color: lighten(#78041d, 10%);
+    }
+  }
+}

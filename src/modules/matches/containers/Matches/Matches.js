@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getMatches, getDDragon, getSummoner, getRunes, getItems } from '../../user/selectors';
+import { getMatches, getDDragon, getSummoner, getRunes, getItems } from '../../../user/selectors';
 import { withRouter } from 'react-router-dom';
 import './Matches.scss';
-import Match from '../components/Match';
+import Match from '../../components/Match';
 class Matches extends Component {
   state = {};
 
@@ -17,6 +17,7 @@ class Matches extends Component {
           game={match}
           runes={this.props.runes}
           items={this.props.items}
+          matchIndex={index}
         ></Match>
       );
     });
