@@ -47,6 +47,11 @@ const createRuneIDMapping = () => {
         mapping[rune.id] = { ...rune };
       });
     });
+    mapping[tree.id] = {
+      key: tree.key,
+      icon: tree.icon,
+      name: tree.name
+    };
   });
   return mapping;
 };

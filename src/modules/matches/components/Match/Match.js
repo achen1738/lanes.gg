@@ -12,9 +12,12 @@ import Expand from '../../containers/Expand';
 import Expansion from '../../../expansion/containers/Expansion';
 
 class Match extends Component {
-  state = {
-    expanded: true
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: this.props.matchIndex === 0
+    };
+  }
 
   /**
    * Determines whether or not the user won the game.
