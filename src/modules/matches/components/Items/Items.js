@@ -7,10 +7,9 @@ class Items extends Component {
 
   renderItems = () => {
     const user = this.props.game.participants[this.props.userIndex];
-    let items = [];
-    for (let i = 0; i < 7; i++) {
-      items.push(user.stats[`item${i}`]);
-    }
+    let items = [0, 1, 2, 6, 3, 4, 5].map(num => {
+      return user.stats[`item${num}`];
+    });
 
     let itemStyle = 'match__items-item';
     if (this.props.win) itemStyle += ' match__items-item_win';
