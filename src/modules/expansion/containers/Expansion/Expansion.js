@@ -13,17 +13,17 @@ class Expansion extends Component {
       {
         icon: <FiList />,
         text: 'Overview',
-        component: <Overview matchIndex={this.props.matchIndex} />
+        component: <Overview matchIndex={this.props.matchIndex} username={this.props.username} />
       },
       {
         icon: <FaTools />,
         text: 'Builds',
-        component: <Overview matchIndex={this.props.matchIndex} />
+        component: <Overview matchIndex={this.props.matchIndex} username={this.props.username} />
       },
       {
         icon: <IconAll />,
         text: 'Laning Phases',
-        component: <Overview matchIndex={this.props.matchIndex} />
+        component: <Overview matchIndex={this.props.matchIndex} username={this.props.username} />
       }
     ]
   };

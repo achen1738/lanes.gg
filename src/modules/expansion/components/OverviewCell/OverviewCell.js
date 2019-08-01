@@ -43,9 +43,13 @@ class OverviewCell extends Component {
       totalDamageDealtToChampions,
       visionWardsBoughtInGame
     } = stats;
+    let cellStyle = 'overview__boxscore--cell';
+    if (identity.player.summonerName.toLowerCase() === this.props.username.toLowerCase()) {
+      cellStyle += ' overview__boxscore--cell_user';
+    }
     const csKilled = totalMinionsKilled + neutralMinionsKilled;
     return (
-      <div className="overview__boxscore--cell">
+      <div className={cellStyle}>
         <div className="overview__boxscore--pictures">
           <div className="overview__boxscore--cell-champ">
             <img src={championImages(`./${champURI}`)} alt="champ" />
@@ -54,8 +58,10 @@ class OverviewCell extends Component {
             <img src={summonerImages(`./${firstSpellURI}`)} alt="summoner spell" />
             <img src={summonerImages(`./${secondSpellURI}`)} alt="summoner spell" />
             <img src={runeImages(`./${keystoneURI}`)} alt="champ" />
-            <img src={images(`./${secondaryURI}`)} alt="champ" />
-            <div className="overview__boxscore--cell-level">18</div>
+            <div className="overview__boxscore--cell-summs_secondary">
+              <img src={images(`./${secondaryURI}`)} alt="champ" />
+            </div>
+            <div className="overview__boxscore--cell-level">{champLevel}</div>
           </div>
           <div className="overview__boxscore--cell-name">{identity.player.summonerName}</div>
           <div className="overview__boxscore--cell-items">

@@ -1,0 +1,81 @@
+@import '../../../../scss/palette';
+
+.overview {
+  &__header {
+    width: 100%;
+    height: 60px;
+    background-color: darken($blockBackgroundColor, 10%);
+    border: 1px solid #4f4f7f;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    margin: 5px 0;
+  }
+
+  &__team {
+    display: flex;
+    align-items: center;
+    &--reversed {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__bans {
+    display: flex;
+    &-container {
+    }
+  }
+
+  &__section {
+    color: white;
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+    &--text {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      &-reversed {
+        text-align: right;
+      }
+    }
+    &--objectives {
+      margin-left: 4px;
+    }
+
+    &--reversed {
+      margin-right: 0 !important;
+      &:not(:last-child) {
+        margin-left: 12px;
+      }
+    }
+  }
+
+  &__winner {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+
+    &-red {
+      color: $lose;
+    }
+
+    &-blue {
+      color: $win;
+    }
+  }
+
+  &__objectives {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    height: 25px;
+    & > span {
+      margin: 0 3px;
+    }
+  }
+}

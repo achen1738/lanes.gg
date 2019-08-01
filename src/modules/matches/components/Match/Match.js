@@ -119,7 +119,12 @@ class Match extends Component {
             </div>
           </div>
         </div>
-        {this.state.expanded ? <Expansion matchIndex={this.props.matchIndex} /> : null}
+        {this.state.expanded ? (
+          <Expansion
+            matchIndex={this.props.matchIndex}
+            username={this.props.match.params.username}
+          />
+        ) : null}
       </div>
     );
   }
