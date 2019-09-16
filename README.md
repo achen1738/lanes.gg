@@ -26,8 +26,9 @@ THIRD ITERATION
 
 Well, now that I know more, here are the following things I'm going to do
 
-- [ ] Integrate redux + saga into each module.
-- [ ] Transition big CSS files to individual SCSS files for each component/container
 - [x] Restructure the file system to be more like how my team at IBM organizes their files.
+- [ ] Integrate redux + saga into each module.
+- [ ] Rewrite the backend to use both a cloud relational db and non-relational db
+- [ ] Transition big CSS files to individual SCSS files for each component/container
 - [ ] Rewrite API to follow better API standards
 - [ ] Make a better design + just use better styling standards
