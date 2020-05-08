@@ -4,17 +4,15 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
-    "babel-loader": "8.0.5",
     "chart.js": "^2.7.3",
     "chart.piecelabel.js": "^0.15.0",
     "chartjs-plugin-datalabels": "^0.5.0",
-    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "kayn": "^0.9.11",
+    "mongoose": "^5.9.12",
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.9",
     "npm": "^6.5.0",
-    "npm-run-all": "^4.1.5",
     "react": "^16.7.0",
     "react-chartjs-2": "^2.7.4",
     "react-cookie": "^4.0.1",
@@ -37,9 +35,6 @@
     "dev:build-server": "webpack --config webpack.server.js --watch",
     "dev:server": "nodemon --watch server-build --exec \"node server-build/bundle.js\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -53,13 +48,8 @@
     ]
   },
   "devDependencies": {
-    "eslint": "5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.13.0",
+    "dotenv": "^8.2.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.17.1",
     "webpack-cli": "^3.3.2"
   },

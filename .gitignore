@@ -24,3 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 node_modules
 package-lock.json
+
+server-build/
+server-build/*

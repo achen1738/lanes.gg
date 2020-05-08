@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.router();
+const router = express.Router();
 const timeline = require('./timeline.js');
 // Will contain all timeline related endpoints.
 

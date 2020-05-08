@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.router();
+const router = express.Router();
 const summoner = require('./summoner.js');
 // Will contain all summoner related endpoints.
 

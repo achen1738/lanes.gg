@@ -1,26 +1,22 @@
 /* eslint-disable func-names */
 /* eslint-disable prettier/prettier */
-import express from 'express';
-import bodyParser from 'body-parser';
-
+const express = require('express');
+const gameRouter = require('./game/gameAPI.js');
+const userRouter = require('./user/userAPI.js');
+const summonerRouter = require('./summoner/summonerAPI.js');
+const timelineRouter = require('./timeline/timelineAPI.js');
+const matchRouter = require('./match/matchAPI.js');
 const port = 3001;
 
 const app = express();
 
-// configure app to use bodyParser()
-const urlencodedParser = bodyParser.urlencoded({ extended: true });
-const jsonParser = bodyParser.json();
-
-// get an instance of the express Router
-const routerV1 = express.Router();
-
-routerV1.get('/', function(req, res) {
-  res.json({ message: 'this is an API response!!!' });
-});
-
-// api context: /api/v1
-app.use('/api/v1', routerV1); // you can access through http://localhost:3001/api/v1
+app.use(gameRouter);
+app.use(userRouter);
+app.use(summonerRouter);
+app.use(timelineRouter);
+app.use(matchRouter);
 
 // start the server
 app.listen(port);
+
 console.log(`Server running on port ${port}`);

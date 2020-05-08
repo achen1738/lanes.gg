@@ -8,7 +8,7 @@ module.exports = {
 
   // Tell webpack the root file of our
   // server application
-  entry: './server/rest.js',
+  entry: './server/restAPI.js',
 
   mode: 'development',
 
