@@ -1,0 +1,140 @@
+
+database.schema.createTableIfNotExists('summoners', function(table) {
+  table.string('accountId');
+  table.integer('profileIconId');
+  table.timestamp('updatedAt');
+  table.string('summonerName');
+  table.string('id');
+  table.string('puuid');
+  table.integer('summonerLevel');
+});
+
+CREATE TABLE IF NOT EXISTS summoners (
+	accountId VARCHAR(56) PRIMARY KEY,
+	profileIconId INT,
+	summonerName VARCHAR(20),
+	updatedAt TIMESTAMP,
+	id VARCHAR(63),
+	puuid VARCHAR(78),
+	summonerLevel INT,
+	UNIQUE KEY (summonerName),
+	UNIQUE KEY (puuid),
+	UNIQUE KEY (id)
+);
+
+database.schema.createTableIfNotExists('matches', function(table) {
+  table.string('accountId');
+  // forgot summonerName
+  // forgot gameId
+  table.integer('participantId');
+  table.integer('championId');
+  table.integer('teamId');
+  table.integer('spell1Id');
+  table.integer('spell2Id');
+  table.boolean('win');
+  table.integer('champLevel');
+  table.integer('kills');
+  table.integer('deaths');
+  table.integer('kills');
+  table.integer('visionScore').unsigned();
+  table.boolean('firstBloodAssist');
+  table.boolean('firstBloodKill');
+  table.integer('goldEarned');
+  table.integer('totalDamageDealtToChampions');
+  table.integer('totalMinionsKilled');
+  table.integer('neutralMinionsKilled');
+  table.integer('neutralMinionsKilledTeamJungle');
+  table.integer('neutralMinionsKilledEnemyJungle');
+  table.integer('wardsPlaced');
+  table.integer('visionWardsBoughtInGame');
+  table.integer('item0');
+  table.integer('item1');
+  table.integer('item2');
+  table.integer('item3');
+  table.integer('item4');
+  table.integer('item5');
+  table.integer('item6');
+  table.integer('perk0');
+  table.integer('perk1');
+  table.integer('perk2');
+  table.integer('perk3');
+  table.integer('perk4');
+  table.integer('perk5');
+  table.integer('perkPrimaryStyle');
+  table.integer('perkSubStyle');
+  table.integer('statPerk0');
+  table.integer('statPerk1');
+  table.integer('statPerk2');
+});
+
+CREATE TABLE IF NOT EXISTS matches (
+	accountId VARCHAR(56),
+  summonerName VARCHAR(20),
+  gameId BIGINT,
+	participantId INT,
+	championId INT,
+	teamId INT,
+	spell1Id INT,
+	spell2Id INT,
+	win TINYINT(1),
+	kills INT,
+	deaths INT,
+	assists INT,
+	visionScore INT,
+	firstBloodAssist TINYINT(1),
+	firstBloodKill TINYINT(1),
+	goldEarned INT,
+	totalDamageDealtToChampions INT,
+	totalMinionsKilled INT,
+	neutralMinionsKilled INT,
+	neutralMinionsKilledTeamJungle INT,
+	neutralMinionsKilledEnemyJungle INT,
+	wardsPlaced INT,
+  visionWardsBoughtInGame INT,
+	item0 INT,
+	item1 INT,
+	item2 INT,
+	item3 INT,
+	item4 INT,
+	item5 INT,
+	item6 INT,
+	perk0 INT,
+	perk1 INT,
+	perk2 INT,
+	perk3 INT,
+	perk4 INT,
+	perk5 INT,
+  perkPrimaryStyle INT,
+	perkSubStyle INT,
+	statPerk0 INT,
+	statPerk1 INT,
+	statPerk2 INT,
+  CONSTRAINT pkMatches PRIMARY KEY (accountID, gameId)
+);
+
+database.schema.createTableIfNotExists('games', function(table) {
+  table.integer('gameId').unsigned();
+  table.integer('queueId');
+  table.integer('gameDuration').unsigned();
+  table.integer('seasonId');
+  table.integer('mapId');
+  table.string('gameType');
+  table.string('platformId');
+  table.timestamp('gameCreation');
+  table.string('gameVersion');
+  table.string('gameMode');
+  table.string('accountId');
+});
+
+CREATE TABLE IF NOT EXISTS games (
+  gameId BIGINT PRIMARY KEY,
+  queueId INT,
+  gameDuration BIGINT,
+  seasonId INT,
+  mapId INT,
+  gameType VARCHAR(50),
+  platformId VARCHAR(50),
+  gameVersion VARCHAR(50),
+  gameMode VARCHAR(50),
+  gameCreation TIMESTAMP
+);

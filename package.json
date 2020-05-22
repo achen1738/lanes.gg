@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "dependencies": {
+    "@mysql/xdevapi": "^8.0.20",
     "axios": "^0.19.0",
     "chart.js": "^2.7.3",
     "chart.piecelabel.js": "^0.15.0",
@@ -10,6 +11,7 @@
     "express": "^4.16.4",
     "kayn": "^0.9.11",
     "mongoose": "^5.9.12",
+    "mysql": "^2.18.1",
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.9",
     "npm": "^6.5.0",
@@ -53,5 +55,8 @@
     "prettier": "^1.17.1",
     "webpack-cli": "^3.3.2"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "engines": {
+    "node": "12.x"
+  }
 }
