@@ -1,4 +1,4 @@
-const { database, session } = require('../connectPG.js');
+const connection = require('../connectPG.js');
 const kayn = require('../kayn.js');
 
 const getGames = (accountId, limit, verbose) => {
@@ -176,6 +176,7 @@ const updateGamesAndMatches = async (accountId, verbose) => {
 
     let promises = [];
     for (let i = 0; i < mostRecentIndex; i++) {
+      const gameId = matchList[i].gameId;
       promises.push(createGameAndMatch(gameId));
     }
 
@@ -185,92 +186,50 @@ const updateGamesAndMatches = async (accountId, verbose) => {
 };
 
 const createGameAndMatch = async gameId => {
-  const match = await kayn.Match.get(gameId).then(match => match);
-  const gamesTable = database.getTable('games');
-  const matchesTable = database.getTable('matches');
-  if (match.mapId === 11) {
-    // Create a games row
-    let gameInsert = gamesTable
-      .insert(getGamesKeys(true))
-      .values(
-        gameId,
-        match.queueId,
-        match.gameDuration,
-        match.seasonId,
-        match.mapId,
-        match.gameType,
-        match.platformId,
-        match.gameVersion,
-        match.gameMode,
-        match.gameCreation
+  connection.then(async res => {
+    const { session, database } = res;
+
+    const match = await kayn.Match.get(gameId)
+      .then(match => match)
+      .catch(err => {
+        console.error(err);
+      });
+    if (match.mapId === 11) {
+      const gamesInsert = session.sql(
+        `INSERT IGNORE INTO games ${getGamesKeys(false)} VALUES ${getGamesValues(gameId, match)}`
       );
 
-    let matchInsert = matchesTable.insert(getMatchesKeys(true));
+      // Create a match row for each of the ten players
+      let matchValuesString = '';
+      for (let i = 0; i < 10; i++) {
+        const { player, participantId } = match.participantIdentities[i];
+        let playerInfo = match.participants[i];
+        const { stats } = playerInfo;
+        /**
+         * In case the indexes for participants and participantIdentities don't
+         * match up, manually find the participant with the corresponding ID
+         */
+        if (participantId !== playerInfo.participantId) {
+          playerInfo = match.participantIdentities.find(playerIdent => {
+            return participantId === playerIdent.participantId;
+          });
+        }
 
-    // Create a match row for each of the ten players
-    for (let i = 0; i < 10; i++) {
-      const { player, participantId } = match.participantIdentities[i];
-      let playerInfo = match.participants[i];
-      let { stats } = playerInfo;
-      /**
-       * In case the indexes for participants and participantIdentities don't
-       * match up, manually find the participant with the corresponding ID
-       */
-      if (participantId !== playerInfo.participantId) {
-        playerInfo = match.participantIdentities.find(playerIdent => {
-          return participantId === playerIdent.participantId;
-        });
+        const win = stats.win ? 1 : 0;
+        matchValuesString += getMatchValues(player, gameId, participantId, playerInfo, stats, win);
+
+        if (i != 9) matchValuesString += ', ';
       }
 
-      let win = stats.win ? 1 : 0;
-
-      matchInsert.values(
-        player.accountId,
-        player.summonerName,
-        gameId,
-        participantId,
-        playerInfo.championId,
-        playerInfo.teamId,
-        playerInfo.spell1Id,
-        playerInfo.spell2Id,
-        win,
-        stats.kills,
-        stats.deaths,
-        stats.assists,
-        stats.visionScore,
-        stats.firstBloodAssist,
-        stats.firstBloodKill,
-        stats.goldEarned,
-        stats.totalDamageDealtToChampions,
-        stats.totalMinionsKilled,
-        stats.neutralMinionsKilled,
-        stats.neutralMinionsKilledTeamJungle,
-        stats.neutralMinionsKilledEnemyJungle,
-        stats.wardsPlaced,
-        stats.visionWardsBoughtInGame,
-        stats.item0,
-        stats.item1,
-        stats.item2,
-        stats.item3,
-        stats.item4,
-        stats.item5,
-        stats.item6,
-        stats.perk0,
-        stats.perk1,
-        stats.perk2,
-        stats.perk3,
-        stats.perk4,
-        stats.perk5,
-        stats.perkPrimaryStyle,
-        stats.perkSubStyle,
-        stats.statPerk0,
-        stats.statPerk1,
-        stats.statPerk2
+      const matchesInsert = session.sql(
+        `INSERT IGNORE INTO MATCHES ${getMatchesKeys(false)} VALUES ${matchValuesString}`
       );
-    }
 
-    return Promise.all([gameInsert.execute(), matchInsert.execute()]);
-  }
+      return Promise.all([gamesInsert.execute(), matchesInsert.execute()]).catch(err => {
+        console.error(err);
+      });
+    }
+  });
 };
 
 const getGamesKeys = wantArray => {
@@ -346,6 +305,44 @@ const getMatchesKeys = wantArray => {
     'item1, item2, item3, item4, item5, item6, perk0, perk1, perk2, perk3, perk4, ' +
     'perk5, perkPrimaryStyle, perkSubStyle, statPerk0, statPerk1, statPerk2)'
   );
+};
+
+const getGamesValues = (gameId, match) => {
+  return `(${gameId}, ${match.queueId}, ${match.gameDuration}, ${match.seasonId}, ${match.mapId}, "${match.gameType}", "${match.platformId}", "${match.gameVersion}", "${match.gameMode}", ${match.gameCreation})`;
+};
+
+const getMatchValues = (player, gameId, participantId, playerInfo, stats, win) => {
+  return `("${player.accountId}", "${player.summonerName}", ${gameId}, ${participantId}, ${playerInfo.championId}, ${playerInfo.teamId}, ${playerInfo.spell1Id}, ${playerInfo.spell2Id}, ${win}, ${stats.kills}, ${stats.deaths}, ${stats.assists}, ${stats.visionScore}, ${stats.firstBloodAssist}, ${stats.firstBloodKill}, ${stats.goldEarned}, ${stats.totalDamageDealtToChampions}, ${stats.totalMinionsKilled}, ${stats.neutralMinionsKilled}, ${stats.neutralMinionsKilledTeamJungle}, ${stats.neutralMinionsKilledEnemyJungle}, ${stats.wardsPlaced}, ${stats.visionWardsBoughtInGame}, ${stats.item0}, ${stats.item1}, ${stats.item2}, ${stats.item3}, ${stats.item4}, ${stats.item5}, ${stats.item6}, ${stats.perk0}, ${stats.perk1}, ${stats.perk2}, ${stats.perk3}, ${stats.perk4}, ${stats.perk5}, ${stats.perkPrimaryStyle}, ${stats.perkSubStyle}, ${stats.statPerk0}, ${stats.statPerk1}, ${stats.statPerk2})`;
+};
+
+const testPopulate = async () => {
+  const accountId = 'e2pOVzlZo9KBdWWZyJRbFSYmFwK94nlrsS323noDoEv42VgLpQ16kbac';
+  console.log(connection);
+  connection.then(async res => {
+    const { session, db } = res;
+    // Get the 100 most recent games played from Riot API
+    const matchList = await kayn.Matchlist.by
+      .accountID(accountId)
+      .then(matches => {
+        return matches;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+    let promises = [];
+    for (let i = 0; i < 5; i++) {
+      promises.push(createGameAndMatch(matchList.matches[i].gameId));
+    }
+
+    await Promise.all(promises)
+      .then(() => {
+        console.log('Success');
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
 };
 
 module.exports = {

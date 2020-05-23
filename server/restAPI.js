@@ -6,7 +6,7 @@ const userRouter = require('./user/userAPI.js');
 const summonerRouter = require('./summoner/summonerAPI.js');
 const timelineRouter = require('./timeline/timelineAPI.js');
 const matchRouter = require('./match/matchAPI.js');
-const port = 3001;
+const port = 8000;
 
 const app = express();
 // me arthur chen

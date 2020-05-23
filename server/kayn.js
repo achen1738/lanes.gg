@@ -1,5 +1,5 @@
 const { Kayn } = require('kayn');
-console.log(process.env.API_KEY);
+require('dotenv').config();
 const kayn = Kayn(process.env.API_KEY)({
   requestOptions: {
     burst: true

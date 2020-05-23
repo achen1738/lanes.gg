@@ -1,4 +1,4 @@
-const { database } = require('../connectPG.js');
+const connection = require('../connectPG.js');
 const kayn = require('../kayn.js');
 
 const getSummoner = (summonerName, verbose) => {
@@ -46,21 +46,52 @@ const getSummoner = (summonerName, verbose) => {
 };
 
 const updateSummoner = (summonerName, verbose) => {
-  return kayn.Summoner.by.name(summonerName).then(summoner => {
-    if (verbose) {
-      console.log('==== Summoner ====');
-      console.log(summoner);
-    }
-    const summonerTable = database.getTable('summoner');
-    return summonerTable
-      .update()
-      .set('profileIconId', summoner.profileIconId)
-      .set('summonerLevel', summoner.summonerLevel)
-      .set('updatedAt', new Date().getTime())
-      .where(`summonerName like :${summonerName}`)
-      .limit(1)
-      .execute();
+  connection.then(res => {
+    const { database, session } = res;
+
+    return kayn.Summoner.by.name(summonerName).then(summoner => {
+      if (verbose) {
+        console.log('==== Summoner ====');
+        console.log(summoner);
+      }
+      const currTime = new Date().getTime();
+      const keys = getSummonerKeys();
+      const values = getSummonerValues(summonerName, currTime, summoner);
+      const updates = getSummonerUpdates(currTime, summoner);
+      const query = `INSERT INTO summoner ${keys} VALUES ${values} ON DUPLICATE KEY UPDATE ${updates}`;
+      // console.log(values);
+      const summonerObject = createSummonerObject(summonerName, summoner, currTime);
+      return session
+        .sql(query)
+        .execute()
+        .then(() => summonerObject)
+        .catch(err => console.error(err));
+    });
   });
+};
+
+const getSummonerKeys = () => {
+  return `(
+    accountId,
+    profileIconId,
+    summonerName,
+    updatedAt,
+    id,
+    puuid,
+    summonerLevel
+  )`;
+};
+
+const getSummonerValues = (summonerName, currTime, summoner) => {
+  return `(
+    "${summoner.accountId}",
+    ${summoner.profileIconId},
+    "${summonerName}",
+    ${currTime},
+    "${summoner.id}",
+    "${summoner.puuid}",
+    ${summoner.summonerLevel}
+  )`;
 };
 
 const createSummonerObject = (summonerName, kaynSummoner, currTime, verbose) => {
@@ -69,17 +100,24 @@ const createSummonerObject = (summonerName, kaynSummoner, currTime, verbose) => 
     profileIconId: kaynSummoner.profileIconId,
     summonerName: summonerName,
     updatedAt: currTime,
-    id: summoner.id,
-    puuid: summoner.puuid,
-    summonerLevel: summoner.summonerLevel
+    id: kaynSummoner.id,
+    puuid: kaynSummoner.puuid,
+    summonerLevel: kaynSummoner.summonerLevel
   };
+};
+
+const getSummonerUpdates = (currTime, summoner) => {
+  return `
+  updatedAt=${currTime},
+  profileIconId=${summoner.profileIconId},
+  summonerLevel=${summoner.summonerLevel}`;
 };
 
 module.exports = {
   getSummoner,
   updateSummoner
 };
-
+//
 // { kayn summoner object
 //   id: 'TMsSo8xx5sm4RVqUiUi0usbYLXAHirIeFi4lxv4RGkh7VE7Q',
 //   accountId: 'e2pOVzlZo9KBdWWZyJRbFSYmFwK94nlrsS323noDoEv42VgLpQ16kbac',
