@@ -28,24 +28,21 @@ const updateGamesAndMatches = async (accountId, verbose) => {
   const matchesTable = database.getTable('matches');
 
   // Get the most recent game stored in our DB.
-  let mostRecentGame = await gamesTable
+  let mostRecentGame = await matchesTable
     .select(['gameId'])
-    .where(`accountId like :${accountId}`)
-    .orderBy(['gameCreation DESC'])
+    .where(`accountId like :accountId`)
+    .bind('accountId', accountId)
+    .orderBy(['gameId DESC'])
     .limit(1)
     .execute()
     .then(result => {
       return result.fetchOne();
     });
-
-  if (mostRecentGame.gameId) {
-    console.log('should not be getting here, if so return field instead of obj');
-    mostRecentGame = mostRecentGame.gameId;
-  }
+  mostRecentGame = mostRecentGame[0];
 
   // Get the 100 most recent games played from Riot API
   const matchList = await kayn.Matchlist.by.accountID(accountId).then(matchlist => {
-    return matchList;
+    return matchlist;
   });
 
   /**
@@ -53,8 +50,8 @@ const updateGamesAndMatches = async (accountId, verbose) => {
    * This is so we can delete the correct number of games from our table, as well
    * as insert the correct number of new games
    */
-  const mostRecentIndex = matchList.findIndex(match => match.gameId === mostRecentGame);
-
+  const mostRecentIndex = matchList.matches.findIndex(match => match.gameId === mostRecentGame);
+  console.log(mostRecentIndex);
   /**
    * If the index is -1, then we couldn't find the game in the list. This means
    * the player has played 100 new games, since last updating, so simply delete
@@ -63,8 +60,8 @@ const updateGamesAndMatches = async (accountId, verbose) => {
   if (mostRecentIndex === -1) {
   } else {
     // Otherwise, get the current number of games stored
-    const gamesList = await gamesTable
-      .select(['*'])
+    const gamesList = await matchesTable
+      .select(['gameId'])
       .where(`accountId like :accountId`)
       .bind('accountId', accountId)
       .execute()
@@ -81,10 +78,11 @@ const updateGamesAndMatches = async (accountId, verbose) => {
         'should replace this exit with some standardized error handling such that',
         'the api can return the correct error'
       );
-      exit();
+      return;
     }
     const gamesCount = gamesList.length;
-    let deletedMatches = [];
+    console.log(gamesCount);
+
     /**
      * If after we insert, we have more than 100 rows. First, delete all the oldest
      * MATCH rows necessary to ensure we stay at 100 rows per player.
@@ -93,8 +91,7 @@ const updateGamesAndMatches = async (accountId, verbose) => {
       let matchesToBeDeleted = '(';
       // Accumulate the last 'mostRecentIndex' number of games o a string for our query.
       for (let i = gamesCount - 1; i >= gamesCount - mostRecentIndex; gamesCount--) {
-        let gameId = gamesList[i].gameId;
-        deletedMatches.push(gameId);
+        let gameId = gamesList[i][0];
         if (i === gamesCount - mostRecentIndex) matchesToBeDeleted += gameId + ')';
         else matchesToBeDeleted += gameId + ', ';
       }
@@ -120,7 +117,7 @@ const updateGamesAndMatches = async (accountId, verbose) => {
           'should replace this exit with some standardized error handling such that',
           'the api can return the correct error'
         );
-        exit();
+        return;
       }
 
       /**
@@ -130,61 +127,29 @@ const updateGamesAndMatches = async (accountId, verbose) => {
        * Right here were finding the matches that still exist, and then we delete
        * the other ones
        */
-      let matchesSelect = await matchesTable
-        .select(['UNIQUE gameId'])
-        .where(`gameId IN :inArrayString`)
-        .bind('inArrayString', matchesToBeDeleted)
+      session
+        .sql(
+          `delete from games as g where g.gameId not in (
+        select
+          distinct m.gameId
+        from 
+          matches as m
+        where
+          m.gameId in ${matchesToBeDeleted}
+      )`
+        )
         .execute()
-        .then(result => result.fetchAll())
-        .catch(err => undefined);
-
-      if (!matchesSelect) {
-        console.error(`Couldn't select matches for account: ${accountId}`);
-        console.error(
-          'should replace this exit with some standardized error handling such that',
-          'the api can return the correct error'
-        );
-        exit();
-      }
-
-      let foundGames = {};
-      let gamesToBeDeleted = '(';
-      matchesSelect.forEach(gameId => (foundGames[gameId] = true));
-      deletedMatches.forEach(gameId => {
-        if (!foundGames[gameId]) gamesToBeDeleted += gameId + ', ';
-      });
-      gamesToBeDeleted = gamesToBeDeleted.slice(0, -2) + ')';
-      if (verbose) {
-        console.log('Deleting these games');
-        console.log(gamesToBeDeleted);
-      }
-
-      let deletedGames = await gamesTable
-        .delete()
-        .where('gameId in :gamesToBeDeleted')
-        .bind('gamesToBeDeleted', gamesToBeDeleted)
-        .execute()
-        .then(() => true)
-        .catch(err => false);
-
-      if (!deletedGames) {
-        console.error(`Couldn't delete games for account: ${accountId}`);
-        console.error(
-          'should replace this exit with some standardized error handling such that',
-          'the api can return the correct error'
-        );
-        exit();
-      }
+        .catch(err => console.error(err));
     }
 
     let promises = [];
     for (let i = 0; i < mostRecentIndex; i++) {
-      const gameId = matchList[i].gameId;
+      const gameId = matchList.matches[i].gameId;
+      // console.log(gameId);
       promises.push(createGameAndMatch(gameId));
     }
 
     return Promise.all(promises);
-    // session.sql(`INSERT IGNORE INTO games ${getGamesKeys} VALUES ()`);
   }
 };
 
@@ -214,9 +179,8 @@ const createGameAndMatch = async gameId => {
           return participantId === playerIdent.participantId;
         });
       }
-
       const win = stats.win ? 1 : 0;
-      matchValuesString += getMatchValues(player, gameId, participantId, playerInfo, stats, win);
+      matchValuesString += getMatchValues(player, gameId, participantId, playerInfo, win);
 
       if (i != 9) matchValuesString += ', ';
     }
@@ -246,7 +210,10 @@ const getGamesKeys = wantArray => {
       'gameCreation'
     ];
   }
-  return '(gameId, queueId, gameDuration, seasonId, mapId, gameType, platformId, gameVersion, gameMode, gameCreation)';
+  return (
+    '(gameId, queueId, gameDuration, seasonId, mapId, gameType, platformId,' +
+    ' gameVersion, gameMode, gameCreation)'
+  );
 };
 
 const getMatchesKeys = wantArray => {
@@ -255,6 +222,8 @@ const getMatchesKeys = wantArray => {
       'accountId',
       'summonerName',
       'gameId',
+      'role',
+      'lane',
       'participantId',
       'championId',
       'teamId',
@@ -296,7 +265,8 @@ const getMatchesKeys = wantArray => {
     ];
   }
   return (
-    '(accountId, summonerName, gameId, participantId, championId, teamId, spell1Id, spell2Id, ' +
+    '(accountId, summonerName, gameId, role, lane, participantId, championId, ' +
+    'teamId, spell1Id, spell2Id, ' +
     'win, kills, deaths, assists, visionScore, firstBloodAssist, firstBloodKill, ' +
     'goldEarned, totalDamageDealtToChampions, totalMinionsKilled, ' +
     'neutralMinionsKilled, neutralMinionsKilledTeamJungle, ' +
@@ -319,10 +289,14 @@ const getGamesValues = (gameId, match) => {
   ${match.gameCreation})`;
 };
 
-const getMatchValues = (player, gameId, participantId, playerInfo, stats, win) => {
+const getMatchValues = (player, gameId, participantId, playerInfo, win) => {
+  const { stats, timeline } = playerInfo;
+
   return `("${player.accountId}",
   "${player.summonerName}",
   ${gameId},
+  "${timeline.role}",
+  "${timeline.lane}",
   ${participantId},
   ${playerInfo.championId},
   ${playerInfo.teamId},

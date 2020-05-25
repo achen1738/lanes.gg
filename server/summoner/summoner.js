@@ -119,6 +119,7 @@ module.exports = {
   updateSummoner
 };
 //
+//
 // { kayn summoner object
 //   id: 'TMsSo8xx5sm4RVqUiUi0usbYLXAHirIeFi4lxv4RGkh7VE7Q',
 //   accountId: 'e2pOVzlZo9KBdWWZyJRbFSYmFwK94nlrsS323noDoEv42VgLpQ16kbac',

@@ -10,7 +10,7 @@ connectionUtil
     const summonerRouter = require('./summoner/summonerAPI.js');
     const timelineRouter = require('./timeline/timelineAPI.js');
     const matchRouter = require('./match/matchAPI.js');
-    const port = 8000;
+    const port = 5000;
     const app = express();
 
     app.use(gameRouter);
