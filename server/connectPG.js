@@ -17,4 +17,11 @@ const connect = async () => {
   return { session, database };
 };
 
-module.exports = connect();
+const getConnections = () => {
+  return { database, session };
+};
+
+module.exports = {
+  connect,
+  getConnections
+};

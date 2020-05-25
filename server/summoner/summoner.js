@@ -1,11 +1,13 @@
 const connection = require('../connectPG.js');
+const { database, session } = connection.getConnections();
 const kayn = require('../kayn.js');
 
 const getSummoner = (summonerName, verbose) => {
   const summonerTable = database.getTable('summoner');
   return summonerTable
-    .select(['*'])
-    .where(`summonerName like :${summonerName}`)
+    .select()
+    .where(`summonerName like :summonerName`)
+    .bind('summonerName', summonerName)
     .limit(1)
     .execute()
     .then(async myResult => {
@@ -16,7 +18,7 @@ const getSummoner = (summonerName, verbose) => {
           console.log(row);
         });
       }
-      if (rows.length) {
+      if (!rows.length) {
         const summoner = await kayn.Summoner.by.name(summonerName);
         const currTime = new Date().getTime();
         summonerTable
@@ -40,33 +42,32 @@ const getSummoner = (summonerName, verbose) => {
           )
           .execute();
         rows[0] = createSummonerObject(summonerName, summoner, currTime);
+        if (verbose) {
+          console.log(rows[0]);
+        }
       }
       return rows[0];
     });
 };
 
 const updateSummoner = (summonerName, verbose) => {
-  connection.then(res => {
-    const { database, session } = res;
-
-    return kayn.Summoner.by.name(summonerName).then(summoner => {
-      if (verbose) {
-        console.log('==== Summoner ====');
-        console.log(summoner);
-      }
-      const currTime = new Date().getTime();
-      const keys = getSummonerKeys();
-      const values = getSummonerValues(summonerName, currTime, summoner);
-      const updates = getSummonerUpdates(currTime, summoner);
-      const query = `INSERT INTO summoner ${keys} VALUES ${values} ON DUPLICATE KEY UPDATE ${updates}`;
-      // console.log(values);
-      const summonerObject = createSummonerObject(summonerName, summoner, currTime);
-      return session
-        .sql(query)
-        .execute()
-        .then(() => summonerObject)
-        .catch(err => console.error(err));
-    });
+  return kayn.Summoner.by.name(summonerName).then(summoner => {
+    if (verbose) {
+      console.log('==== Summoner ====');
+      console.log(summoner);
+    }
+    const currTime = new Date().getTime();
+    const keys = getSummonerKeys();
+    const values = getSummonerValues(summonerName, currTime, summoner);
+    const updates = getSummonerUpdates(currTime, summoner);
+    const query = `INSERT INTO summoner ${keys} VALUES ${values} ON DUPLICATE KEY UPDATE ${updates}`;
+    // console.log(values);
+    const summonerObject = createSummonerObject(summonerName, summoner, currTime);
+    return session
+      .sql(query)
+      .execute()
+      .then(() => summonerObject)
+      .catch(err => console.error(err));
   });
 };
 

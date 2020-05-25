@@ -1,22 +1,25 @@
 const connection = require('../connectPG.js');
+const { database, session } = connection.getConnections();
 const kayn = require('../kayn.js');
-
 const getGames = (accountId, limit, verbose) => {
-  const gamesTable = database.getTable('games');
-  return gamesTable
-    .select(['*'])
-    .where(`accountId like :${accountId}`)
-    .limit(limit)
-    .orderBy(['gameCreation DESC'])
+  return session
+    .sql(
+      `select * from games as g where g.gameId IN 
+      (select m.gameId from matches as m where accountId = "${accountId}") 
+      order by g.gameId desc limit ${limit}`
+    )
     .execute()
-    .then(result => {
-      const games = result.fetchAll();
+    .then(res => {
+      const rows = res.fetchAll();
+      console.log(res.fetchOne());
       if (verbose) {
         for (let i = 0; i < 5; i++) {
-          console.log(games[i]);
+          console.log(rows[i]);
         }
       }
-      return games;
+    })
+    .catch(err => {
+      console.error(err);
     });
 };
 
@@ -186,50 +189,46 @@ const updateGamesAndMatches = async (accountId, verbose) => {
 };
 
 const createGameAndMatch = async gameId => {
-  connection.then(async res => {
-    const { session, database } = res;
+  const match = await kayn.Match.get(gameId)
+    .then(match => match)
+    .catch(err => {
+      console.error(err);
+    });
+  if (match.mapId === 11) {
+    const gamesInsert = session.sql(
+      `INSERT IGNORE INTO games ${getGamesKeys(false)} VALUES ${getGamesValues(gameId, match)}`
+    );
 
-    const match = await kayn.Match.get(gameId)
-      .then(match => match)
-      .catch(err => {
-        console.error(err);
-      });
-    if (match.mapId === 11) {
-      const gamesInsert = session.sql(
-        `INSERT IGNORE INTO games ${getGamesKeys(false)} VALUES ${getGamesValues(gameId, match)}`
-      );
-
-      // Create a match row for each of the ten players
-      let matchValuesString = '';
-      for (let i = 0; i < 10; i++) {
-        const { player, participantId } = match.participantIdentities[i];
-        let playerInfo = match.participants[i];
-        const { stats } = playerInfo;
-        /**
-         * In case the indexes for participants and participantIdentities don't
-         * match up, manually find the participant with the corresponding ID
-         */
-        if (participantId !== playerInfo.participantId) {
-          playerInfo = match.participantIdentities.find(playerIdent => {
-            return participantId === playerIdent.participantId;
-          });
-        }
-
-        const win = stats.win ? 1 : 0;
-        matchValuesString += getMatchValues(player, gameId, participantId, playerInfo, stats, win);
-
-        if (i != 9) matchValuesString += ', ';
+    // Create a match row for each of the ten players
+    let matchValuesString = '';
+    for (let i = 0; i < 10; i++) {
+      const { player, participantId } = match.participantIdentities[i];
+      let playerInfo = match.participants[i];
+      const { stats } = playerInfo;
+      /**
+       * In case the indexes for participants and participantIdentities don't
+       * match up, manually find the participant with the corresponding ID
+       */
+      if (participantId !== playerInfo.participantId) {
+        playerInfo = match.participantIdentities.find(playerIdent => {
+          return participantId === playerIdent.participantId;
+        });
       }
 
-      const matchesInsert = session.sql(
-        `INSERT IGNORE INTO MATCHES ${getMatchesKeys(false)} VALUES ${matchValuesString}`
-      );
+      const win = stats.win ? 1 : 0;
+      matchValuesString += getMatchValues(player, gameId, participantId, playerInfo, stats, win);
 
-      return Promise.all([gamesInsert.execute(), matchesInsert.execute()]).catch(err => {
-        console.error(err);
-      });
+      if (i != 9) matchValuesString += ', ';
     }
-  });
+
+    const matchesInsert = session.sql(
+      `INSERT IGNORE INTO MATCHES ${getMatchesKeys(false)} VALUES ${matchValuesString}`
+    );
+
+    return Promise.all([gamesInsert.execute(), matchesInsert.execute()]).catch(err => {
+      console.error(err);
+    });
+  }
 };
 
 const getGamesKeys = wantArray => {
@@ -308,11 +307,60 @@ const getMatchesKeys = wantArray => {
 };
 
 const getGamesValues = (gameId, match) => {
-  return `(${gameId}, ${match.queueId}, ${match.gameDuration}, ${match.seasonId}, ${match.mapId}, "${match.gameType}", "${match.platformId}", "${match.gameVersion}", "${match.gameMode}", ${match.gameCreation})`;
+  return `(${gameId},
+  ${match.queueId},
+  ${match.gameDuration},
+  ${match.seasonId},
+  ${match.mapId},
+  "${match.gameType}",
+  "${match.platformId}",
+  "${match.gameVersion}",
+  "${match.gameMode}",
+  ${match.gameCreation})`;
 };
 
 const getMatchValues = (player, gameId, participantId, playerInfo, stats, win) => {
-  return `("${player.accountId}", "${player.summonerName}", ${gameId}, ${participantId}, ${playerInfo.championId}, ${playerInfo.teamId}, ${playerInfo.spell1Id}, ${playerInfo.spell2Id}, ${win}, ${stats.kills}, ${stats.deaths}, ${stats.assists}, ${stats.visionScore}, ${stats.firstBloodAssist}, ${stats.firstBloodKill}, ${stats.goldEarned}, ${stats.totalDamageDealtToChampions}, ${stats.totalMinionsKilled}, ${stats.neutralMinionsKilled}, ${stats.neutralMinionsKilledTeamJungle}, ${stats.neutralMinionsKilledEnemyJungle}, ${stats.wardsPlaced}, ${stats.visionWardsBoughtInGame}, ${stats.item0}, ${stats.item1}, ${stats.item2}, ${stats.item3}, ${stats.item4}, ${stats.item5}, ${stats.item6}, ${stats.perk0}, ${stats.perk1}, ${stats.perk2}, ${stats.perk3}, ${stats.perk4}, ${stats.perk5}, ${stats.perkPrimaryStyle}, ${stats.perkSubStyle}, ${stats.statPerk0}, ${stats.statPerk1}, ${stats.statPerk2})`;
+  return `("${player.accountId}",
+  "${player.summonerName}",
+  ${gameId},
+  ${participantId},
+  ${playerInfo.championId},
+  ${playerInfo.teamId},
+  ${playerInfo.spell1Id},
+  ${playerInfo.spell2Id},
+  ${win},
+  ${stats.kills},
+  ${stats.deaths},
+  ${stats.assists},
+  ${stats.visionScore},
+  ${stats.firstBloodAssist},
+  ${stats.firstBloodKill},
+  ${stats.goldEarned},
+  ${stats.totalDamageDealtToChampions},
+  ${stats.totalMinionsKilled},
+  ${stats.neutralMinionsKilled},
+  ${stats.neutralMinionsKilledTeamJungle},
+  ${stats.neutralMinionsKilledEnemyJungle},
+  ${stats.wardsPlaced},
+  ${stats.visionWardsBoughtInGame},
+  ${stats.item0},
+  ${stats.item1}, 
+  ${stats.item2},
+  ${stats.item3},
+  ${stats.item4},
+  ${stats.item5},
+  ${stats.item6},
+  ${stats.perk0},
+  ${stats.perk1},
+  ${stats.perk2},
+  ${stats.perk3},
+  ${stats.perk4},
+  ${stats.perk5},
+  ${stats.perkPrimaryStyle},
+  ${stats.perkSubStyle},
+  ${stats.statPerk0},
+  ${stats.statPerk1},
+  ${stats.statPerk2})`;
 };
 
 const testPopulate = async () => {
