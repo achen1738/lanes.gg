@@ -1,35 +1,14 @@
-const connection = require('../connectPG.js');
-const { database, session } = connection.getConnections();
-const kayn = require('../kayn.js');
+const connection = require('../connectSQL.js');
 
 const getMatches = (accountId, limit, verbose) => {
-  const matchesTable = database.getTable('matches');
-  return matchesTable
-    .select()
-    .where(`accountId like :accountId`)
-    .bind('accountId', accountId)
-    .orderBy(['gameId DESC'])
-    .limit(limit)
-    .execute()
-    .then(result => {
-      const rows = result.fetchAll();
-      const keys = result.getColumns();
-      const numRows = rows.length;
-      const rowLength = rows[0].length || 0;
-      let matches = [];
-      for (let i = 0; i < numRows; i++) {
-        let json = {};
-        for (let j = 0; j < rowLength; j++) {
-          json[keys[j].originalName] = rows[i][j];
-        }
-        matches[i] = json;
-      }
-      if (verbose) {
-        for (let i = 0; i < 5; i++) {
-          console.log(matches);
-        }
-      }
-      return matches;
+  return connection
+    .promise()
+    .query('select * from matches where accountId = ? order by gameId desc limit ?', [
+      accountId,
+      limit
+    ])
+    .then(res => {
+      return JSON.stringify(res[0]);
     });
 };
 

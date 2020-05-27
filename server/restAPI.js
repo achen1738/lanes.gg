@@ -1,32 +1,34 @@
 /* eslint-disable func-names */
 /* eslint-disable prettier/prettier */
-const connectionUtil = require('./connectPG.js');
-connectionUtil
-  .connect()
-  .then(res => {
-    const express = require('express');
-    const gameRouter = require('./game/gameAPI.js');
-    const userRouter = require('./user/userAPI.js');
-    const summonerRouter = require('./summoner/summonerAPI.js');
-    const timelineRouter = require('./timeline/timelineAPI.js');
-    const matchRouter = require('./match/matchAPI.js');
-    const port = 5000;
-    const app = express();
+const connectionUtil = require('./connectSQL.js');
+const express = require('express');
+const summonerRouter = require('./summoner/summonerAPI.js');
+const matchRouter = require('./match/matchAPI.js');
+const gameRouter = require('./game/gameAPI.js');
+// connectionUtil
+//   .connect()
+//   .then(res => {
+//     const express = require('express');
+//     const summonerRouter = require('./summoner/summonerAPI.js');
+//     const userRouter = require('./user/userAPI.js');
+//     const timelineRouter = require('./timeline/timelineAPI.js');
+//     const port = 5000;
+//     const app = express();
 
-    app.use(gameRouter);
-    app.use(userRouter);
-    app.use(summonerRouter);
-    app.use(timelineRouter);
-    app.use(matchRouter);
+//     app.use(gameRouter);
+//     app.use(userRouter);
+//     app.use(summonerRouter);
+//     app.use(timelineRouter);
+//     app.use(matchRouter);
 
-    // start the server
-    app.listen(port);
+//     // start the server
+//     app.listen(port);
 
-    console.log(`Server running on port ${port}`);
-  })
-  .catch(err => {
-    console.error(err);
-  });
+//     console.log(`Server running on port ${port}`);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   });
 
 // me arthur chen
 // "accountId": "e2pOVzlZo9KBdWWZyJRbFSYmFwK94nlrsS323noDoEv42VgLpQ16kbac",
