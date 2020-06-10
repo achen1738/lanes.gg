@@ -27,44 +27,35 @@ const getSummoner = (summonerName, verbose) => {
     });
 };
 
-const updateSummoner = (summonerName, verbose) => {
-  return kayn.Summoner.by.name(summonerName).then(summoner => {
-    const currTime = new Date().getTime();
-    const values = getSummonerValues(summonerName, summoner, currTime);
-    const summonerObject = createSummonerObject(summonerName, summoner, currTime);
-    const updates = getSummonerUpdates(summoner, currTime);
-    const query =
-      'insert into summoner (accountId, profileIconId, summonerName, updatedAt, id, puuid, summonerLevel) ' +
-      'VALUES (?, ?, ?, ?, ?, ?, ?) ' +
-      'ON DUPLICATE KEY UPDATE updatedAt=?, profileIconId=?, summonerLevel=?';
+const updateSummoner = (summoner, verbose) => {
+  const currTime = new Date().getTime();
 
-    return connection
-      .promise()
-      .query(query, [...values, ...updates])
-      .then(res => {
-        console.log(summonerObject);
-        return summonerObject;
-      });
-  });
+  const values = getSummonerValues(summoner, currTime);
+  const summonerObject = createSummonerObject(summoner, currTime);
+  const updates = getSummonerUpdates(summoner, currTime);
+  const query =
+    'insert into summoner ' +
+    getSummonerKeys() +
+    ' VALUES (?, ?, ?, ?, ?, ?, ?) ' +
+    'ON DUPLICATE KEY UPDATE updatedAt=?, profileIconId=?, summonerLevel=?';
+
+  return connection
+    .promise()
+    .query(query, [...values, ...updates])
+    .then(res => {
+      return summonerObject;
+    });
 };
 
 const getSummonerKeys = () => {
-  return [
-    'accountId',
-    'profileIconId',
-    'summonerName',
-    'updatedAt',
-    'id',
-    'puuid',
-    'summonerLevel'
-  ];
+  return '(accountId, profileIconId, summonerName, updatedAt, id, puuid, summonerLevel)';
 };
 
-const getSummonerValues = (summonerName, summoner, currTime) => {
+const getSummonerValues = (summoner, currTime) => {
   return [
     `${summoner.accountId}`,
     summoner.profileIconId,
-    `${summonerName}`,
+    `${summoner.name}`,
     currTime,
     `${summoner.id}`,
     `${summoner.puuid}`,
@@ -72,15 +63,15 @@ const getSummonerValues = (summonerName, summoner, currTime) => {
   ];
 };
 
-const createSummonerObject = (summonerName, kaynSummoner, currTime) => {
+const createSummonerObject = (summoner, currTime) => {
   return {
-    accountId: kaynSummoner.accountId,
-    profileIconId: kaynSummoner.profileIconId,
-    summonerName: summonerName,
+    accountId: summoner.accountId,
+    profileIconId: summoner.profileIconId,
+    summonerName: summoner.name,
     updatedAt: currTime,
-    id: kaynSummoner.id,
-    puuid: kaynSummoner.puuid,
-    summonerLevel: kaynSummoner.summonerLevel
+    id: summoner.id,
+    puuid: summoner.puuid,
+    summonerLevel: summoner.summonerLevel
   };
 };
 

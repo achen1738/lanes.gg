@@ -18,128 +18,51 @@ const getGames = (accountId, limit, verbose) => {
 };
 
 const updateGamesAndMatches = async (accountId, verbose) => {
-  // Get the most recent game stored in our DB.
-  let mostRecentGame = await connection
+  // Get at most 100 most recent games stored in our DB.
+  let mostRecentGames = await connection
     .promise()
-    .query('select gameId from matches where accountId = ? order by gameId desc limit 1', [
+    .query('select gameId from matches where accountId = ? order by gameId desc limit 100', [
       accountId
     ])
     .then(game => {
-      return game[0][0].gameId;
+      // If the user doesn't have any matches stored, return -1.
+      return game[0];
     });
 
   // Get the 100 most recent games played from Riot API
-  const matchList = await kayn.Matchlist.by.accountID(accountId).then(matchlist => {
+  const riotMatchListObj = await kayn.Matchlist.by.accountID(accountId).then(matchlist => {
     return matchlist;
   });
+  const riotMatchList = riotMatchListObj.matches;
 
   /**
-   * Find the index that corresponds to the most recent index that we have stored.
-   * This is so we can delete the correct number of games from our table, as well
-   * as insert the correct number of new games
+   * Storing all the user's (summoner) games in a map, such that we can find
+   * what games the user doesn't have stored in O(1). The reason we dont just
+   * look at all the games before the most recently stored game is because
+   * a different user could have inserted this, meaning there is now a gap
+   * of missing games
    */
-  const mostRecentIndex = matchList.matches.findIndex(match => match.gameId === mostRecentGame);
-  console.log(mostRecentIndex);
-  /**
-   * If the index is -1, then we couldn't find the game in the list. This means
-   * the player has played 100 new games, since last updating, so simply delete
-   * all previous matches, and insert all the new ones
-   */
+  let summonerGames = {};
+  let gamesToAdd = [];
 
-  if (mostRecentIndex === 0) {
-  } else if (mostRecentIndex === -1) {
-  } else {
-    // Otherwise, get the current number of games stored
-    const gamesList = await connection
-      .promise()
-      .query('select gameId from matches where accountId = ?', [accountId])
-      .then(res => {
-        return res[0];
-      })
-      .catch(err => {
-        return undefined;
-      });
+  mostRecentGames.forEach(game => {
+    summonerGames[game.gameId] = 1;
+  });
 
-    // if (!gamesList) {
-    //   console.error(`Couldn't retrieve games list for account: ${accountId}`);
-    //   console.error(
-    //     'should replace this exit with some standardized error handling such that',
-    //     'the api can return the correct error'
-    //   );
-    //   return;
-    // }
-
-    const gamesCount = gamesList.length;
-    console.log(gamesCount);
-
-    /**
-     * If after we insert, we have more than 100 rows. First, delete all the oldest
-     * MATCH rows necessary to ensure we stay at 100 rows per player.
-     */
-    if (gamesCount + mostRecentIndex > 100) {
-      let matchesToBeDeleted = '(';
-      // Accumulate the last 'mostRecentIndex' number of games o a string for our query.
-      for (let i = gamesCount - 1; i >= gamesCount - mostRecentIndex; gamesCount--) {
-        let gameId = gamesList[i][0].gameId;
-        if (i === gamesCount - mostRecentIndex) matchesToBeDeleted += gameId + ')';
-        else matchesToBeDeleted += gameId + ', ';
-      }
-
-      if (verbose) {
-        console.log('Removing these matches:');
-        console.log(matchesToBeDeleted);
-      }
-
-      // Delete all the matches found in the previously accumulated string for an account.
-      let matchesDelete = await matchesTable
-        .delete()
-        .where(`accountId like :accountId AND gameId IN :inArrayString`)
-        .bind('accountId', accountId)
-        .bind('inArrayString', matchesToBeDeleted)
-        .execute()
-        .then(res => true)
-        .catch(err => false);
-
-      if (!matchesDelete) {
-        console.error(`Couldn't delete matches for account: ${accountId}`);
-        console.error(
-          'should replace this exit with some standardized error handling such that',
-          'the api can return the correct error'
-        );
-        return;
-      }
-
-      /**
-       * Then, check if you can delete the corresponding GAMES row. We do this in separate
-       * steps because another user can still be using this games row. Only until
-       * all users (10 users per game) have stopped using this game, can we delete it.
-       * Right here were finding the matches that still exist, and then we delete
-       * the other ones
-       */
-      session
-        .sql(
-          `delete from games as g where g.gameId not in (
-        select
-          distinct m.gameId
-        from 
-          matches as m
-        where
-          m.gameId in ${matchesToBeDeleted}
-      )`
-        )
-        .execute()
-        .catch(err => console.error(err));
+  // For each gameId, only push the gameIds that the user doesn't have currently stored
+  riotMatchList.forEach(match => {
+    if (!summonerGames[match.gameId]) {
+      gamesToAdd.push(match.gameId);
     }
+  });
 
-    let promises = [];
-    for (let i = 0; i < mostRecentIndex; i++) {
-      const gameId = matchList.matches[i].gameId;
-      // console.log(gameId);
-      promises.push(createGameAndMatch(gameId));
-    }
-
-    return Promise.all(promises);
-  }
+  console.log(gamesToAdd.length);
+  // Then, create a corresponding row in matches and games for each missing gameId.
+  let promises = [];
+  gamesToAdd.forEach((gameId, index) => {
+    promises.push(createGameAndMatch(gameId));
+  });
+  return Promise.all(promises);
 };
 
 const createGameAndMatch = async gameId => {
@@ -148,7 +71,7 @@ const createGameAndMatch = async gameId => {
     .catch(err => {
       console.error(err);
     });
-  if (match.mapId === 11) {
+  if (match.mapId === 11 && withinTimeRange(match.gameCreation)) {
     const gamesValues = getGamesValues(gameId, match);
     const gamesQuestionMarks = createValuesQuery(gamesValues.length);
     const query =
@@ -185,6 +108,12 @@ const createGameAndMatch = async gameId => {
       console.error(err);
     });
   }
+};
+
+const withinTimeRange = gameCreation => {
+  // 30 days in milliseconds
+  const oneMonth = 1000 * 60 * 60 * 24 * 30;
+  return new Date().getTime() - gameCreation < oneMonth;
 };
 
 const getGamesKeys = wantArray => {
@@ -334,33 +263,29 @@ const getMatchValues = (player, gameId, participantId, playerInfo, win) => {
 };
 
 const testPopulate = async () => {
-  const accountId = 'e2pOVzlZo9KBdWWZyJRbFSYmFwK94nlrsS323noDoEv42VgLpQ16kbac';
-  console.log(connection);
-  connection.then(async res => {
-    const { session, db } = res;
-    // Get the 100 most recent games played from Riot API
-    const matchList = await kayn.Matchlist.by
-      .accountID(accountId)
-      .then(matches => {
-        return matches;
-      })
-      .catch(err => {
-        console.error(err);
-      });
+  const accountId = 'zbFRHD90fgf8JNbE-noGGdp5JHqXbW6zorwTIvupwz1K5ek';
+  // Get the 100 most recent games played from Riot API
+  const matchList = await kayn.Matchlist.by
+    .accountID(accountId)
+    .then(matches => {
+      return matches;
+    })
+    .catch(err => {
+      console.error(err);
+    });
 
-    let promises = [];
-    for (let i = 0; i < 5; i++) {
-      promises.push(createGameAndMatch(matchList.matches[i].gameId));
-    }
+  let promises = [];
+  for (let i = 0; i < 100; i++) {
+    promises.push(createGameAndMatch(matchList.matches[i].gameId));
+  }
 
-    await Promise.all(promises)
-      .then(() => {
-        console.log('Success');
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  });
+  await Promise.all(promises)
+    .then(() => {
+      console.log('Success');
+    })
+    .catch(err => {
+      console.error(err);
+    });
 };
 
 const createValuesQuery = length => {
