@@ -1,15 +1,17 @@
 const connection = require('../connectSQL.js');
+const db = require('../MySQL.js');
+const { matches: Matches } = db;
 
 const getMatches = (accountId, limit, verbose) => {
-  return connection
-    .promise()
-    .query('select * from matches where accountId = ? order by gameId desc limit ?', [
-      accountId,
-      limit
-    ])
-    .then(res => {
-      return JSON.stringify(res[0]);
-    });
+  return Matches.findAll({
+    where: {
+      accountId
+    },
+    order: [['gameId', 'DESC']],
+    limit
+  }).then(res => {
+    return res.map(match => match.dataValues);
+  });
 };
 
 module.exports = {

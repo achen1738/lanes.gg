@@ -1,15 +1,12 @@
 /* eslint-disable func-names */
 /* eslint-disable prettier/prettier */
-// const connectionUtil = require('./connectSQL.js');
-// const summonerRouter = require('./summoner/summonerAPI.js');
-// const matchRouter = require('./match/matchAPI.js');
-// const gameRouter = require('./game/gameAPI.js');
-// const userRouter = require('./user/userAPI.js');
+const summonerRouter = require('./summoner/summonerAPI.js');
+const matchRouter = require('./match/matchAPI.js');
+const gameRouter = require('./game/gameAPI.js');
+const userRouter = require('./user/userAPI.js');
 
 const express = require('express');
-const { games, matches, summoner } = require('./MySQL.js');
-const expressGraphQL = require('express-graphql');
-const { ApolloServer, graphiqlExpress } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const {
   GraphQLSchema,
   GraphQLObjectType,

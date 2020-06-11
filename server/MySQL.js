@@ -12,7 +12,8 @@ const sequelize = new Sequelize(
     port: process.env.MYSQL_PORT,
     dialect: 'mysql',
     define: {
-      freezeTableName: true
+      freezeTableName: true,
+      timestamps: false
     },
     pool: {
       max: 5,
