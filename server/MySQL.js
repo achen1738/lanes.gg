@@ -27,9 +27,9 @@ const sequelize = new Sequelize(
 );
 
 let models = [
-  require('./models/games.js'),
-  require('./models/matches.js'),
-  require('./models/summoner.js')
+  require('./models/GamesModel.js'),
+  require('./models/MatchesModel.js'),
+  require('./models/SummonerModel.js')
 ];
 
 // Initialize models
@@ -44,6 +44,8 @@ Object.keys(db).forEach(key => {
     db[key].associate(db);
   }
 });
+
+// db.matches.hasMany(db.matches, { alias: 'm1' });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

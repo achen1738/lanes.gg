@@ -13,30 +13,39 @@ const getSummoner = (summonerName, verbose) => {
     if (!summ.length) {
       const kaynSummoner = await kayn.Summoner.by.name(summonerName);
       const currTime = new Date().getTime();
-      const summonerObj = createSummonerObject(kaynSummoner, currTime);
-      console.log(summonerObj);
-      Summoner.create({
-        ...summonerObj
+      db.sequelize.transaction(async t => {
+        const summonerObj = createSummonerObject(kaynSummoner, currTime);
+        Summoner.create({
+          ...summonerObj
+        });
       });
       summ[0] = { dataValues: summonerObj };
     }
     if (verbose) {
       console.log(summ[0].dataValues);
     }
-    return JSON.stringify(summ[0].dataValues);
+    return summ[0].dataValues;
   });
 };
 
 const updateSummoner = (summoner, verbose) => {
   return db.sequelize.transaction(async t => {
-    const currTime = new Date().getTime();
-    const updateObj = createSummonerObject(summoner, currTime);
-    return await Summoner.update(updateObj, {
-      where: {
-        summonerName: summoner.name
-      }
-    });
+    const foundSum = await Summoner.findOne({ where: { summonerName: summoner.name } });
+    if (foundSum) {
+      const updatedSum = updateSummonerHelper(foundSum, summoner);
+      return updatedSum.save();
+    }
+    return [{ dataValues: {} }];
   });
+};
+
+const updateSummonerHelper = (updateObj, summoner) => {
+  const currTime = new Date().getTime();
+  updateObj.summonerLevel = summoner.summonerLevel;
+  updateObj.updatedAtTS = currTime;
+  updateObj.profileIconId = summoner.profileIconId;
+  updateObj.summonerName = summoner.name;
+  return updateObj;
 };
 
 const createSummonerObject = (summoner, currTime) => {

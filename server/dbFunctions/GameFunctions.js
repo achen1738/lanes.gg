@@ -71,7 +71,7 @@ const updateGamesAndMatches = async (accountId, verbose) => {
     gamesToAdd.forEach((gameId, index) => {
       promises.push(createGameAndMatch(gameId));
     });
-    return await Promise.all(promises);
+    return Promise.all(promises);
   });
 };
 
@@ -110,6 +110,7 @@ const createGameAndMatch = async gameId => {
       console.error(err);
     });
   }
+  return [];
 };
 
 const withinTimeRange = gameCreation => {

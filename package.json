@@ -12,6 +12,7 @@
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^15.1.0",
+    "graphql-compose": "^7.18.1",
     "graphql-tools": "^6.0.9",
     "kayn": "^0.9.11",
     "mongoose": "^5.9.12",
