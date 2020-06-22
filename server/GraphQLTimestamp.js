@@ -44,4 +44,4 @@ const TimestampType = new GraphQLScalarType({
   parseLiteral: parseDateFromLiteral
 });
 
-module.exports = { TimestampType };
+module.exports = TimestampType;

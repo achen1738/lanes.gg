@@ -1,13 +1,21 @@
-const { TimestampType } = require('../GraphQLTimestamp.js');
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
   GraphQLNonNull,
-  GraphQLList
+  GraphQLList,
+  GraphQLFloat
 } = require('graphql');
 const MatchType = require('./MatchType');
-const { getSummonerMatches, getAllMatches } = require('../dbFunctions');
+const LeagueType = require('./LeagueType');
+const GameType = require('./GameType.js');
+
+const {
+  getSummonerMatches,
+  getAllMatchesAccount,
+  getLeagues,
+  getGames
+} = require('../dbFunctions');
 
 const SummonerType = new GraphQLObjectType({
   name: 'Summoner',
@@ -16,11 +24,11 @@ const SummonerType = new GraphQLObjectType({
     accountId: { type: GraphQLNonNull(GraphQLString) },
     profileIconId: { type: GraphQLNonNull(GraphQLInt) },
     summonerName: { type: GraphQLNonNull(GraphQLString) },
-    updatedAtTS: { type: TimestampType },
+    updatedAtTS: { type: GraphQLNonNull(GraphQLFloat) },
     id: { type: GraphQLNonNull(GraphQLString) },
     puuid: { type: GraphQLNonNull(GraphQLString) },
     summonerLevel: { type: GraphQLNonNull(GraphQLInt) },
-    onlyUserMatches: {
+    getUserMatches: {
       name: "Summoner's MatchTypes",
       type: GraphQLList(MatchType),
       args: {
@@ -31,21 +39,34 @@ const SummonerType = new GraphQLObjectType({
         return await getSummonerMatches(summoner.accountId, limit);
       }
     },
-    allGameMatches: {
-      name: 'A list of all matches per gameId',
-      // type: GraphQLList(
-      //   new GraphQLObjectType({
-      //     gameId: { type: GraphQLInt },
-      //     matches: GraphQLList(MatchType)
-      //   })
-      // ),
+    getDisplayMatches: {
+      name: 'A list of all matches per gameId for display, not analysis',
       type: GraphQLList(MatchType),
       args: {
         limit: { type: GraphQLInt }
       },
       description: "Retrieves all matches for the summoner's last 'limit' games",
       resolve: async (summoner, { limit }) => {
-        return await getAllMatches(summoner.accountId, limit);
+        return await getAllMatchesAccount(summoner.accountId, limit);
+      }
+    },
+    getLeagues: {
+      name: 'A list of leagues',
+      type: GraphQLList(LeagueType),
+      description: 'Retrieves all leagues the summoner is in',
+      resolve: async (summoner, _) => {
+        return await getLeagues(summoner.id);
+      }
+    },
+    getGames: {
+      name: 'A list of games',
+      type: GraphQLList(GameType),
+      args: {
+        limit: { type: GraphQLInt }
+      },
+      description: "Retrieves the summoner's latest 'limit' games",
+      resolve: async (summoner, { limit }) => {
+        return await getGames(summoner.accountId, limit);
       }
     }
   })

@@ -71,7 +71,19 @@ const updateGamesAndMatches = async (accountId, verbose) => {
     gamesToAdd.forEach((gameId, index) => {
       promises.push(createGameAndMatch(gameId));
     });
-    return Promise.all(promises);
+    return Promise.all(promises).then(res => {
+      let games = [];
+      let matches = [];
+      res.forEach((gameAndMatch, index) => {
+        // If it is a valid summoners rift game
+        if (gameAndMatch.length) {
+          const [game, match] = gameAndMatch;
+          games.push(game.dataValues);
+          matches.push(match.map(dbMatch => dbMatch.dataValues));
+        }
+      });
+      return { games, matches };
+    });
   });
 };
 

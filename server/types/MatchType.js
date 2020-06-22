@@ -1,18 +1,18 @@
 const {
   GraphQLObjectType,
-  GraphQLList,
   GraphQLString,
   GraphQLInt,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLFloat
 } = require('graphql');
 
 const MatchType = new GraphQLObjectType({
-  name: 'match',
+  name: 'Match',
   description: 'This represents the match results for a summoner',
   fields: () => ({
     accountId: { type: GraphQLNonNull(GraphQLString) },
     summonerName: { type: GraphQLNonNull(GraphQLString) },
-    gameId: { type: GraphQLNonNull(GraphQLInt) },
+    gameId: { type: GraphQLNonNull(GraphQLFloat) },
     participantId: { type: GraphQLNonNull(GraphQLInt) },
     championId: { type: GraphQLNonNull(GraphQLInt) },
     teamId: { type: GraphQLNonNull(GraphQLInt) },

@@ -2,7 +2,7 @@ const connection = require('../connectSQL.js');
 const db = require('../MySQL.js');
 const { matches: Matches, games: Games } = db;
 
-const getSummonerMatches = (accountId, limit, verbose) => {
+const getSummonerMatches = (accountId, limit) => {
   return Matches.findAll({
     where: {
       accountId
@@ -15,14 +15,25 @@ const getSummonerMatches = (accountId, limit, verbose) => {
   });
 };
 
-const getAllMatches = (accountId, limit, verbose) => {
+const getAllMatchesAccount = (accountId, limit) => {
+  limit = limit * 10;
   return db.sequelize
     .query(
-      `select m1.* from matches as m1 join (select m2.gameId from matches as m2 where accountId="${accountId}" limit 20) d on m1.gameId in (d.gameId) order by m1.gameId DESC`
+      `select m1.* from matches as m1 join (select m2.gameId from matches as m2 where accountId="${accountId}" limit ${limit}) d on m1.gameId in (d.gameId) order by m1.gameId DESC`
     )
     .then(res => {
       return res[0];
     });
+};
+
+const getAllMatchesGame = gameId => {
+  return Matches.findAll({
+    where: {
+      gameId
+    }
+  }).then(res => {
+    return res.map(match => match.dataValues);
+  });
 };
 
 // select m1.summonerName, m1.gameId from matches as m1 join (select m2.gameId from matches as m2 where accountId="6V5wgu_p5Ydyl39Q4XiUyGyhFzalk72QrmiSvgghpC_RRKM" limit 20) d on m1.gameId in (d.gameId) order by m1.gameId DESC ;
@@ -31,7 +42,8 @@ const getAllMatches = (accountId, limit, verbose) => {
 
 module.exports = {
   getSummonerMatches,
-  getAllMatches
+  getAllMatchesAccount,
+  getAllMatchesGame
 };
 
 //

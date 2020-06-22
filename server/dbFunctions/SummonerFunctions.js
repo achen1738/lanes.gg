@@ -1,7 +1,8 @@
 // const connection = require('../connectSQL.js');
 const db = require('../MySQL.js');
-const { summoner: Summoner } = db;
+const { summoner: Summoner, leagues: Leagues } = db;
 const kayn = require('../kayn.js');
+const { createLeagues } = require('./LeagueFunctions.js');
 
 const getSummoner = (summonerName, verbose) => {
   return Summoner.findAll({
@@ -14,6 +15,7 @@ const getSummoner = (summonerName, verbose) => {
       const kaynSummoner = await kayn.Summoner.by.name(summonerName);
       const currTime = new Date().getTime();
       db.sequelize.transaction(async t => {
+        createLeagues(kaynSummoner.id);
         const summonerObj = createSummonerObject(kaynSummoner, currTime);
         Summoner.create({
           ...summonerObj

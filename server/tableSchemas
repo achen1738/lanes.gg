@@ -22,6 +22,24 @@ CREATE TABLE IF NOT EXISTS summoners (
 	UNIQUE KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS leagues (
+	summonerName VARCHAR(20),
+  summonerId VARCHAR(63),
+  queueType VARCHAR(20),
+  tier VARCHAR(15),
+  division VARCHAR(5),
+  leaguePoints INT,
+  wins INT,
+  losses INT,
+  seriesWins INT,
+  seriesLosses INT,
+  seriesTarget INT,
+  CONSTRAINT pkLeagues PRIMARY KEY (summonerName, queueType),
+  CONSTRAINT uqLeague UNIQUE (summonerId, queueType)
+);
+
+
+
 database.schema.createTableIfNotExists('matches', function(table) {
   table.string('accountId');
   // forgot summonerName

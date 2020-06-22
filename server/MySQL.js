@@ -29,7 +29,8 @@ const sequelize = new Sequelize(
 let models = [
   require('./models/GamesModel.js'),
   require('./models/MatchesModel.js'),
-  require('./models/SummonerModel.js')
+  require('./models/SummonerModel.js'),
+  require('./models/LeaguesModel.js')
 ];
 
 // Initialize models

@@ -1,4 +1,4 @@
-const { getSummoner } = require('../dbFunctions/SummonerFunctions.js');
+const { getSummoner } = require('../dbFunctions');
 const { GraphQLString } = require('graphql');
 const { SummonerType } = require('../types');
 
