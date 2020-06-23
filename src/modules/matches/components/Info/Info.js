@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Info.scss';
 
-class Info extends Component {
-  state = {};
-
-  calculateTime = () => {
-    const match = this.props.game;
+const Info = props => {
+  const calculateTime = () => {
+    const match = props.game;
     let date = new Date();
     // Both gameTimestamp and currentTimestamp are in milliseconds
     const gameTimestamp = match.gameCreation;
@@ -34,44 +32,42 @@ class Info extends Component {
     return timeAgo;
   };
 
-  calculateDuration = () => {
-    const match = this.props.game;
+  const calculateDuration = () => {
+    const match = props.game;
     const gameMinutes = Math.floor(match.gameDuration / 60);
     const gameSeconds = match.gameDuration % 60;
     const duration = `${gameMinutes}m ${gameSeconds}s`;
     return duration;
   };
 
-  calculateResult = win => {
+  const calculateResult = win => {
     if (win) return 'Victory';
     else return 'Loss';
   };
 
-  render() {
-    const win = this.props.win;
+  const win = props.win;
 
-    let matchInfoStyle = 'match__info';
-    if (win) matchInfoStyle += ' match__info_win';
-    else matchInfoStyle += ' match__info_lose';
+  let matchInfoStyle = 'match__info';
+  if (win) matchInfoStyle += ' match__info_win';
+  else matchInfoStyle += ' match__info_lose';
 
-    let matchResultStyle = 'match__info-result';
-    if (win) matchResultStyle += ' match__info-result_win';
-    else matchResultStyle += ' match__info-result_lose';
+  let matchResultStyle = 'match__info-result';
+  if (win) matchResultStyle += ' match__info-result_win';
+  else matchResultStyle += ' match__info-result_lose';
 
-    let matchBarStyle = 'match__info-bar';
-    if (win) matchBarStyle += ' match__info-bar_win';
-    else matchBarStyle += ' match__info-bar_lose';
+  let matchBarStyle = 'match__info-bar';
+  if (win) matchBarStyle += ' match__info-bar_win';
+  else matchBarStyle += ' match__info-bar_lose';
 
-    return (
-      <div className={matchInfoStyle}>
-        <div className="match__info-queue">Ranked Solo</div>
-        <div className={matchResultStyle}>{this.calculateResult(win)}</div>
-        <div className={matchBarStyle}></div>
-        <div className="match__info-duration">{this.calculateDuration()}</div>
-        <div className="match__info-time">{this.calculateTime()}</div>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={matchInfoStyle}>
+      <div className="match__info-queue">Ranked Solo</div>
+      <div className={matchResultStyle}>{calculateResult(win)}</div>
+      <div className={matchBarStyle}></div>
+      <div className="match__info-duration">{calculateDuration()}</div>
+      <div className="match__info-time">{calculateTime()}</div>
+    </div>
+  );
+};
 
 export default Info;

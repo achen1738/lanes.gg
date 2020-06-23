@@ -1,32 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { getMatches, getDDragon, getSummoner, getRunes, getItems } from '../../../user/selectors';
 import { withRouter } from 'react-router-dom';
 import './Matches.scss';
 import Match from '../../components/Match';
-class Matches extends Component {
-  state = {};
 
-  renderMatches = () => {
-    return this.props.matches.map((match, index) => {
+const Matches = props => {
+  const renderMatches = () => {
+    return props.matches.map((match, index) => {
       return (
         <Match
-          summoner={this.props.summoner}
-          ddragon={this.props.ddragon}
+          summoner={props.summoner}
+          ddragon={props.ddragon}
           key={index}
           game={match}
-          runes={this.props.runes}
-          items={this.props.items}
+          runes={props.runes}
+          items={props.items}
           matchIndex={index}
         ></Match>
       );
     });
   };
 
-  render() {
-    return <div className="matches">{this.renderMatches()}</div>;
-  }
-}
+  return <div className="matches">{renderMatches()}</div>;
+};
 
 const mapStateToProps = state => {
   return {
@@ -38,9 +35,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    {}
-  )(Matches)
-);
+export default withRouter(connect(mapStateToProps, {})(Matches));

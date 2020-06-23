@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Stats.scss';
 
-class Stats extends Component {
-  state = {};
-
-  renderKDA = () => {
-    const stats = this.props.game.participants[this.props.userIndex].stats;
+const Stats = props => {
+  const renderKDA = () => {
+    const stats = props.game.participants[props.userIndex].stats;
     const { kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled } = stats;
     let ratio;
     if (deaths === 0) ratio = 'Perfect';
     else ratio = ((kills + assists) / deaths).toFixed(1);
     const csKilled = totalMinionsKilled + neutralMinionsKilled;
-    const gameDuration = this.props.game.gameDuration;
+    const gameDuration = props.game.gameDuration;
     const csAverage = (csKilled / (gameDuration / 60)).toFixed(1);
 
     return (
@@ -37,9 +35,7 @@ class Stats extends Component {
     );
   };
 
-  render() {
-    return <div className="match__stats">{this.renderKDA()}</div>;
-  }
-}
+  return <div className="match__stats">{renderKDA()}</div>;
+};
 
 export default Stats;

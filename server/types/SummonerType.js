@@ -12,7 +12,7 @@ const GameType = require('./GameType.js');
 
 const {
   getSummonerMatches,
-  getAllMatchesAccount,
+  getAllDisplayMatches,
   getLeagues,
   getGames
 } = require('../dbFunctions');
@@ -47,7 +47,7 @@ const SummonerType = new GraphQLObjectType({
       },
       description: "Retrieves all matches for the summoner's last 'limit' games",
       resolve: async (summoner, { limit }) => {
-        return await getAllMatchesAccount(summoner.accountId, limit);
+        return await getAllDisplayMatches(summoner.accountId, limit);
       }
     },
     getLeagues: {

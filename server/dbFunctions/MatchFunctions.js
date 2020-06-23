@@ -15,15 +15,29 @@ const getSummonerMatches = (accountId, limit) => {
   });
 };
 
-const getAllMatchesAccount = (accountId, limit) => {
-  limit = limit * 10;
+const getAllDisplayMatches = (accountId, limit) => {
   return db.sequelize
     .query(
-      `select m1.* from matches as m1 join (select m2.gameId from matches as m2 where accountId="${accountId}" limit ${limit}) d on m1.gameId in (d.gameId) order by m1.gameId DESC`
+      `select 
+        m1.summonerName, m1.gameId, m1.participantId, m1.championId, m1.teamId 
+      from 
+        matches as m1 
+      join 
+        (select 
+          m2.gameId 
+        from 
+          matches as m2 
+        where 
+          m2.accountId="${accountId}" 
+        limit ${limit}) d 
+      on 
+        m1.gameId 
+      in 
+        (d.gameId) 
+      order by 
+        m1.gameId DESC`
     )
-    .then(res => {
-      return res[0];
-    });
+    .then(res => res[0]);
 };
 
 const getAllMatchesGame = gameId => {
@@ -42,7 +56,7 @@ const getAllMatchesGame = gameId => {
 
 module.exports = {
   getSummonerMatches,
-  getAllMatchesAccount,
+  getAllDisplayMatches,
   getAllMatchesGame
 };
 

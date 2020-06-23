@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Match.scss';
 import { WIN } from '../../constants';
@@ -11,20 +11,15 @@ import Players from '../Players';
 import Expand from '../../containers/Expand';
 import Expansion from '../../../expansion/containers/Expansion';
 
-class Match extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      expanded: this.props.matchIndex === 0
-    };
-  }
+const Match = props => {
+  const [expanded, setExpanded] = useState(props.matchIndex === 0);
 
   /**
    * Determines whether or not the user won the game.
    * @returns A boolean representing if the user won or not.
    */
-  calculateWin = match => {
-    const username = this.props.match.params.username.toLowerCase();
+  const calculateWin = match => {
+    const username = props.match.params.username.toLowerCase();
     for (let participant of match.participantIdentities) {
       const participantName = participant.player.summonerName.toLowerCase();
       if (username === participantName) {
@@ -42,9 +37,9 @@ class Match extends Component {
    * array of participants.
    * @returns A number indicating the index of the user in the participants array.
    */
-  calculateParticipantIndex = () => {
-    const participantIdentities = this.props.game.participantIdentities;
-    const username = this.props.match.params.username.toLowerCase();
+  const calculateParticipantIndex = () => {
+    const participantIdentities = props.game.participantIdentities;
+    const username = props.match.params.username.toLowerCase();
     const length = participantIdentities.length;
     for (let i = 0; i < length; i++) {
       const participantName = participantIdentities[i].player.summonerName.toLowerCase();
@@ -55,80 +50,71 @@ class Match extends Component {
     return 0;
   };
 
-  handleExpand = () => {
-    this.setState({ expanded: !this.state.expanded });
+  const handleExpand = () => {
+    setExpanded(!expanded);
   };
 
-  render() {
-    const username = this.props.match.params.username.toLowerCase();
-    const userIndex = this.calculateParticipantIndex();
-    const win = this.calculateWin(this.props.game);
-    let matchStyle = 'match';
-    if (win) matchStyle += ' match_win';
-    else matchStyle += ' match_lose';
+  const username = props.match.params.username.toLowerCase();
+  const userIndex = calculateParticipantIndex();
+  const win = calculateWin(props.game);
+  let matchStyle = 'match';
+  if (win) matchStyle += ' match_win';
+  else matchStyle += ' match_lose';
 
-    let matchSummaryStyle = 'match__summary';
-    if (win) matchSummaryStyle += ' match__summary_win';
-    else matchSummaryStyle += ' match__summary_lose';
+  let matchSummaryStyle = 'match__summary';
+  if (win) matchSummaryStyle += ' match__summary_win';
+  else matchSummaryStyle += ' match__summary_lose';
 
-    return (
-      <div className="match-container">
-        <div className={matchStyle}>
-          <div className={matchSummaryStyle}>
-            <div className="match__summary-cell">
-              <Info win={win} game={this.props.game} username={username} userIndex={userIndex} />
-            </div>
-            <div className="match__summary-cell">
-              <Champ
-                win={win}
-                game={this.props.game}
-                username={username}
-                userIndex={userIndex}
-                ddragon={this.props.ddragon}
-                summoner={this.props.summoner}
-                runes={this.props.runes}
-              />
-            </div>
-            <div className="match__summary-cell">
-              <Stats win={win} game={this.props.game} username={username} userIndex={userIndex} />
-            </div>
-            <div className="match__summary-cell">
-              <Items
-                win={win}
-                items={this.props.items}
-                game={this.props.game}
-                username={username}
-                userIndex={userIndex}
-              />
-            </div>
-            <div className="match__summary-cell">
-              <Players
-                win={win}
-                game={this.props.game}
-                ddragon={this.props.ddragon}
-                username={username}
-                userIndex={userIndex}
-              />
-            </div>
-            <div className="match__summary-cell">
-              <Expand
-                win={win}
-                handleExpand={this.handleExpand}
-                matchIndex={this.props.matchIndex}
-              />
-            </div>
+  return (
+    <div className="match-container">
+      <div className={matchStyle}>
+        <div className={matchSummaryStyle}>
+          <div className="match__summary-cell">
+            <Info win={win} game={props.game} username={username} userIndex={userIndex} />
+          </div>
+          <div className="match__summary-cell">
+            <Champ
+              win={win}
+              game={props.game}
+              username={username}
+              userIndex={userIndex}
+              ddragon={props.ddragon}
+              summoner={props.summoner}
+              runes={props.runes}
+            />
+          </div>
+          <div className="match__summary-cell">
+            <Stats win={win} game={props.game} username={username} userIndex={userIndex} />
+          </div>
+          <div className="match__summary-cell">
+            <Items
+              win={win}
+              items={props.items}
+              game={props.game}
+              username={username}
+              userIndex={userIndex}
+            />
+          </div>
+          <div className="match__summary-cell">
+            <Players
+              win={win}
+              game={props.game}
+              ddragon={props.ddragon}
+              username={username}
+              userIndex={userIndex}
+            />
+          </div>
+          <div className="match__summary-cell">
+            <Expand win={win} handleExpand={handleExpand} matchIndex={props.matchIndex} />
           </div>
         </div>
-        {this.state.expanded ? (
-          <Expansion
-            matchIndex={this.props.matchIndex}
-            username={this.props.match.params.username}
-          />
-        ) : null}
       </div>
-    );
-  }
-}
+      {expanded ? (
+        <Expansion matchIndex={props.matchIndex} username={props.match.params.username} />
+      ) : null}
+    </div>
+  );
+};
 
 Match.propTypes = {
   match: PropTypes.object.isRequired

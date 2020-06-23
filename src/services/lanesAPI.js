@@ -13,7 +13,48 @@ export const getAnalysis = gameId => {
     data: {
       query: `
         query {
-      
+          getAllMatchesGame(gameId: ${gameId}) {
+            summonerName,
+            gameId,
+            participantId,
+            championId,
+            teamId,
+            spell1Id,
+            spell2Id,
+            win,
+            kills,
+            deaths,
+            assists,
+            visionScore,
+            firstBloodAssist,
+            firstBloodKill,
+            goldEarned,
+            totalDamageDealtToChampions,
+            totalMinionsKilled,
+            neutralMinionsKilled,
+            neutralMinionsKilledTeamJungle,
+            neutralMinionsKilledEnemyJungle,
+            wardsPlaced,
+            visionWardsBoughtInGame,
+            item0,
+            item1,
+            item2,
+            item3,
+            item4,
+            item5,
+            item6,
+            perk0,
+            perk1,
+            perk2,
+            perk3,
+            perk4,
+            perk5,
+            perkPrimaryStyle,
+            perkSubStyle,
+            statPerk0,
+            statPerk1,
+            statPerk2
+          }
         }
       `
     }
@@ -27,7 +68,7 @@ export const getAllInfo = (summonerName, limit) => {
     data: {
       query: `
         query {
-          summoner(summonerName: "born to kill 200") {
+          summoner(summonerName: "${summonerName}") {
             summonerName,
             summonerLevel,
             profileIconId,
@@ -42,7 +83,7 @@ export const getAllInfo = (summonerName, limit) => {
               seriesLosses,
               seriesTarget
             },
-            getUserMatches(limit: 1) {
+            getUserMatches(limit: ${limit}) {
               summonerName,
               gameId,
               participantId,
@@ -84,14 +125,14 @@ export const getAllInfo = (summonerName, limit) => {
               statPerk1,
               statPerk2
             },
-            getDisplayMatches(limit: 1) {
+            getDisplayMatches(limit: ${limit}) {
               summonerName,
               gameId,
               participantId,
               championId,
               teamId
             },
-            getGames(limit: 1) {
+            getGames(limit: ${limit}) {
               gameId,
               queueId,
               gameDuration,

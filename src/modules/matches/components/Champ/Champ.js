@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Champ.scss';
 const championImages = require.context('../../../../ddragon/img/champion', true);
 const summonerImages = require.context('../../../../ddragon/img/spell', true);
 const runeImages = require.context('../../../../ddragon/img/runes', true);
 
-class Champ extends Component {
-  state = {};
-
+const Champ = props => {
   /**
    * Renders the champion image
    */
-  renderChampion = () => {
-    const user = this.props.game.participants[this.props.userIndex];
+  const renderChampion = () => {
+    const user = props.game.participants[props.userIndex];
     const championID = user.championId;
-    let champURI = this.props.ddragon[championID].image.full;
+    let champURI = props.ddragon[championID].image.full;
     if (championID === 246) champURI = 'Qiyana.png';
     return (
       <div className="match__champ-image match__champ-image_main">
@@ -25,21 +23,21 @@ class Champ extends Component {
   /**
    * Renders the summoner spells as well as the level
    */
-  renderSummoners = () => {
-    const user = this.props.game.participants[this.props.userIndex];
+  const renderSummoners = () => {
+    const user = props.game.participants[props.userIndex];
     const { spell1Id, spell2Id } = user;
     const champLevel = user.stats.champLevel;
     const keystoneID = user.stats.perk0;
     // const level = user.stats.champLevel;
-    let firstSpellURI = this.props.summoner[spell1Id].image.full;
-    let secondSpellURI = this.props.summoner[spell2Id].image.full;
-    let keystoneURI = this.props.runes[keystoneID].key + '.png';
+    let firstSpellURI = props.summoner[spell1Id].image.full;
+    let secondSpellURI = props.summoner[spell2Id].image.full;
+    let keystoneURI = props.runes[keystoneID].key + '.png';
     let styles = [
       'match__champ-image match__champ-image_secondary match__champ-image_secondary-left',
       'match__champ-image match__champ-image_secondary match__champ-image_secondary-right',
       'match__champ-image_tertiary'
     ];
-    if (this.props.win) styles[2] += ' match__champ-image_secondary_win';
+    if (props.win) styles[2] += ' match__champ-image_secondary_win';
     else styles[2] += ' match__champ-image_secondary_lose';
 
     return (
@@ -62,16 +60,14 @@ class Champ extends Component {
     );
   };
 
-  render() {
-    return (
-      <div className="match__champ-container">
-        <div className="match__champ">
-          {this.renderChampion()}
-          {this.renderSummoners()}
-        </div>
+  return (
+    <div className="match__champ-container">
+      <div className="match__champ">
+        {renderChampion()}
+        {renderSummoners()}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Champ;
