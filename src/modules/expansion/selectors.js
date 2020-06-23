@@ -26,7 +26,7 @@ export const getSummoner = state => {
     return {};
   }
 
-  return appState.summoner;
+  return appState.summonerSpells;
 };
 
 export const getRunes = state => {

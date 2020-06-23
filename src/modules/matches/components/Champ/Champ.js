@@ -29,8 +29,8 @@ const Champ = props => {
     const champLevel = user.stats.champLevel;
     const keystoneID = user.stats.perk0;
     // const level = user.stats.champLevel;
-    let firstSpellURI = props.summoner[spell1Id].image.full;
-    let secondSpellURI = props.summoner[spell2Id].image.full;
+    let firstSpellURI = props.summonerSpells[spell1Id].image.full;
+    let secondSpellURI = props.summonerSpells[spell2Id].image.full;
     let keystoneURI = props.runes[keystoneID].key + '.png';
     let styles = [
       'match__champ-image match__champ-image_secondary match__champ-image_secondary-left',

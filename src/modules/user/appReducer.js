@@ -1,9 +1,9 @@
 import { GET_USER_DETAILS } from './actionTypes';
 import Champions from '../../ddragon/data/en_US/champion.json';
-import Summoner from '../../ddragon/data/en_US/summoner.json';
+import SummonerSpells from '../../ddragon/data/en_US/summoner.json';
 import Runes from '../../ddragon/data/en_US/runesReforged.json';
 import Items from '../../ddragon/data/en_US/item.json';
-
+import { DisplayMatches, UserMatches, Summoner, Leagues, Games } from '../../mock/correct';
 /**
  * From the imported Champions json, create a mapping from
  * championID to info instead of championName to info.
@@ -20,13 +20,22 @@ const createChampIDMapping = () => {
   return mapping;
 };
 
+const modifyUserMatches = () => {
+  const userMatches = UserMatches.userMatches;
+  let mapping = {};
+  userMatches.forEach(match => {
+    mapping[match.gameId] = match;
+  });
+  return mapping;
+};
+
 /**
  * From the imported Summoner json, create a mapping from summonerID
  * to info instead of summonerName to info
  * @returns An object where the keys are summonerIDs and value is an object
  */
 const createSummonerIDMapping = () => {
-  const data = Summoner.data;
+  const data = SummonerSpells.data;
   let mapping = {};
   Object.keys(data).forEach((summoner, index) => {
     mapping[data[summoner].key] = { ...data[summoner] };
@@ -68,9 +77,15 @@ const createItemIDMapping = () => {
 const initialState = {
   matches: [],
   ddragon: createChampIDMapping(),
-  summoner: createSummonerIDMapping(),
+  summonerSpells: createSummonerIDMapping(),
   runes: createRuneIDMapping(),
-  items: createItemIDMapping()
+  items: createItemIDMapping(),
+
+  displayMatches: DisplayMatches.displayMatches,
+  userMatches: modifyUserMatches(),
+  summoner: Summoner.summoner,
+  leagues: Leagues.leagues,
+  games: Games.games
 };
 
 export default function appReducer(state = initialState, action) {

@@ -53,7 +53,7 @@ const mapStateToProps = (state, props) => {
   return {
     match: getMatch(state, props.matchIndex),
     ddragon: getDDragon(state),
-    summoner: getSummoner(state),
+    summonerSpells: getSummoner(state),
     runes: getRunes(state),
     items: getItems(state)
   };

@@ -29,6 +29,8 @@ const getAllDisplayMatches = (accountId, limit) => {
           matches as m2 
         where 
           m2.accountId="${accountId}" 
+        order by 
+          m2.gameId desc
         limit ${limit}) d 
       on 
         m1.gameId 

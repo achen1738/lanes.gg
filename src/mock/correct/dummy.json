@@ -1,0 +1,1273 @@
+{
+  "leagues": [
+    {
+      "queueType": "RANKED_FLEX_SR",
+      "tier": "GOLD",
+      "division": "II",
+      "leaguePoints": 56,
+      "wins": 55,
+      "losses": 33,
+      "seriesWins": 0,
+      "seriesLosses": 0,
+      "seriesTarget": 0
+    },
+    {
+      "queueType": "RANKED_SOLO_5x5",
+      "tier": "GOLD",
+      "division": "III",
+      "leaguePoints": 100,
+      "wins": 57,
+      "losses": 48,
+      "seriesWins": 1,
+      "seriesLosses": 0,
+      "seriesTarget": 2
+    }
+  ],
+  "displayMatches": {
+    "3467550184": [
+      {
+        "summonerName": "Heçate",
+        "gameId": 3467550184,
+        "participantId": 5,
+        "championId": 21,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Doodis",
+        "gameId": 3467550184,
+        "participantId": 1,
+        "championId": 3,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3467550184,
+        "participantId": 2,
+        "championId": 28,
+        "teamId": 100
+      },
+      {
+        "summonerName": "tsxitouaipiaorou",
+        "gameId": 3467550184,
+        "participantId": 8,
+        "championId": 115,
+        "teamId": 200
+      },
+      {
+        "summonerName": "wxxlxxw",
+        "gameId": 3467550184,
+        "participantId": 6,
+        "championId": 59,
+        "teamId": 200
+      },
+      {
+        "summonerName": "cyp",
+        "gameId": 3467550184,
+        "participantId": 4,
+        "championId": 37,
+        "teamId": 100
+      },
+      {
+        "summonerName": "12cz",
+        "gameId": 3467550184,
+        "participantId": 7,
+        "championId": 81,
+        "teamId": 200
+      },
+      {
+        "summonerName": "ChauMiFan",
+        "gameId": 3467550184,
+        "participantId": 3,
+        "championId": 23,
+        "teamId": 100
+      },
+      {
+        "summonerName": "sexyleghair",
+        "gameId": 3467550184,
+        "participantId": 9,
+        "championId": 432,
+        "teamId": 200
+      },
+      {
+        "summonerName": "LilithyG",
+        "gameId": 3467550184,
+        "participantId": 10,
+        "championId": 62,
+        "teamId": 200
+      }
+    ],
+    "3468235097": [
+      {
+        "summonerName": "KEV gona CARRY",
+        "gameId": 3468235097,
+        "participantId": 7,
+        "championId": 245,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3468235097,
+        "participantId": 3,
+        "championId": 114,
+        "teamId": 100
+      },
+      {
+        "summonerName": "nuclear cat",
+        "gameId": 3468235097,
+        "participantId": 8,
+        "championId": 15,
+        "teamId": 200
+      },
+      {
+        "summonerName": "JADiaz105",
+        "gameId": 3468235097,
+        "participantId": 1,
+        "championId": 98,
+        "teamId": 100
+      },
+      {
+        "summonerName": "illion7",
+        "gameId": 3468235097,
+        "participantId": 9,
+        "championId": 39,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Phantomz1",
+        "gameId": 3468235097,
+        "participantId": 10,
+        "championId": 23,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Im Sad and Alone",
+        "gameId": 3468235097,
+        "participantId": 6,
+        "championId": 45,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Eye of the Storm",
+        "gameId": 3468235097,
+        "participantId": 5,
+        "championId": 40,
+        "teamId": 100
+      },
+      {
+        "summonerName": "EllislAxrtM",
+        "gameId": 3468235097,
+        "participantId": 4,
+        "championId": 81,
+        "teamId": 100
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3468235097,
+        "participantId": 2,
+        "championId": 62,
+        "teamId": 100
+      }
+    ],
+    "3468247938": [
+      {
+        "summonerName": "falconk1ck",
+        "gameId": 3468247938,
+        "participantId": 1,
+        "championId": 16,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3468247938,
+        "participantId": 5,
+        "championId": 134,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Skrall",
+        "gameId": 3468247938,
+        "participantId": 3,
+        "championId": 53,
+        "teamId": 100
+      },
+      {
+        "summonerName": "FaZeToAsTeRr",
+        "gameId": 3468247938,
+        "participantId": 10,
+        "championId": 2,
+        "teamId": 200
+      },
+      {
+        "summonerName": "mechal",
+        "gameId": 3468247938,
+        "participantId": 9,
+        "championId": 39,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Gay George ",
+        "gameId": 3468247938,
+        "participantId": 7,
+        "championId": 22,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Doctor LoL",
+        "gameId": 3468247938,
+        "participantId": 6,
+        "championId": 115,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Soulful Eyes",
+        "gameId": 3468247938,
+        "participantId": 8,
+        "championId": 350,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Swervó",
+        "gameId": 3468247938,
+        "participantId": 2,
+        "championId": 429,
+        "teamId": 100
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3468247938,
+        "participantId": 4,
+        "championId": 62,
+        "teamId": 100
+      }
+    ],
+    "3468261015": [
+      {
+        "summonerName": "Queen Dragneel",
+        "gameId": 3468261015,
+        "participantId": 2,
+        "championId": 54,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3468261015,
+        "participantId": 7,
+        "championId": 10,
+        "teamId": 200
+      },
+      {
+        "summonerName": "TríHardXD",
+        "gameId": 3468261015,
+        "participantId": 5,
+        "championId": 119,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Coffee Slave",
+        "gameId": 3468261015,
+        "participantId": 10,
+        "championId": 25,
+        "teamId": 200
+      },
+      {
+        "summonerName": "No More Milk",
+        "gameId": 3468261015,
+        "participantId": 8,
+        "championId": 38,
+        "teamId": 200
+      },
+      {
+        "summonerName": "TriHard Seller",
+        "gameId": 3468261015,
+        "participantId": 4,
+        "championId": 429,
+        "teamId": 100
+      },
+      {
+        "summonerName": "peemoppa01",
+        "gameId": 3468261015,
+        "participantId": 1,
+        "championId": 101,
+        "teamId": 100
+      },
+      {
+        "summonerName": "2005 NISSAN 350Z",
+        "gameId": 3468261015,
+        "participantId": 9,
+        "championId": 81,
+        "teamId": 200
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3468261015,
+        "participantId": 6,
+        "championId": 62,
+        "teamId": 200
+      },
+      {
+        "summonerName": "SarcasticSensei",
+        "gameId": 3468261015,
+        "participantId": 3,
+        "championId": 106,
+        "teamId": 100
+      }
+    ],
+    "3468352992": [
+      {
+        "summonerName": "VoidSafety",
+        "gameId": 3468352992,
+        "participantId": 6,
+        "championId": 29,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3468352992,
+        "participantId": 9,
+        "championId": 134,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Minion313",
+        "gameId": 3468352992,
+        "participantId": 3,
+        "championId": 101,
+        "teamId": 100
+      },
+      {
+        "summonerName": "FaZeToAsTeRr",
+        "gameId": 3468352992,
+        "participantId": 2,
+        "championId": 2,
+        "teamId": 100
+      },
+      {
+        "summonerName": "mechal",
+        "gameId": 3468352992,
+        "participantId": 1,
+        "championId": 120,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Darkchyld95",
+        "gameId": 3468352992,
+        "participantId": 5,
+        "championId": 3,
+        "teamId": 100
+      },
+      {
+        "summonerName": "schawill",
+        "gameId": 3468352992,
+        "participantId": 10,
+        "championId": 98,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Majikk",
+        "gameId": 3468352992,
+        "participantId": 4,
+        "championId": 51,
+        "teamId": 100
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3468352992,
+        "participantId": 8,
+        "championId": 48,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Foodie",
+        "gameId": 3468352992,
+        "participantId": 7,
+        "championId": 117,
+        "teamId": 200
+      }
+    ],
+    "3468862178": [
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3468862178,
+        "participantId": 7,
+        "championId": 134,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Bebraveee",
+        "gameId": 3468862178,
+        "participantId": 2,
+        "championId": 120,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Hot Fresh Stew",
+        "gameId": 3468862178,
+        "participantId": 8,
+        "championId": 122,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Tzüyü",
+        "gameId": 3468862178,
+        "participantId": 10,
+        "championId": 412,
+        "teamId": 200
+      },
+      {
+        "summonerName": "TheMajesticBoy",
+        "gameId": 3468862178,
+        "participantId": 3,
+        "championId": 40,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Drizzthelf",
+        "gameId": 3468862178,
+        "participantId": 9,
+        "championId": 21,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Prey and Spray",
+        "gameId": 3468862178,
+        "participantId": 4,
+        "championId": 22,
+        "teamId": 100
+      },
+      {
+        "summonerName": "chinamantis",
+        "gameId": 3468862178,
+        "participantId": 5,
+        "championId": 86,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Tây Môn Khánh",
+        "gameId": 3468862178,
+        "participantId": 1,
+        "championId": 61,
+        "teamId": 100
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3468862178,
+        "participantId": 6,
+        "championId": 62,
+        "teamId": 200
+      }
+    ],
+    "3468907872": [
+      {
+        "summonerName": "Joeeeee",
+        "gameId": 3468907872,
+        "participantId": 8,
+        "championId": 117,
+        "teamId": 200
+      },
+      {
+        "summonerName": "AddictedToRamen",
+        "gameId": 3468907872,
+        "participantId": 10,
+        "championId": 114,
+        "teamId": 200
+      },
+      {
+        "summonerName": "High and Sad",
+        "gameId": 3468907872,
+        "participantId": 9,
+        "championId": 39,
+        "teamId": 200
+      },
+      {
+        "summonerName": "waiandanumber",
+        "gameId": 3468907872,
+        "participantId": 1,
+        "championId": 122,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3468907872,
+        "participantId": 3,
+        "championId": 68,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Rito Michael",
+        "gameId": 3468907872,
+        "participantId": 6,
+        "championId": 22,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Sugggar Flower",
+        "gameId": 3468907872,
+        "participantId": 5,
+        "championId": 25,
+        "teamId": 100
+      },
+      {
+        "summonerName": "T and K",
+        "gameId": 3468907872,
+        "participantId": 4,
+        "championId": 429,
+        "teamId": 100
+      },
+      {
+        "summonerName": "isolate pls",
+        "gameId": 3468907872,
+        "participantId": 7,
+        "championId": 60,
+        "teamId": 200
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3468907872,
+        "participantId": 2,
+        "championId": 62,
+        "teamId": 100
+      }
+    ],
+    "3468913925": [
+      {
+        "summonerName": "Ashby20",
+        "gameId": 3468913925,
+        "participantId": 5,
+        "championId": 157,
+        "teamId": 100
+      },
+      {
+        "summonerName": "amspecialneeds",
+        "gameId": 3468913925,
+        "participantId": 7,
+        "championId": 122,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3468913925,
+        "participantId": 10,
+        "championId": 4,
+        "teamId": 200
+      },
+      {
+        "summonerName": "WhiteFangZ",
+        "gameId": 3468913925,
+        "participantId": 8,
+        "championId": 22,
+        "teamId": 200
+      },
+      {
+        "summonerName": "thakarar",
+        "gameId": 3468913925,
+        "participantId": 1,
+        "championId": 120,
+        "teamId": 100
+      },
+      {
+        "summonerName": "ToManyDays",
+        "gameId": 3468913925,
+        "participantId": 6,
+        "championId": 432,
+        "teamId": 200
+      },
+      {
+        "summonerName": "133780081351337",
+        "gameId": 3468913925,
+        "participantId": 2,
+        "championId": 25,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Kebin Koala",
+        "gameId": 3468913925,
+        "participantId": 3,
+        "championId": 202,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Deemed insanity",
+        "gameId": 3468913925,
+        "participantId": 4,
+        "championId": 38,
+        "teamId": 100
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3468913925,
+        "participantId": 9,
+        "championId": 62,
+        "teamId": 200
+      }
+    ],
+    "3469265227": [
+      {
+        "summonerName": "Absys",
+        "gameId": 3469265227,
+        "participantId": 3,
+        "championId": 3,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Armour4",
+        "gameId": 3469265227,
+        "participantId": 2,
+        "championId": 15,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3469265227,
+        "participantId": 5,
+        "championId": 23,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Plastic Boy",
+        "gameId": 3469265227,
+        "participantId": 7,
+        "championId": 432,
+        "teamId": 200
+      },
+      {
+        "summonerName": "TSD Doan",
+        "gameId": 3469265227,
+        "participantId": 8,
+        "championId": 54,
+        "teamId": 200
+      },
+      {
+        "summonerName": "BLACK MAN",
+        "gameId": 3469265227,
+        "participantId": 10,
+        "championId": 112,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Keìon",
+        "gameId": 3469265227,
+        "participantId": 1,
+        "championId": 99,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Minion Blocked",
+        "gameId": 3469265227,
+        "participantId": 6,
+        "championId": 81,
+        "teamId": 200
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3469265227,
+        "participantId": 4,
+        "championId": 62,
+        "teamId": 100
+      },
+      {
+        "summonerName": "lilclown",
+        "gameId": 3469265227,
+        "participantId": 9,
+        "championId": 28,
+        "teamId": 200
+      }
+    ],
+    "3469318517": [
+      {
+        "summonerName": "Ambie",
+        "gameId": 3469318517,
+        "participantId": 9,
+        "championId": 117,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Genulaithere",
+        "gameId": 3469318517,
+        "participantId": 3,
+        "championId": 39,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Neo99899",
+        "gameId": 3469318517,
+        "participantId": 6,
+        "championId": 8,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Born To Kill 200",
+        "gameId": 3469318517,
+        "participantId": 8,
+        "championId": 31,
+        "teamId": 200
+      },
+      {
+        "summonerName": "TurtleLift2",
+        "gameId": 3469318517,
+        "participantId": 2,
+        "championId": 141,
+        "teamId": 100
+      },
+      {
+        "summonerName": "Three AM",
+        "gameId": 3469318517,
+        "participantId": 10,
+        "championId": 119,
+        "teamId": 200
+      },
+      {
+        "summonerName": "Luziooo",
+        "gameId": 3469318517,
+        "participantId": 1,
+        "championId": 111,
+        "teamId": 100
+      },
+      {
+        "summonerName": "WhenYourDadyDie",
+        "gameId": 3469318517,
+        "participantId": 4,
+        "championId": 55,
+        "teamId": 100
+      },
+      {
+        "summonerName": "MafewMa",
+        "gameId": 3469318517,
+        "participantId": 5,
+        "championId": 222,
+        "teamId": 100
+      },
+      {
+        "summonerName": "CinnaMinh",
+        "gameId": 3469318517,
+        "participantId": 7,
+        "championId": 62,
+        "teamId": 200
+      }
+    ]
+  },
+  "games": [
+    {
+      "gameId": 3469318517,
+      "queueId": 420,
+      "gameDuration": 2204,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592772118466,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3469265227,
+      "queueId": 420,
+      "gameDuration": 1492,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592769424970,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3468913925,
+      "queueId": 420,
+      "gameDuration": 912,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592721732273,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3468907872,
+      "queueId": 420,
+      "gameDuration": 1629,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592719487492,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3468862178,
+      "queueId": 420,
+      "gameDuration": 1628,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592716573439,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3468352992,
+      "queueId": 420,
+      "gameDuration": 2029,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592691574043,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3468261015,
+      "queueId": 420,
+      "gameDuration": 1424,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592685265506,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3468247938,
+      "queueId": 420,
+      "gameDuration": 2222,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592688915667,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3468235097,
+      "queueId": 420,
+      "gameDuration": 1512,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592687056142,
+      "gameMode": "CLASSIC"
+    },
+    {
+      "gameId": 3467550184,
+      "queueId": 440,
+      "gameDuration": 2153,
+      "seasonId": 13,
+      "mapId": 11,
+      "gameType": "MATCHED_GAME",
+      "gameCreation": 1592623952951,
+      "gameMode": "CLASSIC"
+    }
+  ],
+  "userMatches": [
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3469318517,
+      "participantId": 8,
+      "championId": 31,
+      "teamId": 200,
+      "spell1Id": 4,
+      "spell2Id": 14,
+      "win": 1,
+      "kills": 12,
+      "deaths": 8,
+      "assists": 10,
+      "visionScore": 9,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 1,
+      "goldEarned": 16283,
+      "totalDamageDealtToChampions": 31712,
+      "totalMinionsKilled": 212,
+      "neutralMinionsKilled": 10,
+      "neutralMinionsKilledTeamJungle": 4,
+      "neutralMinionsKilledEnemyJungle": 1,
+      "wardsPlaced": 3,
+      "visionWardsBoughtInGame": 1,
+      "item0": 3193,
+      "item1": 3030,
+      "item2": 3157,
+      "item3": 3905,
+      "item4": 3001,
+      "item5": 3020,
+      "item6": 3364,
+      "perk0": 8351,
+      "perk1": 8304,
+      "perk2": 8345,
+      "perk3": 8410,
+      "perk4": 8135,
+      "perk5": 8139,
+      "perkPrimaryStyle": 8300,
+      "perkSubStyle": 8100,
+      "statPerk0": 5008,
+      "statPerk1": 5008,
+      "statPerk2": 5003
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3469265227,
+      "participantId": 5,
+      "championId": 23,
+      "teamId": 100,
+      "spell1Id": 4,
+      "spell2Id": 6,
+      "win": 1,
+      "kills": 0,
+      "deaths": 0,
+      "assists": 0,
+      "visionScore": 9,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 0,
+      "goldEarned": 10972,
+      "totalDamageDealtToChampions": 3821,
+      "totalMinionsKilled": 252,
+      "neutralMinionsKilled": 18,
+      "neutralMinionsKilledTeamJungle": 0,
+      "neutralMinionsKilledEnemyJungle": 12,
+      "wardsPlaced": 5,
+      "visionWardsBoughtInGame": 0,
+      "item0": 3812,
+      "item1": 1036,
+      "item2": 3077,
+      "item3": 3006,
+      "item4": 1038,
+      "item5": 1036,
+      "item6": 3340,
+      "perk0": 8008,
+      "perk1": 9111,
+      "perk2": 9103,
+      "perk3": 8299,
+      "perk4": 8275,
+      "perk5": 8210,
+      "perkPrimaryStyle": 8000,
+      "perkSubStyle": 8200,
+      "statPerk0": 5005,
+      "statPerk1": 5008,
+      "statPerk2": 5003
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3468913925,
+      "participantId": 10,
+      "championId": 4,
+      "teamId": 200,
+      "spell1Id": 4,
+      "spell2Id": 14,
+      "win": 1,
+      "kills": 4,
+      "deaths": 0,
+      "assists": 2,
+      "visionScore": 12,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 1,
+      "goldEarned": 8526,
+      "totalDamageDealtToChampions": 6037,
+      "totalMinionsKilled": 133,
+      "neutralMinionsKilled": 4,
+      "neutralMinionsKilledTeamJungle": 0,
+      "neutralMinionsKilledEnemyJungle": 4,
+      "wardsPlaced": 5,
+      "visionWardsBoughtInGame": 3,
+      "item0": 2033,
+      "item1": 2010,
+      "item2": 2055,
+      "item3": 1001,
+      "item4": 3100,
+      "item5": 3027,
+      "item6": 3364,
+      "perk0": 8229,
+      "perk1": 8226,
+      "perk2": 8210,
+      "perk3": 8237,
+      "perk4": 8345,
+      "perk5": 8352,
+      "perkPrimaryStyle": 8200,
+      "perkSubStyle": 8300,
+      "statPerk0": 5005,
+      "statPerk1": 5008,
+      "statPerk2": 5002
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3468907872,
+      "participantId": 3,
+      "championId": 68,
+      "teamId": 100,
+      "spell1Id": 4,
+      "spell2Id": 14,
+      "win": 1,
+      "kills": 16,
+      "deaths": 3,
+      "assists": 7,
+      "visionScore": 11,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 0,
+      "goldEarned": 14447,
+      "totalDamageDealtToChampions": 24140,
+      "totalMinionsKilled": 167,
+      "neutralMinionsKilled": 0,
+      "neutralMinionsKilledTeamJungle": 0,
+      "neutralMinionsKilledEnemyJungle": 0,
+      "wardsPlaced": 8,
+      "visionWardsBoughtInGame": 2,
+      "item0": 1054,
+      "item1": 3020,
+      "item2": 3157,
+      "item3": 3151,
+      "item4": 3165,
+      "item5": 1026,
+      "item6": 3340,
+      "perk0": 8229,
+      "perk1": 8275,
+      "perk2": 8210,
+      "perk3": 8237,
+      "perk4": 8139,
+      "perk5": 8135,
+      "perkPrimaryStyle": 8200,
+      "perkSubStyle": 8100,
+      "statPerk0": 5008,
+      "statPerk1": 5008,
+      "statPerk2": 5002
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3468862178,
+      "participantId": 7,
+      "championId": 134,
+      "teamId": 200,
+      "spell1Id": 4,
+      "spell2Id": 12,
+      "win": 1,
+      "kills": 8,
+      "deaths": 2,
+      "assists": 3,
+      "visionScore": 8,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 0,
+      "goldEarned": 12811,
+      "totalDamageDealtToChampions": 16315,
+      "totalMinionsKilled": 222,
+      "neutralMinionsKilled": 19,
+      "neutralMinionsKilledTeamJungle": 8,
+      "neutralMinionsKilledEnemyJungle": 9,
+      "wardsPlaced": 6,
+      "visionWardsBoughtInGame": 0,
+      "item0": 1056,
+      "item1": 3020,
+      "item2": 3157,
+      "item3": 3165,
+      "item4": 1058,
+      "item5": 3285,
+      "item6": 3340,
+      "perk0": 8112,
+      "perk1": 8139,
+      "perk2": 8138,
+      "perk3": 8135,
+      "perk4": 8226,
+      "perk5": 8210,
+      "perkPrimaryStyle": 8100,
+      "perkSubStyle": 8200,
+      "statPerk0": 5008,
+      "statPerk1": 5008,
+      "statPerk2": 5003
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3468352992,
+      "participantId": 9,
+      "championId": 134,
+      "teamId": 200,
+      "spell1Id": 4,
+      "spell2Id": 12,
+      "win": 1,
+      "kills": 16,
+      "deaths": 5,
+      "assists": 8,
+      "visionScore": 12,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 0,
+      "goldEarned": 16777,
+      "totalDamageDealtToChampions": 42684,
+      "totalMinionsKilled": 239,
+      "neutralMinionsKilled": 16,
+      "neutralMinionsKilledTeamJungle": 12,
+      "neutralMinionsKilledEnemyJungle": 0,
+      "wardsPlaced": 8,
+      "visionWardsBoughtInGame": 1,
+      "item0": 3135,
+      "item1": 3285,
+      "item2": 3157,
+      "item3": 3151,
+      "item4": 3020,
+      "item5": 1058,
+      "item6": 3340,
+      "perk0": 8112,
+      "perk1": 8139,
+      "perk2": 8138,
+      "perk3": 8135,
+      "perk4": 8226,
+      "perk5": 8210,
+      "perkPrimaryStyle": 8100,
+      "perkSubStyle": 8200,
+      "statPerk0": 5008,
+      "statPerk1": 5008,
+      "statPerk2": 5003
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3468261015,
+      "participantId": 7,
+      "championId": 10,
+      "teamId": 200,
+      "spell1Id": 4,
+      "spell2Id": 12,
+      "win": 1,
+      "kills": 8,
+      "deaths": 3,
+      "assists": 2,
+      "visionScore": 10,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 0,
+      "goldEarned": 12440,
+      "totalDamageDealtToChampions": 20419,
+      "totalMinionsKilled": 196,
+      "neutralMinionsKilled": 5,
+      "neutralMinionsKilledTeamJungle": 0,
+      "neutralMinionsKilledEnemyJungle": 1,
+      "wardsPlaced": 6,
+      "visionWardsBoughtInGame": 0,
+      "item0": 3124,
+      "item1": 3006,
+      "item2": 3153,
+      "item3": 3115,
+      "item4": 0,
+      "item5": 0,
+      "item6": 3340,
+      "perk0": 8021,
+      "perk1": 9101,
+      "perk2": 9104,
+      "perk3": 8014,
+      "perk4": 8444,
+      "perk5": 8451,
+      "perkPrimaryStyle": 8000,
+      "perkSubStyle": 8400,
+      "statPerk0": 5005,
+      "statPerk1": 5008,
+      "statPerk2": 5003
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3468247938,
+      "participantId": 5,
+      "championId": 134,
+      "teamId": 100,
+      "spell1Id": 4,
+      "spell2Id": 12,
+      "win": 1,
+      "kills": 9,
+      "deaths": 2,
+      "assists": 17,
+      "visionScore": 22,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 0,
+      "goldEarned": 15957,
+      "totalDamageDealtToChampions": 37426,
+      "totalMinionsKilled": 265,
+      "neutralMinionsKilled": 20,
+      "neutralMinionsKilledTeamJungle": 20,
+      "neutralMinionsKilledEnemyJungle": 0,
+      "wardsPlaced": 8,
+      "visionWardsBoughtInGame": 1,
+      "item0": 3151,
+      "item1": 3285,
+      "item2": 3157,
+      "item3": 3020,
+      "item4": 3135,
+      "item5": 1082,
+      "item6": 3364,
+      "perk0": 8010,
+      "perk1": 9101,
+      "perk2": 9103,
+      "perk3": 8014,
+      "perk4": 8444,
+      "perk5": 8451,
+      "perkPrimaryStyle": 8000,
+      "perkSubStyle": 8400,
+      "statPerk0": 5005,
+      "statPerk1": 5008,
+      "statPerk2": 5002
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3468235097,
+      "participantId": 3,
+      "championId": 114,
+      "teamId": 100,
+      "spell1Id": 4,
+      "spell2Id": 12,
+      "win": 0,
+      "kills": 5,
+      "deaths": 2,
+      "assists": 3,
+      "visionScore": 11,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 0,
+      "goldEarned": 11229,
+      "totalDamageDealtToChampions": 16748,
+      "totalMinionsKilled": 210,
+      "neutralMinionsKilled": 0,
+      "neutralMinionsKilledTeamJungle": 0,
+      "neutralMinionsKilledEnemyJungle": 0,
+      "wardsPlaced": 6,
+      "visionWardsBoughtInGame": 1,
+      "item0": 3078,
+      "item1": 3153,
+      "item2": 3077,
+      "item3": 3047,
+      "item4": 1053,
+      "item5": 0,
+      "item6": 3340,
+      "perk0": 8010,
+      "perk1": 9101,
+      "perk2": 9103,
+      "perk3": 8014,
+      "perk4": 8444,
+      "perk5": 8451,
+      "perkPrimaryStyle": 8000,
+      "perkSubStyle": 8400,
+      "statPerk0": 5005,
+      "statPerk1": 5008,
+      "statPerk2": 5002
+    },
+    {
+      "summonerName": "Born To Kill 200",
+      "gameId": 3467550184,
+      "participantId": 2,
+      "championId": 28,
+      "teamId": 100,
+      "spell1Id": 4,
+      "spell2Id": 11,
+      "win": 1,
+      "kills": 18,
+      "deaths": 5,
+      "assists": 13,
+      "visionScore": 14,
+      "firstBloodAssist": 0,
+      "firstBloodKill": 0,
+      "goldEarned": 16601,
+      "totalDamageDealtToChampions": 44093,
+      "totalMinionsKilled": 29,
+      "neutralMinionsKilled": 138,
+      "neutralMinionsKilledTeamJungle": 72,
+      "neutralMinionsKilledEnemyJungle": 9,
+      "wardsPlaced": 3,
+      "visionWardsBoughtInGame": 2,
+      "item0": 1402,
+      "item1": 3157,
+      "item2": 3102,
+      "item3": 3165,
+      "item4": 3100,
+      "item5": 3020,
+      "item6": 3364,
+      "perk0": 8112,
+      "perk1": 8143,
+      "perk2": 8138,
+      "perk3": 8105,
+      "perk4": 8275,
+      "perk5": 8232,
+      "perkPrimaryStyle": 8100,
+      "perkSubStyle": 8200,
+      "statPerk0": 5008,
+      "statPerk1": 5008,
+      "statPerk2": 5002
+    }
+  ],
+  "summoner": { "profileIconId": 1301, "summonerLevel": 112, "summonerName": "Born To Kill 200" }
+}

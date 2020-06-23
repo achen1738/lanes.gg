@@ -1,62 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Match.scss';
-import { WIN } from '../../constants';
-import { withRouter } from 'react-router-dom';
-import Info from '../Info';
-import Champ from '../Champ';
-import Stats from '../Stats';
-import Items from '../Items';
-import Players from '../Players';
-import Expand from '../../containers/Expand';
-import Expansion from '../../../expansion/containers/Expansion';
+import { connect } from 'react-redux';
+import { getUserMatch, getDisplayMatches } from '../../../user/selectors';
+
+// import Info from '../Info';
+// import Champ from '../Champ';
+// import Stats from '../Stats';
+// import Items from '../Items';
+// import Players from '../Players';
+// import Expand from '../../containers/Expand';
+// import Expansion from '../../../expansion/containers/Expansion';
 
 const Match = props => {
-  const [expanded, setExpanded] = useState(props.matchIndex === 0);
+  // eslint-disable-next-line
+  const [expanded, setExpanded] = useState(false);
+  const win = props.userMatch.win;
 
-  /**
-   * Determines whether or not the user won the game.
-   * @returns A boolean representing if the user won or not.
-   */
-  const calculateWin = match => {
-    const username = props.match.params.username.toLowerCase();
-    for (let participant of match.participantIdentities) {
-      const participantName = participant.player.summonerName.toLowerCase();
-      if (username === participantName) {
-        let team;
-        if (participant.participantId < 6) team = match.teams[0];
-        else team = match.teams[1];
-        return team.win === WIN;
-      }
-    }
-    return true;
-  };
-
-  /**
-   * With the submitted username, find the corresponding participant index in the
-   * array of participants.
-   * @returns A number indicating the index of the user in the participants array.
-   */
-  const calculateParticipantIndex = () => {
-    const participantIdentities = props.game.participantIdentities;
-    const username = props.match.params.username.toLowerCase();
-    const length = participantIdentities.length;
-    for (let i = 0; i < length; i++) {
-      const participantName = participantIdentities[i].player.summonerName.toLowerCase();
-      if (username === participantName) {
-        return i;
-      }
-    }
-    return 0;
-  };
-
-  const handleExpand = () => {
-    setExpanded(!expanded);
-  };
-
-  const username = props.match.params.username.toLowerCase();
-  const userIndex = calculateParticipantIndex();
-  const win = calculateWin(props.game);
   let matchStyle = 'match';
   if (win) matchStyle += ' match_win';
   else matchStyle += ' match_lose';
@@ -69,7 +29,7 @@ const Match = props => {
     <div className="match-container">
       <div className={matchStyle}>
         <div className={matchSummaryStyle}>
-          <div className="match__summary-cell">
+          {/* <div className="match__summary-cell">
             <Info win={win} game={props.game} username={username} userIndex={userIndex} />
           </div>
           <div className="match__summary-cell">
@@ -79,7 +39,7 @@ const Match = props => {
               username={username}
               userIndex={userIndex}
               ddragon={props.ddragon}
-              summoner={props.summoner}
+              summonerSpells={props.summonerSpells}
               runes={props.runes}
             />
           </div>
@@ -106,18 +66,22 @@ const Match = props => {
           </div>
           <div className="match__summary-cell">
             <Expand win={win} handleExpand={handleExpand} matchIndex={props.matchIndex} />
-          </div>
+          </div> */}
         </div>
       </div>
-      {expanded ? (
-        <Expansion matchIndex={props.matchIndex} username={props.match.params.username} />
-      ) : null}
     </div>
   );
 };
 
 Match.propTypes = {
-  match: PropTypes.object.isRequired
+  game: PropTypes.object.isRequired
 };
 
-export default withRouter(Match);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    userMatch: getUserMatch(state, ownProps.game.gameId),
+    displayMatches: getDisplayMatches(state, ownProps.game.gameId)
+  };
+};
+
+export default connect(mapStateToProps, {})(Match);

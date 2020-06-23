@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@mysql/xdevapi": "^8.0.20",
-    "apollo-server-express": "^2.14.3",
+    "apollo-server-express": "^2.15.0",
     "axios": "^0.19.0",
     "chart.js": "^2.7.3",
     "chart.piecelabel.js": "^0.15.0",
@@ -13,15 +13,15 @@
     "express-graphql": "^0.9.0",
     "graphql": "^15.1.0",
     "graphql-compose": "^7.18.1",
-    "graphql-tools": "^6.0.9",
+    "graphql-tools": "^6.0.10",
     "kayn": "^0.9.11",
-    "mongoose": "^5.9.12",
+    "mongoose": "^5.9.20",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
-    "node-sass": "^4.12.0",
-    "nodemon": "^1.18.9",
+    "node-sass": "^4.14.1",
+    "nodemon": "^1.19.4",
     "npm": "^6.5.0",
-    "react": "^16.7.0",
+    "react": "^16.13.1",
     "react-chartjs-2": "^2.7.4",
     "react-cookie": "^4.0.1",
     "react-dom": "^16.7.0",
@@ -31,8 +31,8 @@
     "react-scripts": "^3.4.1",
     "redux": "^4.0.4",
     "redux-define": "^1.1.1",
-    "redux-saga": "^1.0.5",
-    "sequelize": "^5.21.12",
+    "redux-saga": "^1.1.3",
+    "sequelize": "^5.21.13",
     "sequelize-auto": "^0.4.29",
     "webpack-node-externals": "1.6.0"
   },
@@ -60,8 +60,8 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.17.1",
-    "webpack-cli": "^3.3.2"
+    "prettier": "^1.19.1",
+    "webpack-cli": "^3.3.12"
   },
   "proxy": "http://localhost:5000",
   "engines": {

@@ -22,8 +22,8 @@ const OverviewCell = props => {
   const secondaryID = participant.stats.perkSubStyle;
 
   // const level = user.stats.champLevel;
-  let firstSpellURI = props.summoner[spell1Id].image.full;
-  let secondSpellURI = props.summoner[spell2Id].image.full;
+  let firstSpellURI = props.summonerSpells[spell1Id].image.full;
+  let secondSpellURI = props.summonerSpells[spell2Id].image.full;
   let keystoneURI = props.runes[keystoneID].key + '.png';
   let secondaryURI = props.runes[secondaryID].icon;
   let items = [0, 1, 2, 6, 3, 4, 5];
