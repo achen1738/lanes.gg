@@ -2,14 +2,15 @@ import React from 'react';
 import './Stats.scss';
 
 const Stats = props => {
+  const match = props.userMatch;
+  const game = props.game;
   const renderKDA = () => {
-    const stats = props.game.participants[props.userIndex].stats;
-    const { kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled } = stats;
+    const { kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled } = match;
     let ratio;
     if (deaths === 0) ratio = 'Perfect';
     else ratio = ((kills + assists) / deaths).toFixed(1);
     const csKilled = totalMinionsKilled + neutralMinionsKilled;
-    const gameDuration = props.game.gameDuration;
+    const gameDuration = game.gameDuration;
     const csAverage = (csKilled / (gameDuration / 60)).toFixed(1);
 
     return (

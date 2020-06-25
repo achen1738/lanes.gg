@@ -2,15 +2,16 @@ import React from 'react';
 import './Info.scss';
 
 const Info = props => {
+  const match = props.userMatch;
+  const game = props.game;
   const calculateTime = () => {
-    const match = props.game;
     let date = new Date();
     // Both gameTimestamp and currentTimestamp are in milliseconds
-    const gameTimestamp = match.gameCreation;
+    const gameTimestamp = game.gameCreation;
     const currentTimestamp = date.getTime();
 
     // Get the time of when the game started (current time - end of game time - duration time)
-    const time = Math.floor((currentTimestamp - gameTimestamp) / 1000) - match.gameDuration;
+    const time = Math.floor((currentTimestamp - gameTimestamp) / 1000) - game.gameDuration;
     const days = Math.floor(time / 86400);
 
     let timeAgo;
@@ -33,9 +34,8 @@ const Info = props => {
   };
 
   const calculateDuration = () => {
-    const match = props.game;
-    const gameMinutes = Math.floor(match.gameDuration / 60);
-    const gameSeconds = match.gameDuration % 60;
+    const gameMinutes = Math.floor(game.gameDuration / 60);
+    const gameSeconds = game.gameDuration % 60;
     const duration = `${gameMinutes}m ${gameSeconds}s`;
     return duration;
   };
@@ -45,7 +45,7 @@ const Info = props => {
     else return 'Loss';
   };
 
-  const win = props.win;
+  const win = match.win;
 
   let matchInfoStyle = 'match__info';
   if (win) matchInfoStyle += ' match__info_win';

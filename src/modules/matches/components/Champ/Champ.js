@@ -1,16 +1,18 @@
-import React from 'react';
 import './Champ.scss';
-const championImages = require.context('../../../../ddragon/img/champion', true);
-const summonerImages = require.context('../../../../ddragon/img/spell', true);
+import React from 'react';
+
 const runeImages = require.context('../../../../ddragon/img/runes', true);
+const summonerImages = require.context('../../../../ddragon/img/spell', true);
+const championImages = require.context('../../../../ddragon/img/champion', true);
 
 const Champ = props => {
+  const match = props.userMatch;
+
   /**
    * Renders the champion image
    */
   const renderChampion = () => {
-    const user = props.game.participants[props.userIndex];
-    const championID = user.championId;
+    const championID = match.championId;
     let champURI = props.ddragon[championID].image.full;
     if (championID === 246) champURI = 'Qiyana.png';
     return (
@@ -24,10 +26,8 @@ const Champ = props => {
    * Renders the summoner spells as well as the level
    */
   const renderSummoners = () => {
-    const user = props.game.participants[props.userIndex];
-    const { spell1Id, spell2Id } = user;
-    const champLevel = user.stats.champLevel;
-    const keystoneID = user.stats.perk0;
+    const { spell1Id, spell2Id, champLevel } = match;
+    const keystoneID = match.perk0;
     // const level = user.stats.champLevel;
     let firstSpellURI = props.summonerSpells[spell1Id].image.full;
     let secondSpellURI = props.summonerSpells[spell2Id].image.full;
@@ -37,7 +37,7 @@ const Champ = props => {
       'match__champ-image match__champ-image_secondary match__champ-image_secondary-right',
       'match__champ-image_tertiary'
     ];
-    if (props.win) styles[2] += ' match__champ-image_secondary_win';
+    if (match.win) styles[2] += ' match__champ-image_secondary_win';
     else styles[2] += ' match__champ-image_secondary_lose';
 
     return (

@@ -49,7 +49,7 @@ export const getDDragon = state => {
   return appState.ddragon;
 };
 
-export const getSummoner = state => {
+export const getSummonerSpells = state => {
   const moduleName = NAME;
   const appState = state[moduleName];
   if (!appState) {

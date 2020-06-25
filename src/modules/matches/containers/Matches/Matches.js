@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getGames } from '../../../user/selectors';
 import './Matches.scss';
-import Match from '../../components/Match';
+import MatchContainer from '../../components/MatchContainer';
 
 const Matches = props => {
   const renderMatches = () => {
     return props.games.map(game => {
-      return <Match game={game} key={game.gameId}></Match>;
+      return <MatchContainer game={game} key={game.gameId}></MatchContainer>;
     });
   };
 

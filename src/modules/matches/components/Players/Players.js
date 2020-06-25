@@ -3,19 +3,23 @@ import './Players.scss';
 const championImages = require.context('../../../../ddragon/img/champion', true);
 
 const Players = props => {
-  const renderTeam = offset => {
-    const participants = props.game.participants;
-    const identities = props.game.participantIdentities;
+  const match = props.userMatch;
+
+  const renderTeam = teamId => {
+    const teamMatches = props.displayMatches.filter(dm => dm.teamId === teamId);
+
     let players = [];
-    for (let i = 0 + offset; i < 5 + offset; i++) {
+
+    teamMatches.forEach(teamMatch => {
       players.push({
-        isUser: i === props.userIndex,
-        name: identities[i].player.summonerName,
-        champID: participants[i].championId
+        isUser: teamMatch.participantId === match.participantId,
+        name: teamMatch.summonerName,
+        championId: teamMatch.championId
       });
-    }
+    });
+
     return players.map((player, index) => {
-      const champ = props.ddragon[player.champID];
+      const champ = props.ddragon[player.championId];
       let champURI = champ.image.full;
       let textStyle = 'match__players-text';
       if (player.isUser) textStyle += ' match__players-text_user';
@@ -36,8 +40,8 @@ const Players = props => {
   return (
     <div className="match__players-container">
       <div className="match__players">
-        <div className="match__players-group">{renderTeam(0)}</div>
-        <div className="match__players-group">{renderTeam(5)}</div>
+        <div className="match__players-group">{renderTeam(100)}</div>
+        <div className="match__players-group">{renderTeam(200)}</div>
       </div>
     </div>
   );
