@@ -10,6 +10,16 @@ export const getGames = state => {
   return appState.games;
 };
 
+export const getSummoner = state => {
+  const moduleName = NAME;
+  const appState = state[moduleName];
+  if (!appState) {
+    return [];
+  }
+
+  return appState.summoner;
+};
+
 export const getUserMatch = (state, gameId) => {
   const moduleName = NAME;
   const appState = state[moduleName];

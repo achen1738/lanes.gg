@@ -21,7 +21,6 @@ export function* getDDragon() {
       summonerSpells: unflattenKeyHelper(data.getSummonerSpells),
       profileIcons: unflattenIDHelper(data.getProfileIcons)
     };
-    console.log(unflattened);
     yield put({
       type: GET_DDRAGON.SUCCESS,
       ...unflattened

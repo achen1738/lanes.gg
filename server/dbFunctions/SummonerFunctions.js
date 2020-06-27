@@ -24,7 +24,6 @@ const getSummoner = (summonerName, verbose) => {
       summ[0] = { dataValues: summonerObj };
     }
     if (verbose) {
-      console.log(summ[0].dataValues);
     }
     return summ[0].dataValues;
   });

@@ -2,8 +2,6 @@ import './Champ.scss';
 import React from 'react';
 
 const runeImages = require.context('../../../../ddragon/img/runes', true);
-const summonerImages = require.context('../../../../ddragon/img/spell', true);
-const championImages = require.context('../../../../ddragon/img/champion', true);
 
 const Champ = props => {
   const match = props.userMatch;
@@ -18,7 +16,7 @@ const Champ = props => {
       if (championID === 246) champURI = 'Qiyana.png';
       return (
         <div className="match__champ-image match__champ-image_main">
-          <img src={championImages(`./${champURI}`)} alt="champion" />
+          <img src={champURI} alt="champion" />
         </div>
       );
     }
@@ -46,10 +44,10 @@ const Champ = props => {
       return (
         <div className="match__champ-image_secondary-container">
           <div className={styles[0]}>
-            <img src={summonerImages(`./${firstSpellURI}`)} alt="summoner spell" />
+            <img src={firstSpellURI} alt="summoner spell" />
           </div>
           <div className={styles[1]}>
-            <img src={summonerImages(`./${secondSpellURI}`)} alt="summoner spell" />
+            <img src={secondSpellURI} alt="summoner spell" />
           </div>
           <div className={styles[2]}>
             <img

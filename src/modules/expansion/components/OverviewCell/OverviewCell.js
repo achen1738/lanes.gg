@@ -51,7 +51,7 @@ const OverviewCell = props => {
     <div className={cellStyle}>
       <div className="overview__boxscore--pictures">
         <div className="overview__boxscore--cell-champ">
-          <img src={championImages(`./${champURI}`)} alt="champ" />
+          <img src={champURI} alt="champ" />
         </div>
         <div className="overview__boxscore--cell-summs">
           <img src={summonerImages(`./${firstSpellURI}`)} alt="summoner spell" />

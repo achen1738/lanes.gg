@@ -28,14 +28,7 @@ const OverviewHeader = props => {
       const champ = props.champions[championID];
       let champURI = champ._full;
 
-      return (
-        <img
-          className="overview__image--ban"
-          src={championImages(`./${champURI}`)}
-          alt="champ banned"
-          key={index}
-        />
-      );
+      return <img className="overview__image--ban" src={champURI} alt="champ banned" key={index} />;
     });
 
     return (

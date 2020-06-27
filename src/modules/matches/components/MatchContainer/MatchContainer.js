@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './MatchContainer.scss';
 
 import { connect } from 'react-redux';
-import { getUserMatch, getDisplayMatches } from '../../../user/selectors.js';
+import { getUserMatch, getDisplayMatches, getItems } from '../../../user/selectors.js';
 import Match from '../Match/Match';
 
 import Info from '../Info';
@@ -34,7 +34,6 @@ const MatchContainer = props => {
     if (expanded) return <Expansion gameId={props.game.gameId} />;
     return null;
   };
-
   return (
     <div className="match-container">
       <div className={matchStyle}>
@@ -43,8 +42,8 @@ const MatchContainer = props => {
             <Info game={props.game} />
             <Champ />
             <Stats game={props.game} />
-            <Items />
-            <Players displayMatches={props.displayMatches} />
+            <Items items={props.items} />
+            <Players items={props.items} displayMatches={props.displayMatches} />
             <Expand handleExpand={handleExpand} />
           </Match>
         </div>
@@ -62,7 +61,8 @@ const mapStateToProps = (state, ownProps) => {
   const gameId = ownProps.game.gameId;
   return {
     userMatch: getUserMatch(state, gameId),
-    displayMatches: getDisplayMatches(state, gameId)
+    displayMatches: getDisplayMatches(state, gameId),
+    items: getItems(state)
   };
 };
 

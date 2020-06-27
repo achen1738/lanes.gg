@@ -1,5 +1,7 @@
 const kayn = require('../kayn');
 const db = require('../MySQL.js');
+const cloudinary = require('cloudinary');
+const { model } = require('mongoose');
 const {
   profileicons: ProfileIcons,
   champions: Champions,
@@ -131,7 +133,6 @@ const updateSummonerSpells = () => {
               w: summonerSpells[key].image.w,
               h: summonerSpells[key].image.h
             };
-            console.log(summObj);
             return SummonerSpells.create(summObj);
           } else {
             return summonerSpell;
@@ -154,7 +155,6 @@ const updateRunes = async () => {
   return db.sequelize.transaction(async t => {
     const res = await kayn.DDragon.RunesReforged.list();
     const runes = res;
-    console.log(runes);
     let promises = [];
     runes.forEach(rune => {
       const promise = Runes.findOne({
@@ -245,6 +245,32 @@ const updateProfileIcons = () => {
     });
   });
 };
+
+const cloudinaryFixHelper = (model, folderName, next_cursor) => {
+  const cloudinarySearch = cloudinary.v2.search.expression(`folder:${folderName}`).max_results(500);
+  if (next_cursor && next_cursor !== 1) cloudinarySearch.next_cursor(next_cursor);
+  cloudinarySearch.execute().then(res => {
+    db.sequelize.transaction(async t => {
+      res.resources.forEach(image => {
+        const id = image.filename.substring(0, image.filename.lastIndexOf('_'));
+        const { secure_url } = image;
+        model.findOne({ where: { id } }).then(champ => {
+          if (champ) {
+            champ._full = secure_url;
+            champ.save();
+          }
+        });
+      });
+      if (res.next_cursor) cloudinaryFixHelper(model, folderName, res.next_cursor);
+    });
+  });
+};
+
+const cloudinaryFix = (model, folderName) => {
+  cloudinaryFixHelper(model, folderName, 1);
+};
+
+// cloudinaryFix(SummonerSpells, 'summonerSpells');
 
 const test = async () => {
   const res = await updateSummonerSpells();

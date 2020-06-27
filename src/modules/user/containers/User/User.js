@@ -2,13 +2,17 @@ import React, { useEffect } from 'react';
 import './User.scss';
 import { connect } from 'react-redux';
 import Header from '../../../../components/header';
-import { getMatches } from '../../selectors';
+import { getMatches, getSummoner, getChampions } from '../../selectors';
 import { getUserDetails, getDDragon } from '../../actions';
 import Matches from '../../../matches/containers/Matches';
 const User = props => {
   useEffect(() => {
-    props.getUserDetails();
-    props.getDDragon();
+    if (!props.summoner.summonerLevel) {
+      props.getUserDetails();
+    }
+    if (!props.champions[1]) {
+      props.getDDragon();
+    }
   }, [props]);
 
   return (
@@ -26,7 +30,9 @@ const User = props => {
 
 const mapStateToProps = state => {
   return {
-    matches: getMatches(state)
+    matches: getMatches(state),
+    summoner: getSummoner(state),
+    champions: getChampions(state)
   };
 };
 

@@ -1,11 +1,9 @@
 import React from 'react';
 import './Players.scss';
-const championImages = require.context('../../../../ddragon/img/champion', true);
-const itemImages = require.context('../../../../ddragon/img/item', true);
 
 const Players = props => {
   const match = props.userMatch;
-
+  const items = props.items;
   const renderTeam = teamId => {
     const teamMatches = props.displayMatches.filter(dm => dm.teamId === teamId);
 
@@ -25,10 +23,11 @@ const Players = props => {
       let src;
       if (props.champions[player.championId]) {
         const champ = props.champions[player.championId];
-        src = championImages(`./${champ._full}`);
+        src = champ._full;
       } else {
-        src = itemImages(`./3637.png`);
+        src = items[3637] ? items[3637]._full : '';
       }
+
       return (
         <div key={index} className="match__players-player">
           <img className="match__players-image" alt="champion" src={src} />
