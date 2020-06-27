@@ -119,8 +119,9 @@ const updateSummonerSpells = () => {
       })
         .then(summonerSpell => {
           if (!summonerSpell) {
-            const champObj = {
+            const summObj = {
               id: summonerSpells[key].id,
+              _key: summonerSpells[key].key,
               name: summonerSpells[key].name,
               _full: summonerSpells[key].image.full,
               sprite: summonerSpells[key].image.sprite,
@@ -130,7 +131,8 @@ const updateSummonerSpells = () => {
               w: summonerSpells[key].image.w,
               h: summonerSpells[key].image.h
             };
-            return SummonerSpells.create(champObj);
+            console.log(summObj);
+            return SummonerSpells.create(summObj);
           } else {
             return summonerSpell;
           }
@@ -244,9 +246,10 @@ const updateProfileIcons = () => {
   });
 };
 
-// const test = async () => {
-//   const res = await getProfileIcons();
-//   console.log(res); //
-// };
+const test = async () => {
+  const res = await updateSummonerSpells();
+  console.log(res); //
+};
+//
 
 module.exports = { getItems, getChampions, getSummonerSpells, getRunes, getProfileIcons };

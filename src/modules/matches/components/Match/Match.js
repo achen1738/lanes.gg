@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getDDragon, getRunes, getSummonerSpells } from '../../../user/selectors';
+import { getRunes, getSummonerSpells, getChampions } from '../../../user/selectors';
 import { v4 as uuidv4 } from 'uuid';
 
 const Match = props => {
@@ -12,7 +12,7 @@ const Match = props => {
             userMatch: props.userMatch,
             summonerSpells: props.summonerSpells,
             runes: props.runes,
-            ddragon: props.ddragon
+            champions: props.champions
           })}
         </div>
       );
@@ -26,7 +26,7 @@ const mapStateToProps = state => {
   return {
     summonerSpells: getSummonerSpells(state),
     runes: getRunes(state),
-    ddragon: getDDragon(state)
+    champions: getChampions(state)
   };
 };
 

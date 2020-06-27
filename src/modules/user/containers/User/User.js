@@ -3,11 +3,12 @@ import './User.scss';
 import { connect } from 'react-redux';
 import Header from '../../../../components/header';
 import { getMatches } from '../../selectors';
-import { getUserDetails } from '../../actions';
+import { getUserDetails, getDDragon } from '../../actions';
 import Matches from '../../../matches/containers/Matches';
 const User = props => {
   useEffect(() => {
     props.getUserDetails();
+    props.getDDragon();
   }, [props]);
 
   return (
@@ -29,4 +30,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getUserDetails })(User);
+export default connect(mapStateToProps, { getUserDetails, getDDragon })(User);

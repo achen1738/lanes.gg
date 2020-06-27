@@ -43,8 +43,8 @@ const MatchContainer = props => {
             <Info game={props.game} />
             <Champ />
             <Stats game={props.game} />
-            {/* <Items /> */}
-            {/* <Players displayMatches={props.displayMatches} /> */}
+            <Items />
+            <Players displayMatches={props.displayMatches} />
             <Expand handleExpand={handleExpand} />
           </Match>
         </div>

@@ -7,3 +7,5 @@ export const GET_USER_DETAILS = defineAction(
   [CANCELLED, ERROR, PENDING, SUCCESS],
   NAME
 );
+
+export const GET_DDRAGON = defineAction('GET_DDRAGON', [CANCELLED, ERROR, PENDING, SUCCESS], NAME);

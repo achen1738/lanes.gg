@@ -7,7 +7,7 @@ const RuneType = new GraphQLObjectType({
     id: { type: GraphQLNonNull(GraphQLInt) },
     name: { type: GraphQLNonNull(GraphQLString) },
     icon: { type: GraphQLNonNull(GraphQLString) },
-    key: { type: GraphQLNonNull(GraphQLString) }
+    _key: { type: GraphQLNonNull(GraphQLString) }
   })
 });
 

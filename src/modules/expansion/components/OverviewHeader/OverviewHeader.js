@@ -25,8 +25,8 @@ const OverviewHeader = props => {
           </div>
         );
       }
-      const champ = props.ddragon[championID];
-      let champURI = champ.image.full;
+      const champ = props.champions[championID];
+      let champURI = champ._full;
 
       return (
         <img

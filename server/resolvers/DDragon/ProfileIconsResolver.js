@@ -12,6 +12,7 @@ const ProfileIconsQueries = {
     }
   }
 };
+
 const ProfileIconsMutations = {};
 
 module.exports = {

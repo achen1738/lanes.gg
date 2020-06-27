@@ -151,3 +151,61 @@ export const getAllInfo = (summonerName, limit) => {
     }
   });
 };
+
+export const getDDragonAPI = () => {
+  return axios({
+    url: '/graphql/',
+    method: 'post',
+    data: {
+      query: `
+        query {
+          getSummonerSpells {
+            id,
+            _key,
+            name,
+            _full,
+            sprite,
+            _group,
+            x,
+            y,
+            w,
+            h
+          },
+          getItems {
+            id,
+            name,
+            _full,
+            sprite,
+            _group,
+            x,
+            y,
+            w,
+            h
+          },
+          getChampions {
+            id,
+            _key,
+            name,
+            _full,
+            sprite,
+            _group,
+            x,
+            y,
+            w,
+            h
+          },
+          getProfileIcons {
+            id,
+            _full,
+            sprite,
+            _group,
+            x,
+            y,
+            w,
+            h
+          }
+        }
+      `
+    }
+  });
+};

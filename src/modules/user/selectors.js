@@ -39,14 +39,14 @@ export const getMatches = state => {
   return appState.matches;
 };
 
-export const getDDragon = state => {
+export const getChampions = state => {
   const moduleName = NAME;
   const appState = state[moduleName];
   if (!appState) {
     return {};
   }
 
-  return appState.ddragon;
+  return appState.champions;
 };
 
 export const getSummonerSpells = state => {

@@ -1,17 +1,38 @@
 import { put, takeEvery } from 'redux-saga/effects';
 
-import { GET_USER_DETAILS } from './actionTypes';
+import { GET_USER_DETAILS, GET_DDRAGON } from './actionTypes';
 // eslint-disable-next-line
-import { getFakeMatchesApi, getAllInfo } from '../../services/lanesAPI';
+import { getFakeMatchesApi, getAllInfo, getDDragonAPI } from '../../services/lanesAPI';
 
 export function* saga() {
   yield takeEvery(GET_USER_DETAILS.ACTION, getUserDetails);
+  yield takeEvery(GET_DDRAGON.ACTION, getDDragon);
 }
 
-/**
- * Delays 1 second before incrementing the counter
- * @param {*} action
- */
+export function* getDDragon() {
+  try {
+    yield put({ type: GET_DDRAGON.PENDING });
+
+    const res = yield getDDragonAPI();
+    const data = res.data.data;
+    const unflattened = {
+      champions: unflattenKeyHelper(data.getChampions),
+      items: unflattenIDHelper(data.getItems),
+      summonerSpells: unflattenKeyHelper(data.getSummonerSpells),
+      profileIcons: unflattenIDHelper(data.getProfileIcons)
+    };
+    console.log(unflattened);
+    yield put({
+      type: GET_DDRAGON.SUCCESS,
+      ...unflattened
+    });
+  } catch (error) {
+    yield put({
+      type: GET_DDRAGON.ERROR
+    });
+  }
+}
+
 export function* getUserDetails(action) {
   try {
     yield put({ type: GET_USER_DETAILS.PENDING });
@@ -50,3 +71,19 @@ export function* getUserDetails(action) {
     });
   }
 }
+
+const unflattenIDHelper = array => {
+  let unflattenObj = {};
+  array.forEach(obj => {
+    unflattenObj[obj.id] = obj;
+  });
+  return unflattenObj;
+};
+
+const unflattenKeyHelper = array => {
+  let unflattenObj = {};
+  array.forEach(obj => {
+    unflattenObj[obj._key] = obj;
+  });
+  return unflattenObj;
+};

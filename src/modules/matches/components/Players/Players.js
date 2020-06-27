@@ -1,6 +1,7 @@
 import React from 'react';
 import './Players.scss';
 const championImages = require.context('../../../../ddragon/img/champion', true);
+const itemImages = require.context('../../../../ddragon/img/item', true);
 
 const Players = props => {
   const match = props.userMatch;
@@ -19,18 +20,18 @@ const Players = props => {
     });
 
     return players.map((player, index) => {
-      const champ = props.ddragon[player.championId];
-      let champURI = champ.image.full;
       let textStyle = 'match__players-text';
       if (player.isUser) textStyle += ' match__players-text_user';
-
+      let src;
+      if (props.champions[player.championId]) {
+        const champ = props.champions[player.championId];
+        src = championImages(`./${champ._full}`);
+      } else {
+        src = itemImages(`./3637.png`);
+      }
       return (
         <div key={index} className="match__players-player">
-          <img
-            className="match__players-image"
-            alt="champion"
-            src={championImages(`./${champURI}`)}
-          />
+          <img className="match__players-image" alt="champion" src={src} />
           <div className={textStyle}>{`${player.name}`}</div>
         </div>
       );

@@ -15,7 +15,7 @@ const OverviewCell = props => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
   const match = props.match;
-  const champ = props.ddragon[match.championId];
+  const champ = props.champions[match.championId];
   let champURI = champ.image.full;
 
   const {
@@ -35,8 +35,8 @@ const OverviewCell = props => {
   const secondaryID = match.perkSubStyle;
 
   // const level = user.stats.champLevel;
-  let firstSpellURI = props.summonerSpells[spell1Id].image.full;
-  let secondSpellURI = props.summonerSpells[spell2Id].image.full;
+  let firstSpellURI = props.summonerSpells[spell1Id]._full;
+  let secondSpellURI = props.summonerSpells[spell2Id]._full;
   let keystoneURI = props.runes[keystoneID].key + '.png';
   let secondaryURI = props.runes[secondaryID].icon;
   let items = [0, 1, 2, 6, 3, 4, 5];

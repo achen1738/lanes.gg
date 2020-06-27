@@ -5,9 +5,9 @@ const ProfileIconType = new GraphQLObjectType({
   description: 'This represents a profile icon',
   fields: () => ({
     id: { type: GraphQLNonNull(GraphQLInt) },
-    full: { type: GraphQLNonNull(GraphQLString) },
+    _full: { type: GraphQLNonNull(GraphQLString) },
     sprite: { type: GraphQLNonNull(GraphQLString) },
-    group: { type: GraphQLNonNull(GraphQLString) },
+    _group: { type: GraphQLNonNull(GraphQLString) },
     x: { type: GraphQLNonNull(GraphQLInt) },
     y: { type: GraphQLNonNull(GraphQLInt) },
     w: { type: GraphQLNonNull(GraphQLInt) },
