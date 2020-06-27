@@ -30,7 +30,14 @@ let models = [
   require('./models/GamesModel.js'),
   require('./models/MatchesModel.js'),
   require('./models/SummonerModel.js'),
-  require('./models/LeaguesModel.js')
+  require('./models/LeaguesModel.js'),
+
+  require('./models/ItemsModel.js'),
+  require('./models/RunesModel.js'),
+  require('./models/SummonerSpellsModel.js'),
+  require('./models/MapsModel.js'),
+  require('./models/ProfileIconsModel.js'),
+  require('./models/ChampionsModel.js')
 ];
 
 // Initialize models

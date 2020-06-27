@@ -1,28 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Expansion.scss';
 import Overview from '../Overview';
 import OptionTab from '../../components/OptionTab';
 import { IconAll } from '../../../../icons/icons';
 import { FiList } from 'react-icons/fi';
 import { FaTools } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import { getAnalysisAction } from '../../actions';
+import { getMatch } from '../../selectors';
 
 const Expansion = props => {
+  useEffect(() => {
+    if (!props.matches.length) {
+      props.getAnalysisAction(props.gameId);
+    }
+  }, [props]);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const data = [
     {
       icon: <FiList />,
       text: 'Overview',
-      component: <Overview matchIndex={props.matchIndex} username={props.username} />
+      component: <Overview matches={props.matches} />
     },
     {
       icon: <FaTools />,
       text: 'Builds',
-      component: <Overview matchIndex={props.matchIndex} username={props.username} />
+      component: <Overview matches={props.matches} />
     },
     {
       icon: <IconAll />,
       text: 'Laning Phases',
-      component: <Overview matchIndex={props.matchIndex} username={props.username} />
+      component: <Overview matches={props.matches} />
     }
   ];
 
@@ -32,7 +41,9 @@ const Expansion = props => {
       <FaTools style={{ width: '13px', height: '13px' }} />,
       <IconAll style={{ width: '14px', height: '14px' }} />
     ].map((str, index) => {
-      return <OptionTab value={str} key={index} index={index} setActiveIndex={setActiveIndex} />;
+      return (
+        <OptionTab value={str} key={str + index} index={index} setActiveIndex={setActiveIndex} />
+      );
     });
   };
 
@@ -49,4 +60,10 @@ const Expansion = props => {
   );
 };
 
-export default Expansion;
+const mapStateToProps = (state, props) => {
+  return {
+    matches: getMatch(state, props.gameId)
+  };
+};
+
+export default connect(mapStateToProps, { getAnalysisAction })(Expansion);

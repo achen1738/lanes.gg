@@ -1,23 +1,16 @@
-const { GamesQueries, GamesMutations } = require('./GamesResolver');
-const { MatchesQueries, MatchesMutations } = require('./MatchesResolver');
-const { UserQueries, UserMutations } = require('./UserResolver');
-const { SummonerQueries, SummonerMutations } = require('./SummonerResolver');
-
 const { SchemaComposer } = require('graphql-compose');
 const schemaComposer = new SchemaComposer();
+const { DDragonQueries, DDragonMutations } = require('./DDragon');
+const { MySQLQueries, MySQLMutations } = require('./MySQL');
 
 schemaComposer.Query.addFields({
-  ...GamesQueries,
-  ...MatchesQueries,
-  ...UserQueries,
-  ...SummonerQueries
+  ...DDragonQueries,
+  ...MySQLQueries
 });
 
 schemaComposer.Mutation.addFields({
-  ...GamesMutations,
-  ...MatchesMutations,
-  ...UserMutations,
-  ...SummonerMutations
+  ...DDragonMutations,
+  ...MySQLMutations
 });
 
 schemaComposer.Subscription.addFields({});

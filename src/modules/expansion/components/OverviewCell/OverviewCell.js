@@ -1,5 +1,9 @@
 import React from 'react';
 import './OverviewCell.scss';
+import { connect } from 'react-redux';
+import { getSummonerSpells, getRunes, getDDragon } from '../../selectors';
+import { getUserMatch } from '../../../user/selectors';
+
 const championImages = require.context('../../../../ddragon/img/champion', true);
 const summonerImages = require.context('../../../../ddragon/img/spell', true);
 const runeImages = require.context('../../../../ddragon/img/runes', true);
@@ -10,27 +14,14 @@ const OverviewCell = props => {
   const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
-
-  const participant = props.participant;
-  const identity = props.identity;
-  const champ = props.ddragon[participant.championId];
+  const match = props.match;
+  const champ = props.ddragon[match.championId];
   let champURI = champ.image.full;
 
-  const { spell1Id, spell2Id } = participant;
-  const champLevel = participant.stats.champLevel;
-  const keystoneID = participant.stats.perk0;
-  const secondaryID = participant.stats.perkSubStyle;
-
-  // const level = user.stats.champLevel;
-  let firstSpellURI = props.summonerSpells[spell1Id].image.full;
-  let secondSpellURI = props.summonerSpells[spell2Id].image.full;
-  let keystoneURI = props.runes[keystoneID].key + '.png';
-  let secondaryURI = props.runes[secondaryID].icon;
-  let items = [0, 1, 2, 6, 3, 4, 5];
-  items = items.map(num => participant.stats[`item${num}`]);
-
-  const stats = participant.stats;
   const {
+    spell1Id,
+    spell2Id,
+    champLevel,
     kills,
     deaths,
     assists,
@@ -39,9 +30,20 @@ const OverviewCell = props => {
     goldEarned,
     totalDamageDealtToChampions,
     visionWardsBoughtInGame
-  } = stats;
+  } = match;
+  const keystoneID = match.perk0;
+  const secondaryID = match.perkSubStyle;
+
+  // const level = user.stats.champLevel;
+  let firstSpellURI = props.summonerSpells[spell1Id].image.full;
+  let secondSpellURI = props.summonerSpells[spell2Id].image.full;
+  let keystoneURI = props.runes[keystoneID].key + '.png';
+  let secondaryURI = props.runes[secondaryID].icon;
+  let items = [0, 1, 2, 6, 3, 4, 5];
+  items = items.map(num => match[`item${num}`]);
+
   let cellStyle = 'overview__boxscore--cell';
-  if (identity.player.summonerName.toLowerCase() === props.username.toLowerCase()) {
+  if (match.participantId === 1) {
     cellStyle += ' overview__boxscore--cell_user';
   }
   const csKilled = totalMinionsKilled + neutralMinionsKilled;
@@ -60,10 +62,10 @@ const OverviewCell = props => {
           </div>
           <div className="overview__boxscore--cell-level">{champLevel}</div>
         </div>
-        <div className="overview__boxscore--cell-name">{identity.player.summonerName}</div>
+        <div className="overview__boxscore--cell-name">{match.summonerName}</div>
         <div className="overview__boxscore--cell-items">
           {items.map((item, index) => {
-            if (item === 0) item = 3637;
+            if (item === 0 || item >= 3853) item = 3637;
             return <img key={index} alt="item" src={itemImages(`./${item}.png`)} />;
           })}
           <div className="overview__boxscore--cell-item">
@@ -89,4 +91,13 @@ const OverviewCell = props => {
   );
 };
 
-export default OverviewCell;
+const mapStateToProps = (state, props) => {
+  return {
+    summonerSpells: getSummonerSpells(state),
+    runes: getRunes(state),
+    ddragon: getDDragon(state),
+    userMatch: getUserMatch(state, props.gameId)
+  };
+};
+
+export default connect(mapStateToProps, {})(OverviewCell);

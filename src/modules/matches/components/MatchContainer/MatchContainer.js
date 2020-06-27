@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './MatchContainer.scss';
+
 import { connect } from 'react-redux';
 import { getUserMatch, getDisplayMatches } from '../../../user/selectors.js';
 import Match from '../Match/Match';
@@ -11,7 +12,7 @@ import Stats from '../Stats';
 import Items from '../Items';
 import Players from '../Players';
 import Expand from '../../containers/Expand';
-// import Expansion from '../../../expansion/containers/Expansion';
+import Expansion from '../../../expansion/containers/Expansion';
 
 const MatchContainer = props => {
   const [expanded, setExpanded] = useState(false);
@@ -21,7 +22,6 @@ const MatchContainer = props => {
   };
 
   const win = props.userMatch.win;
-
   let matchStyle = 'match';
   if (win) matchStyle += ' match_win';
   else matchStyle += ' match_lose';
@@ -29,6 +29,11 @@ const MatchContainer = props => {
   let matchSummaryStyle = 'match__summary';
   if (win) matchSummaryStyle += ' match__summary_win';
   else matchSummaryStyle += ' match__summary_lose';
+
+  const renderExpansion = () => {
+    if (expanded) return <Expansion gameId={props.game.gameId} />;
+    return null;
+  };
 
   return (
     <div className="match-container">
@@ -38,11 +43,12 @@ const MatchContainer = props => {
             <Info game={props.game} />
             <Champ />
             <Stats game={props.game} />
-            <Items />
-            <Players displayMatches={props.displayMatches} />
+            {/* <Items /> */}
+            {/* <Players displayMatches={props.displayMatches} /> */}
             <Expand handleExpand={handleExpand} />
           </Match>
         </div>
+        {renderExpansion()}
       </div>
     </div>
   );

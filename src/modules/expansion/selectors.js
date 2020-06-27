@@ -1,16 +1,26 @@
-import { NAME } from '../user/constants';
+import { NAME, APP } from './constants';
 
-export const getMatch = (state, matchIndex) => {
+export const getMatch = (state, gameId) => {
   const moduleName = NAME;
   const appState = state[moduleName];
-  if (!appState || !appState.matches) {
-    return undefined;
+  if (!appState || !appState[gameId]) {
+    return [];
   }
-  return appState.matches[matchIndex];
+  return appState[gameId].matches;
+};
+
+export const getTimeline = (state, gameId) => {
+  const moduleName = NAME;
+  const appState = state[moduleName];
+  if (!appState) {
+    return [];
+  }
+
+  return appState[gameId].timeline;
 };
 
 export const getDDragon = state => {
-  const moduleName = NAME;
+  const moduleName = APP;
   const appState = state[moduleName];
   if (!appState) {
     return {};
@@ -19,8 +29,8 @@ export const getDDragon = state => {
   return appState.ddragon;
 };
 
-export const getSummoner = state => {
-  const moduleName = NAME;
+export const getSummonerSpells = state => {
+  const moduleName = APP;
   const appState = state[moduleName];
   if (!appState) {
     return {};
@@ -30,7 +40,7 @@ export const getSummoner = state => {
 };
 
 export const getRunes = state => {
-  const moduleName = NAME;
+  const moduleName = APP;
   const appState = state[moduleName];
   if (!appState) {
     return [];
@@ -40,7 +50,7 @@ export const getRunes = state => {
 };
 
 export const getItems = state => {
-  const moduleName = NAME;
+  const moduleName = APP;
   const appState = state[moduleName];
   if (!appState) {
     return {};

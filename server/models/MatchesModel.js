@@ -175,6 +175,14 @@ module.exports = function(sequelize, DataTypes) {
     statPerk2: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    champLevel: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    ban: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     tableName: 'matches'

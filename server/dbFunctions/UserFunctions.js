@@ -2,7 +2,7 @@ const kayn = require('../kayn.js');
 const { updateSummoner } = require('./SummonerFunctions.js');
 const { updateGamesAndMatches } = require('./GameFunctions.js');
 const { updateLeagues } = require('./LeagueFunctions');
-const updateUser = (summonerName, verbose) => {
+const updateUser = summonerName => {
   return kayn.Summoner.by.name(summonerName).then(summoner => {
     // Updates summoner row, returns { dataValues: {...} }
     let summonerPromise = updateSummoner(summoner);
@@ -20,7 +20,6 @@ const updateUser = (summonerName, verbose) => {
 module.exports = {
   updateUser
 };
-//
 
 // [
 //   games {

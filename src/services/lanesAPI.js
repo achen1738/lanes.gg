@@ -1,4 +1,4 @@
-import Matches from '../mock/matches.json';
+import Matches from '../mock/old/matches.json';
 const axios = require('axios');
 axios.defaults.baseURL = 'http://localhost:5000';
 
@@ -53,7 +53,9 @@ export const getAnalysis = gameId => {
             perkSubStyle,
             statPerk0,
             statPerk1,
-            statPerk2
+            statPerk2,
+            champLevel,
+            ban
           }
         }
       `
@@ -123,7 +125,8 @@ export const getAllInfo = (summonerName, limit) => {
               perkSubStyle,
               statPerk0,
               statPerk1,
-              statPerk2
+              statPerk2,
+              champLevel
             },
             getDisplayMatches(limit: ${limit}) {
               summonerName,

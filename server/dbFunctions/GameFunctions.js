@@ -97,6 +97,7 @@ const createGameAndMatch = async gameId => {
     let gamesToCreate = [];
     // Create a match row for each of the ten players
     for (let i = 0; i < 10; i++) {
+      const teams = match.teams;
       const { player, participantId } = match.participantIdentities[i];
       let playerInfo = match.participants[i];
       const { stats } = playerInfo;
@@ -110,8 +111,11 @@ const createGameAndMatch = async gameId => {
         });
       }
       const win = stats.win ? 1 : 0;
-
-      const matchObj = createMatchObject(player, gameId, participantId, playerInfo, win);
+      const teamIndex = participantId <= 5 ? 0 : 1;
+      const insideTeamIndex = participantId - 1 - teamIndex * 5;
+      const bans = teams[teamIndex].bans;
+      const ban = bans.length ? bans[insideTeamIndex].championId : -1;
+      const matchObj = createMatchObject(player, gameId, participantId, playerInfo, win, ban);
       gamesToCreate.push(matchObj);
     }
 
@@ -124,7 +128,7 @@ const createGameAndMatch = async gameId => {
   }
   return [];
 };
-
+//
 const withinTimeRange = gameCreation => {
   // 30 days in milliseconds
   const oneMonth = 1000 * 60 * 60 * 24 * 30;
@@ -146,8 +150,9 @@ const createGameObject = (gameId, match) => {
   };
 };
 
-const createMatchObject = (player, gameId, participantId, playerInfo, win) => {
+const createMatchObject = (player, gameId, participantId, playerInfo, win, ban) => {
   const { stats, timeline } = playerInfo;
+
   const {
     kills,
     deaths,
@@ -180,7 +185,8 @@ const createMatchObject = (player, gameId, participantId, playerInfo, win) => {
     perkSubStyle,
     statPerk0,
     statPerk1,
-    statPerk2
+    statPerk2,
+    champLevel
   } = stats;
 
   return {
@@ -226,7 +232,9 @@ const createMatchObject = (player, gameId, participantId, playerInfo, win) => {
     perkSubStyle,
     statPerk0,
     statPerk1,
-    statPerk2
+    statPerk2,
+    champLevel,
+    ban
   };
 };
 

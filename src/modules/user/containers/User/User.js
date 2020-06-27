@@ -30,4 +30,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { getUserDetails })(User);
-// export default User;

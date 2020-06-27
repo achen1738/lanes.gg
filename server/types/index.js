@@ -1,6 +1,7 @@
-const GameType = require('./GameType');
-const MatchType = require('./MatchType');
-const SummonerType = require('./SummonerType');
-const LeagueType = require('./LeagueType');
+const MySQLTypes = require('./MySQL');
+const DDragonTypes = require('./DDragon');
 
-module.exports = { GameType, MatchType, SummonerType, LeagueType };
+module.exports = {
+  ...MySQLTypes,
+  ...DDragonTypes
+};

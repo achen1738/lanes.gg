@@ -16,6 +16,9 @@ export function* getUserDetails(action) {
   try {
     yield put({ type: GET_USER_DETAILS.PENDING });
 
+    // const items = yield kayn.DDragon.Item.list();
+    // console.log(items);
+
     // const realMatches = yield getAllInfo('born to kill 200', 10);
     // let mappedMatches = {};
     // const data = realMatches.data.data.summoner;

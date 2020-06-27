@@ -6,6 +6,10 @@ import './OverviewHeader.scss';
 const championImages = require.context('../../../../ddragon/img/champion', true);
 
 const OverviewHeader = props => {
+  return <div></div>;
+
+  const { blueTeam, redTeam } = props;
+
   const renderBans = team => {
     let sectionStyle = 'overview__section';
     if (team.bans[0].pickTurn !== 1) sectionStyle += ' overview__section--reversed';

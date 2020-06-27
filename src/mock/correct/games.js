@@ -1,103 +1,103 @@
 export default {
   games: [
     {
-      gameId: 3469318517,
-      queueId: 420,
-      gameDuration: 2204,
+      gameId: 3474134340,
+      queueId: 430,
+      gameDuration: 1924,
       seasonId: 13,
       mapId: 11,
       gameType: 'MATCHED_GAME',
-      gameCreation: 1592772118466,
+      gameCreation: 1593153558307,
       gameMode: 'CLASSIC'
     },
     {
-      gameId: 3469265227,
-      queueId: 420,
-      gameDuration: 1492,
+      gameId: 3474102585,
+      queueId: 430,
+      gameDuration: 938,
       seasonId: 13,
       mapId: 11,
       gameType: 'MATCHED_GAME',
-      gameCreation: 1592769424970,
+      gameCreation: 1593152310084,
       gameMode: 'CLASSIC'
     },
     {
-      gameId: 3468913925,
+      gameId: 3474094835,
       queueId: 420,
-      gameDuration: 912,
+      gameDuration: 1373,
       seasonId: 13,
       mapId: 11,
       gameType: 'MATCHED_GAME',
-      gameCreation: 1592721732273,
+      gameCreation: 1593148999018,
       gameMode: 'CLASSIC'
     },
     {
-      gameId: 3468907872,
+      gameId: 3473869644,
       queueId: 420,
-      gameDuration: 1629,
+      gameDuration: 1618,
       seasonId: 13,
       mapId: 11,
       gameType: 'MATCHED_GAME',
-      gameCreation: 1592719487492,
+      gameCreation: 1593139009265,
       gameMode: 'CLASSIC'
     },
     {
-      gameId: 3468862178,
-      queueId: 420,
-      gameDuration: 1628,
-      seasonId: 13,
-      mapId: 11,
-      gameType: 'MATCHED_GAME',
-      gameCreation: 1592716573439,
-      gameMode: 'CLASSIC'
-    },
-    {
-      gameId: 3468352992,
-      queueId: 420,
-      gameDuration: 2029,
-      seasonId: 13,
-      mapId: 11,
-      gameType: 'MATCHED_GAME',
-      gameCreation: 1592691574043,
-      gameMode: 'CLASSIC'
-    },
-    {
-      gameId: 3468261015,
-      queueId: 420,
-      gameDuration: 1424,
-      seasonId: 13,
-      mapId: 11,
-      gameType: 'MATCHED_GAME',
-      gameCreation: 1592685265506,
-      gameMode: 'CLASSIC'
-    },
-    {
-      gameId: 3468247938,
-      queueId: 420,
-      gameDuration: 2222,
-      seasonId: 13,
-      mapId: 11,
-      gameType: 'MATCHED_GAME',
-      gameCreation: 1592688915667,
-      gameMode: 'CLASSIC'
-    },
-    {
-      gameId: 3468235097,
-      queueId: 420,
-      gameDuration: 1512,
-      seasonId: 13,
-      mapId: 11,
-      gameType: 'MATCHED_GAME',
-      gameCreation: 1592687056142,
-      gameMode: 'CLASSIC'
-    },
-    {
-      gameId: 3467550184,
+      gameId: 3473235845,
       queueId: 440,
-      gameDuration: 2153,
+      gameDuration: 1968,
       seasonId: 13,
       mapId: 11,
       gameType: 'MATCHED_GAME',
-      gameCreation: 1592623952951,
+      gameCreation: 1593067770136,
+      gameMode: 'CLASSIC'
+    },
+    {
+      gameId: 3473231496,
+      queueId: 440,
+      gameDuration: 1715,
+      seasonId: 13,
+      mapId: 11,
+      gameType: 'MATCHED_GAME',
+      gameCreation: 1593065334369,
+      gameMode: 'CLASSIC'
+    },
+    {
+      gameId: 3473165458,
+      queueId: 440,
+      gameDuration: 2462,
+      seasonId: 13,
+      mapId: 11,
+      gameType: 'MATCHED_GAME',
+      gameCreation: 1593062379528,
+      gameMode: 'CLASSIC'
+    },
+    {
+      gameId: 3473141286,
+      queueId: 440,
+      gameDuration: 1273,
+      seasonId: 13,
+      mapId: 11,
+      gameType: 'MATCHED_GAME',
+      gameCreation: 1593060549154,
+      gameMode: 'CLASSIC'
+    },
+    {
+      gameId: 3472741307,
+      queueId: 420,
+      gameDuration: 1497,
+      seasonId: 13,
+      mapId: 11,
+      gameType: 'MATCHED_GAME',
+      gameCreation: 1593033925299,
+      gameMode: 'CLASSIC'
+    },
+    {
+      gameId: 3472706385,
+      queueId: 430,
+      gameDuration: 1296,
+      seasonId: 13,
+      mapId: 11,
+      gameType: 'MATCHED_GAME',
+      gameCreation: 1593036650202,
       gameMode: 'CLASSIC'
     }
   ]
