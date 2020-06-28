@@ -1,6 +1,5 @@
 import React from 'react';
 import './Items.scss';
-const itemImages = require.context('../../../../ddragon/img/item', true);
 
 const Items = props => {
   const match = props.userMatch;

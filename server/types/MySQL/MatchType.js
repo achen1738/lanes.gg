@@ -50,7 +50,9 @@ const MatchType = new GraphQLObjectType({
     perkSubStyle: { type: GraphQLNonNull(GraphQLInt) },
     statPerk0: { type: GraphQLNonNull(GraphQLInt) },
     statPerk1: { type: GraphQLNonNull(GraphQLInt) },
-    statPerk2: { type: GraphQLNonNull(GraphQLInt) }
+    statPerk2: { type: GraphQLNonNull(GraphQLInt) },
+    champLevel: { type: GraphQLNonNull(GraphQLInt) },
+    ban: { type: GraphQLNonNull(GraphQLInt) }
   })
 });
 

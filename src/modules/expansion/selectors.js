@@ -58,3 +58,13 @@ export const getItems = state => {
 
   return appState.items;
 };
+
+export const getChampions = state => {
+  const moduleName = APP;
+  const appState = state[moduleName];
+  if (!appState) {
+    return {};
+  }
+
+  return appState.champions;
+};

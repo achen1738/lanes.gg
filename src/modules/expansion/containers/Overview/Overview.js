@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Overview.scss';
 
 import OverviewCell from '../../components/OverviewCell';
 import OverviewHeader from '../../components/OverviewHeader';
 
 const Overview = props => {
-  const renderTeam = teamId => {
-    const team = props.matches.filter(match => match.teamId === teamId);
-    return team.map(match => {
-      return <OverviewCell match={match} />;
+  const [blueTeam, setBlueTeam] = useState([]);
+  const [redTeam, setRedTeam] = useState([]);
+
+  useEffect(() => {
+    const createTeam = teamId => {
+      const team = props.matches.filter(match => match.teamId === teamId);
+      return team;
+    };
+    setBlueTeam(createTeam(100));
+    setRedTeam(createTeam(200));
+  }, [props]);
+
+  const renderTeam = team => {
+    return team.map((match, index) => {
+      return <OverviewCell key={match.gameId + ':' + index} match={match} />;
     });
   };
-
-  const blueTeam = renderTeam(100);
-  const redTeam = renderTeam(200);
 
   return (
     <div className="overview">
@@ -35,8 +43,8 @@ const Overview = props => {
         </div>
       </div>
       <div className="overview__boxscore">
-        <div className="overview__boxscore--group">{blueTeam}</div>
-        <div className="overview__boxscore--group">{redTeam}</div>
+        <div className="overview__boxscore--group">{renderTeam(blueTeam)}</div>
+        <div className="overview__boxscore--group">{renderTeam(redTeam)}</div>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@
       }
     }
 
-    &--ban + div {
+    &--ban {
       background-color: $blockBackgroundColor;
       display: flex;
       justify-content: center;

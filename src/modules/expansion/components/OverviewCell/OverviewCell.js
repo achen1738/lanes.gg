@@ -1,14 +1,11 @@
 import React from 'react';
 import './OverviewCell.scss';
 import { connect } from 'react-redux';
-import { getSummonerSpells, getRunes, getDDragon } from '../../selectors';
+import { getSummonerSpells, getRunes, getChampions, getItems } from '../../selectors';
 import { getUserMatch } from '../../../user/selectors';
 
-const championImages = require.context('../../../../ddragon/img/champion', true);
-const summonerImages = require.context('../../../../ddragon/img/spell', true);
 const runeImages = require.context('../../../../ddragon/img/runes', true);
 const images = require.context('../../../../img', true);
-const itemImages = require.context('../../../../ddragon/img/item', true);
 
 const OverviewCell = props => {
   const numberWithCommas = x => {
@@ -16,7 +13,7 @@ const OverviewCell = props => {
   };
   const match = props.match;
   const champ = props.champions[match.championId];
-  let champURI = champ.image.full;
+  let champURI = champ._full;
 
   const {
     spell1Id,
@@ -54,8 +51,8 @@ const OverviewCell = props => {
           <img src={champURI} alt="champ" />
         </div>
         <div className="overview__boxscore--cell-summs">
-          <img src={summonerImages(`./${firstSpellURI}`)} alt="summoner spell" />
-          <img src={summonerImages(`./${secondSpellURI}`)} alt="summoner spell" />
+          <img src={firstSpellURI} alt="summoner spell" />
+          <img src={secondSpellURI} alt="summoner spell" />
           <img src={runeImages(`./${keystoneURI}`)} alt="champ" />
           <div className="overview__boxscore--cell-summs_secondary">
             <img src={images(`./${secondaryURI}`)} alt="champ" />
@@ -66,10 +63,10 @@ const OverviewCell = props => {
         <div className="overview__boxscore--cell-items">
           {items.map((item, index) => {
             if (item === 0 || item >= 3853) item = 3637;
-            return <img key={index} alt="item" src={itemImages(`./${item}.png`)} />;
+            return <img key={index} alt="item" src={props.items[item]._full} />;
           })}
           <div className="overview__boxscore--cell-item">
-            <img key={7} alt="control ward" src={itemImages(`./2055.png`)} />
+            <img key={7} alt="control ward" src={props.items[2055]._full} />
             <div className="overview__boxscore--cell-item_ward">{visionWardsBoughtInGame}</div>
           </div>
         </div>
@@ -95,8 +92,9 @@ const mapStateToProps = (state, props) => {
   return {
     summonerSpells: getSummonerSpells(state),
     runes: getRunes(state),
-    ddragon: getDDragon(state),
-    userMatch: getUserMatch(state, props.gameId)
+    userMatch: getUserMatch(state, props.gameId),
+    items: getItems(state),
+    champions: getChampions(state)
   };
 };
 

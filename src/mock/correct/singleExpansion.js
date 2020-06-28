@@ -39,7 +39,9 @@ export default [
     perkSubStyle: 8100,
     statPerk0: 5005,
     statPerk1: 5008,
-    statPerk2: 5003
+    statPerk2: 5003,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: 'JJJJCCCC5555',
@@ -81,7 +83,9 @@ export default [
     perkSubStyle: 8200,
     statPerk0: 5008,
     statPerk1: 5002,
-    statPerk2: 5001
+    statPerk2: 5001,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: '6868',
@@ -123,7 +127,9 @@ export default [
     perkSubStyle: 8100,
     statPerk0: 5008,
     statPerk1: 5008,
-    statPerk2: 5002
+    statPerk2: 5002,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: 'Born To Kill 200',
@@ -165,7 +171,9 @@ export default [
     perkSubStyle: 8200,
     statPerk0: 5008,
     statPerk1: 5008,
-    statPerk2: 5002
+    statPerk2: 5002,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: 'wo hao lan',
@@ -207,7 +215,9 @@ export default [
     perkSubStyle: 8200,
     statPerk0: 5005,
     statPerk1: 5008,
-    statPerk2: 5002
+    statPerk2: 5002,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: 'Wàh',
@@ -249,7 +259,9 @@ export default [
     perkSubStyle: 8100,
     statPerk0: 5008,
     statPerk1: 5008,
-    statPerk2: 5002
+    statPerk2: 5002,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: 'Lienlion',
@@ -291,7 +303,9 @@ export default [
     perkSubStyle: 8100,
     statPerk0: 5007,
     statPerk1: 5002,
-    statPerk2: 5001
+    statPerk2: 5001,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: 'Pangci',
@@ -333,7 +347,9 @@ export default [
     perkSubStyle: 8000,
     statPerk0: 5008,
     statPerk1: 5008,
-    statPerk2: 5002
+    statPerk2: 5002,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: 'Pidma',
@@ -375,7 +391,9 @@ export default [
     perkSubStyle: 8200,
     statPerk0: 5005,
     statPerk1: 5008,
-    statPerk2: 5002
+    statPerk2: 5002,
+    champLevel: 0,
+    ban: 0
   },
   {
     summonerName: 'CinnaMinh',
@@ -417,6 +435,8 @@ export default [
     perkSubStyle: 8100,
     statPerk0: 5005,
     statPerk1: 5008,
-    statPerk2: 5002
+    statPerk2: 5002,
+    champLevel: 0,
+    ban: 0
   }
 ];

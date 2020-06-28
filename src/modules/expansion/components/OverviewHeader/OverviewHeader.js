@@ -3,24 +3,27 @@ import { FiX } from 'react-icons/fi';
 import { FaCrown } from 'react-icons/fa';
 import { IconBaron, IconDragon, IconTower } from '../../../../icons/icons';
 import './OverviewHeader.scss';
-const championImages = require.context('../../../../ddragon/img/champion', true);
+import { connect } from 'react-redux';
+import { getChampions, getItems } from '../../selectors';
+import { v4 as uuidv4 } from 'uuid';
 
 const OverviewHeader = props => {
-  return <div></div>;
-
   const { blueTeam, redTeam } = props;
+  console.log(blueTeam);
 
-  const renderBans = team => {
+  const renderBans = (team, reversed) => {
     let sectionStyle = 'overview__section';
-    if (team.bans[0].pickTurn !== 1) sectionStyle += ' overview__section--reversed';
+    if (reversed) sectionStyle += ' overview__section--reversed';
 
     let textStyle = 'overview__section--text';
-    if (team.bans[0].pickTurn !== 1) textStyle += ' overview__section--text-reversed';
-    const bans = team.bans.map((ban, index) => {
-      let championID = ban.championId;
-      if (championID === -1) {
+    if (reversed) textStyle += ' overview__section--text-reversed';
+
+    const bans = team.map((match, index) => {
+      let championID = match.ban;
+      console.log(championID);
+      if (championID <= 0) {
         return (
-          <div className="overview__image--ban">
+          <div key={uuidv4()} className="overview__image--ban">
             <FiX />
           </div>
         );
@@ -39,42 +42,39 @@ const OverviewHeader = props => {
     );
   };
 
-  const renderObjectives = team => {
+  const renderObjectives = (team, reversed) => {
     let iconStyle = 'icon--objective';
-    if (team.bans[0].pickTurn === 1) iconStyle += ' icon--objective-blue';
+    if (reversed) iconStyle += ' icon--objective-blue';
     else iconStyle += ' icon--objective-red';
 
     let sectionStyle = 'overview__section';
-    if (team.bans[0].pickTurn !== 1) sectionStyle += ' overview__section--reversed';
+    if (reversed) sectionStyle += ' overview__section--reversed';
 
     let textStyle = 'overview__section--text';
-    if (team.bans[0].pickTurn !== 1) textStyle += ' overview__section--text-reversed';
+    if (reversed) textStyle += ' overview__section--text-reversed';
     return (
       <div className={sectionStyle}>
         <div className={textStyle + ' overview__section--objectives'}>Objectives</div>
         <div className="overview__objectives">
           <IconTower className={iconStyle} />
-          <span>{team.towerKills}</span>
+          <span>{0}</span>
           <IconBaron className={iconStyle} />
-          <span>{team.baronKills}</span>
+          <span>{0}</span>
           <IconDragon className={iconStyle} />
-          <span>{team.dragonKills}</span>
+          <span>{0}</span>
         </div>
       </div>
     );
   };
 
-  const renderKills = team => {
-    let start = team.bans[0].pickTurn - 1;
-    let end = team.bans[4].pickTurn - 1;
+  const renderKills = (team, reversed) => {
     let sectionStyle = 'overview__section';
     let textStyle = 'overview__section--text';
-    if (team.bans[0].pickTurn !== 1) textStyle += ' overview__section--text-reversed';
-    const participants = props.match.participants;
+    if (reversed) textStyle += ' overview__section--text-reversed';
     let totalKills = 0;
-    for (let i = start; i <= end; i++) {
-      totalKills += participants[i].stats.kills;
-    }
+    team.forEach(match => {
+      totalKills += match.kills;
+    });
 
     return (
       <div className={sectionStyle}>
@@ -84,25 +84,27 @@ const OverviewHeader = props => {
     );
   };
 
-  const renderTeam = teamIndex => {
-    const team = props.match.teams[teamIndex];
+  const renderTeam = (team, reversed) => {
     let overviewStyle = 'overview__team';
-    if (teamIndex) overviewStyle += ' overview__team--reversed';
+    if (reversed) overviewStyle += ' overview__team--reversed';
 
     return (
       <div className={overviewStyle}>
-        {renderBans(team)}
-        {renderObjectives(team)}
-        {renderKills(team)}
+        {renderBans(team, reversed)}
+        {renderObjectives(team, reversed)}
+        {renderKills(team, reversed)}
       </div>
     );
   };
 
-  const renderWinner = () => {
-    const team = props.match.teams[0];
+  const renderWinner = team => {
     let winnerStyle = 'overview__winner';
-    if (team.win === 'Fail') winnerStyle += ' overview__winner-red';
-    else winnerStyle += ' overview__winner-blue';
+    if (team.length) {
+      const { win } = team[0];
+      if (win) winnerStyle += ' overview__winner-red';
+      else winnerStyle += ' overview__winner-blue';
+    }
+
     return (
       <div className={winnerStyle}>
         <FaCrown />
@@ -112,11 +114,18 @@ const OverviewHeader = props => {
 
   return (
     <div className="overview__header">
-      {renderTeam(0)}
-      {renderWinner()}
-      {renderTeam(1)}
+      {renderTeam(blueTeam)}
+      {renderWinner(blueTeam)}
+      {renderTeam(redTeam)}
     </div>
   );
 };
 
-export default OverviewHeader;
+const mapStateToProps = (state, props) => {
+  return {
+    items: getItems(state),
+    champions: getChampions(state)
+  };
+};
+
+export default connect(mapStateToProps, {})(OverviewHeader);
